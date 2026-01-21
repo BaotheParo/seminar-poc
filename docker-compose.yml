@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: audioguide-postgres
+    environment:
+      POSTGRES_DB: audioguide_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5433:5432" # Map port 5433 to avoid conflict with existing 5432
+    restart: always
