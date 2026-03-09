@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: StreetVoice
+  
+  datasource:
+    url: jdbc:postgresql://localhost:5432/street_voice_db
+    username: postgres
+    password: 
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10 
+      minimum-idle: 5
+      connection-timeout: 30000
+  
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+        jdbc:
+          lob:
+            non_contextual_creation: true
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+logging:
+  level:
+    com.foodstreet.voice: DEBUG
+    org.hibernate.SQL: DEBUG
+
+vietmap:
+  api-key: ${VIETMAP_API_KEY_SERVICES}
+  base-url: https://maps.vietmap.vn/api
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method

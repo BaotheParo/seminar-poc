@@ -1,0 +1,178 @@
+{
+  "info": {
+    "name": "Street Voice API",
+    "description": "API Collection cho ứng dụng Phố ẩm thực - Street Food Location-based Audio Guide",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Get All Food Stalls",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/v1/stalls",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "v1", "stalls"]
+        },
+        "description": "Lấy danh sách tất cả các quán ăn trong database"
+      },
+      "response": []
+    },
+    {
+      "name": "2. Get Food Stall by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/v1/stalls/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "v1", "stalls", "1"]
+        },
+        "description": "Lấy thông tin chi tiết của một quán ăn theo ID"
+      },
+      "response": []
+    },
+    {
+      "name": "3. Find Nearest Stall (PostGIS)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/v1/stalls/nearby?lat=21.0285&lon=105.8542",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "v1", "stalls", "nearby"],
+          "query": [
+            {
+              "key": "lat",
+              "value": "21.0285",
+              "description": "Vĩ độ (latitude)"
+            },
+            {
+              "key": "lon",
+              "value": "105.8542",
+              "description": "Kinh độ (longitude)"
+            }
+          ]
+        },
+        "description": "Tìm quán ăn gần nhất dựa trên tọa độ GPS (PostGIS ST_Distance)"
+      },
+      "response": []
+    },
+    {
+      "name": "4. Create New Food Stall",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Bánh Cuốn Thanh Vân\",\n  \"description\": \"Bánh cuốn nóng hổi, nhân thịt băm và nấm mèo thơm ngon\",\n  \"audioUrl\": \"https://example.com/audio/banh-cuon.mp3\",\n  \"imageUrl\": \"https://example.com/images/banh-cuon.jpg\",\n  \"latitude\": 21.0320,\n  \"longitude\": 105.8500\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/stalls",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "v1", "stalls"]
+        },
+        "description": "Tạo một quán ăn mới trong database"
+      },
+      "response": []
+    },
+    {
+      "name": "5. Update Food Stall",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"description\": \"Quán phở truyền thống nổi tiếng nhất phố cổ Hà Nội, được thành lập từ năm 1979\",\n  \"audioUrl\": \"https://example.com/audio/pho-bat-dan-updated.mp3\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/stalls/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "v1", "stalls", "1"]
+        },
+        "description": "Cập nhật thông tin của một quán ăn (tất cả các field đều optional)"
+      },
+      "response": []
+    },
+    {
+      "name": "6. Delete Food Stall",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/v1/stalls/6",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "v1", "stalls", "6"]
+        },
+        "description": "Xóa một quán ăn khỏi database"
+      },
+      "response": []
+    },
+    {
+      "name": "Test: Invalid Latitude (Validation)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/v1/stalls/nearby?lat=999&lon=105.8542",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "v1", "stalls", "nearby"],
+          "query": [
+            {
+              "key": "lat",
+              "value": "999",
+              "description": "Invalid latitude (should return 400)"
+            },
+            {
+              "key": "lon",
+              "value": "105.8542"
+            }
+          ]
+        },
+        "description": "Test validation error - latitude phải từ -90 đến 90"
+      },
+      "response": []
+    },
+    {
+      "name": "Test: Stall Not Found (404)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/v1/stalls/999",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "v1", "stalls", "999"]
+        },
+        "description": "Test 404 error - quán ăn không tồn tại"
+      },
+      "response": []
+    }
+  ]
+}

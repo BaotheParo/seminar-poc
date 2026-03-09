@@ -1,0 +1,18 @@
+[
+    {
+        "name": "Quán Ốc Oanh",
+        "address": "534 Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
+        "lat": 10.7607739,
+        "lng": 106.7006542,
+        "description": "Quán ốc nổi tiếng với hải sản tươi sống và không gian nhộn nhịp",
+        "audioUrl": "https://example.com/audio/oc_oanh.mp3",
+        "triggerRadius": 15,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ]
+    }
+]

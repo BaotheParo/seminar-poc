@@ -1,13 +1,43 @@
 version: '3.8'
 
 services:
-  postgres:
-    image: postgres:16-alpine
-    container_name: audioguide-postgres
-    environment:
-      POSTGRES_DB: audioguide_db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+  street-voice-backend:
+    build: .
+    container_name: street-voice-backend
     ports:
-      - "5433:5432" # Map port 5433 to avoid conflict with existing 5432
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://street-voice-db:5432/street_voice_db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=password
+      # Load API Keys from local environment or .env file
+      - VIETMAP_API_KEY_SERVICES=${VIETMAP_API_KEY_SERVICES}
+    depends_on:
+      - street-voice-db
+    networks:
+      - street-voice-network
+
+  street-voice-db:
+    image: postgis/postgis:14-3.4-alpine
+    container_name: street-voice-db-new
     restart: always
+    environment:
+      - POSTGRES_DB=street_voice_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # Init script to adding extensions if needed, though PostGIS image usually has them
+      - ./src/main/resources/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    networks:
+      - street-voice-network
+
+volumes:
+  postgres_data:
+
+
+networks:
+  street-voice-network:
+    driver: bridge

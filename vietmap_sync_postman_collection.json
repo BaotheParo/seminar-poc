@@ -1,0 +1,147 @@
+{
+	"info": {
+		"_postman_id": "b3e3e7a1-5f2a-4b6c-8d1e-9f0a2b3c4d5e",
+		"name": "Street Voice - VietMap Sync",
+		"description": "Collection to test VietMap Sync API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Sync Stalls (Admin)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"lat\": 10.7607739,\n    \"lng\": 106.7006542,\n    \"keyword\": \"ốc\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/admin/sync-vietmap",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"sync-vietmap"
+					]
+				},
+				"description": "Syncs food stalls from VietMap based on location and keyword."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Nearby Stalls",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/stalls/sync?lat=10.7607739&lng=106.7006542&radius=1000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"stalls",
+						"sync"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "10.7607739"
+						},
+						{
+							"key": "lng",
+							"value": "106.7006542"
+						},
+						{
+							"key": "radius",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tune Geofence (Admin)",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"latitude\": 10.762900,\n    \"longitude\": 106.700300,\n    \"triggerRadius\": 10.0\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/admin/stores/1/geofence",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"stores",
+						"1",
+						"geofence"
+					]
+				},
+				"description": "Fine-tune the geofence (anchor point and radius) for a specific store."
+			},
+			"response": []
+		},
+		{
+			"name": "Import Manual Data (JSON)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n  {\n    \"name\": \"Quán Ốc Oanh\",\n    \"address\": \"534 Vĩnh Khánh, Phường 8, Quận 4, TP.HCM\",\n    \"lat\": 10.7607739,\n    \"lng\": 106.7006542,\n    \"description\": \"Quán Ốc Oanh là một trong những quán ốc – hải sản nổi tiếng bậc nhất trên phố ẩm thực Vĩnh Khánh, với hơn 20 năm hoạt động...\",\n    \"audioUrl\": \"https://example.com/audio/oc_oanh.mp3\",\n    \"triggerRadius\": 15\n  },\n  {\n    \"name\": \"Ốc Bụi Quán\",\n    \"address\": \"Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM\",\n    \"lat\": 10.761234,\n    \"lng\": 106.701567,\n    \"description\": \"Ốc Bụi là quán ốc bình dân được nhiều thực khách yêu thích...\",\n    \"audioUrl\": \"https://example.com/audio/oc_bui.mp3\",\n    \"triggerRadius\": 10\n  }\n]"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/admin/import-json",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"import-json"
+					]
+				},
+				"description": "Import a list of stalls manually via JSON."
+			},
+			"response": []
+		}
+	]
+}
