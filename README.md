@@ -45,12 +45,10 @@ CREATE DATABASE street_voice_db;
 \q
 ```
 
-### 3. Khởi tạo schema
+### 3. Khởi tạo schema & Seed data
 
-```bash
-# Chạy từ thư mục gốc của project
-psql -U root -d street_voice_db -f src/main/resources/db/schema.sql
-```
+Dự án hiện tại đã tích hợp **Flyway** và **Static Data Seeder**. FE **KHÔNG CẦN** phải chạy script SQL hay gọi API import dữ liệu thủ công nữa.
+Khi ứng dụng hoặc Docker container khởi động, Flyway sẽ tự động tạo cấu trúc bảng, và `DatabaseSeeder` sẽ tự động nạp danh sách 28 quán ăn chuẩn vào database nếu bảng đang trống.
 
 ### 4. Cấu hình database (nếu cần)
 
@@ -77,8 +75,15 @@ spring:
 
 ### 2. Chạy
 ```bash
-docker-compose up --build
+# Xóa data cũ và build lại từ đầu (Khuyên dùng khi có schema thay đổi)
+docker-compose down -v
+docker-compose up -d --build
 ```
+*   **LƯU Ý CHO FRONTEND TEAM**: 
+    1. Khi chạy lệnh trên, Database PostgreSQL sẽ được tạo mới.
+    2. Spring Boot Boot khởi động, **Flyway** sẽ tự động chạy migration `V1__Init_Schema.sql`.
+    3. **DatabaseSeeder** sẽ tự động đọc file `vinh_khanh_places.json` và insert 28 bản ghi quán ăn mẫu vào database.
+    4. Bạn không cần phải gọi bất kỳ API sync/import nào nữa!
 *   Backend: `http://localhost:8080`
 *   Database: `localhost:5432` (User: `postgres`, Pass: `password`, DB: `street_voice_db`)
 
@@ -143,37 +148,7 @@ curl "http://localhost:8080/api/v1/stalls/nearby?lat=21.0285&lon=105.8542"
 - `404 Not Found`: Không tìm thấy quán ăn nào gần vị trí
 - `500 Internal Server Error`: Lỗi server
 
-### Import Dữ Liệu (JSON)
 
-**Endpoint:** `POST /api/v1/admin/import-json`
-
-**Body:** Danh sách các quán ăn.
-
-**Ví dụ JSON:**
-```json
-[
-  {
-    "name": "Quán Ốc Oanh",
-    "address": "534 Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
-    "lat": 10.7607739,
-    "lng": 106.7006542,
-    "description": "Quán ốc nổi tiếng...",
-    "audioUrl": "https://example.com/audio/oc_oanh.mp3",
-    "triggerRadius": 15,
-    "minPrice": 30000,
-    "maxPrice": 150000,
-    "audioDuration": 120,
-    "featuredReviews": ["Good food", "Nice place"]
-  }
-]
-```
-
-**Curl Command:**
-```bash
-curl -X POST -H "Content-Type: application/json; charset=utf-8" \
-     -d @import_test_data.json \
-     http://localhost:8080/api/v1/admin/import-json
-```
 
 ## 🗄️ Database Schema
 
@@ -196,12 +171,7 @@ curl -X POST -H "Content-Type: application/json; charset=utf-8" \
 
 ### Dữ liệu mẫu
 
-Database đã được khởi tạo với 5 quán ăn tại khu phố cổ Hà Nội:
-- Phở Bát Đàn (21.0285, 105.8542)
-- Bún Chả Hàng Mành (21.0310, 105.8520)
-- Bánh Mì Phố Hàng Cá (21.0295, 105.8498)
-- Cà Phê Giảng (21.0330, 105.8510)
-- Chả Cá Lã Vọng (21.0340, 105.8525)
+Database sẽ được tự động nạp từ file `vinh_khanh_places.json` (thông qua `DatabaseSeeder`) gồm 28 địa điểm quán ăn tại Phố Ẩm Thực Vĩnh Khánh (Quận 4). Kèm theo đó là các thông số toạ độ chi tiết và các thuộc tính khác. Mọi thao tác đều hoàn toàn tự động khi khởi động Spring Boot.
 
 ## 📱 Tích hợp với Flutter
 

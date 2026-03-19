@@ -22,6 +22,7 @@ public class AnalyticsService {
 
     @Async // Run in background to avoid blocking API response
     @Transactional
+    @SuppressWarnings("null")
     public void trackEvent(TrackEventRequest request) {
         log.debug("Tracking event: device={}, action={}, stall={}", request.getDeviceId(), request.getAction(),
                 request.getStallId());

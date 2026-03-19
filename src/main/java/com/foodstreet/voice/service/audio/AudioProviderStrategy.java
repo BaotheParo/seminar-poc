@@ -1,6 +1,10 @@
 package com.foodstreet.voice.service.audio;
 
+import org.springframework.lang.NonNull;
+
 public interface AudioProviderStrategy {
-    byte[] generateAudio (String text, String languageCode);
+    @NonNull
+    byte[] generateAudio(@NonNull String text, @NonNull String languageCode);
+
     String getProviderName();
 }

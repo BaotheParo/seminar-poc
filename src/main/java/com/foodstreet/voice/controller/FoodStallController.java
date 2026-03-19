@@ -15,6 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -30,6 +33,21 @@ import java.util.stream.Collectors;
 public class FoodStallController {
 
     private final FoodStallService foodStallService;
+
+    @GetMapping("/search")
+    @Operation(summary = "Search and filter food stalls with pagination")
+    public ResponseEntity<Page<FoodStallResponse>> searchStalls(
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) Integer minPrice,
+            @RequestParam(required = false) Integer maxPrice,
+            @RequestParam(required = false) Double minRating,
+            @PageableDefault(size = 10) Pageable pageable) {
+        log.info("Received request to search stalls: keyword={}, minPrice={}, maxPrice={}, minRating={}",
+                keyword, minPrice, maxPrice, minRating);
+        Page<FoodStallResponse> results = foodStallService.searchStalls(keyword, minPrice, maxPrice, minRating,
+                pageable);
+        return ResponseEntity.ok(results);
+    }
 
     @GetMapping
     @Operation(summary = "Get all food stalls")
@@ -47,6 +65,29 @@ public class FoodStallController {
         FoodStallResponse stall = foodStallService.getStallById(id);
         return ResponseEntity.ok(stall);
     }
+
+    @GetMapping("/{id}/audio")
+    @Operation(summary = "Get audio URL for a specific food stall")
+    public ResponseEntity<?> getAudioByStallId(@PathVariable Long id) {
+        log.info("Nhan request lay audio cho quan an id: {}", id);
+        FoodStallResponse stall = foodStallService.getStallById(id);
+        String audioUrl = stall.getAudioUrl();
+        if (audioUrl == null || audioUrl.isBlank()) {
+            return ResponseEntity.ok(java.util.Map.of(
+                "id", id,
+                "name", stall.getName(),
+                "audioUrl", "",
+                "message", "Quan nay chua co audio. Vui long goi API /sync truoc."
+            ));
+        }
+        return ResponseEntity.ok(java.util.Map.of(
+            "id", id,
+            "name", stall.getName(),
+            "audioUrl", audioUrl,
+            "audioDuration", stall.getAudioDuration() != null ? stall.getAudioDuration() : 0
+        ));
+    }
+
 
     @GetMapping("/nearby")
     @Operation(summary = "Find the nearest food stall")

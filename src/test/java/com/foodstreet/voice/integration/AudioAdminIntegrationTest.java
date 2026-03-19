@@ -1,0 +1,88 @@
+package com.foodstreet.voice.integration;
+
+import com.foodstreet.voice.entity.FoodStall;
+import com.foodstreet.voice.repository.FoodStallRepository;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+@SpringBootTest
+@AutoConfigureMockMvc
+@ActiveProfiles("test")
+@Transactional
+public class AudioAdminIntegrationTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Autowired
+    private FoodStallRepository foodStallRepository;
+
+    private final String UPLOAD_DIR = "./uploads/audio/";
+
+    @BeforeEach
+    void setUp() throws Exception {
+        Files.createDirectories(Paths.get(UPLOAD_DIR));
+        // Clear any existing test files in the directory if needed,
+        // but for safety in local environments, we'll just create specific test files.
+    }
+
+    @Test
+    void listAudioFiles() throws Exception {
+        Path testFile = Paths.get(UPLOAD_DIR + "test_audio.mp3");
+        Files.write(testFile, "test data".getBytes());
+
+        mockMvc.perform(get("/api/v1/admin/audio"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray());
+
+        Files.deleteIfExists(testFile);
+    }
+
+    @Test
+    @SuppressWarnings("null")
+    void regenerateAudio() throws Exception {
+        FoodStall stall = foodStallRepository.save(FoodStall.builder()
+                .name("Test Stall")
+                .description("Test Description")
+                .triggerRadius(10)
+                .build());
+
+        mockMvc.perform(post("/api/v1/admin/audio/regenerate/" + stall.getId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.message").value("Audio regenerated successfully"))
+                .andExpect(jsonPath("$.newUrl").exists());
+
+        // Clean up generated file
+        FoodStall updated = foodStallRepository.findById(stall.getId()).orElseThrow();
+        if (updated.getAudioUrl() != null) {
+            Files.deleteIfExists(Paths.get("./uploads/audio/" + updated.getAudioUrl().replace("/audio/", "")));
+        }
+    }
+
+    @Test
+    void listOrphanedFiles() throws Exception {
+        Path orphanedFile = Paths.get(UPLOAD_DIR + "orphaned_audio.mp3");
+        Files.write(orphanedFile, "orphaned data".getBytes());
+
+        mockMvc.perform(get("/api/v1/admin/audio/orphaned"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray());
+
+        Files.deleteIfExists(orphanedFile);
+    }
+}

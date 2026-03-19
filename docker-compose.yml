@@ -6,12 +6,16 @@ services:
     container_name: street-voice-backend
     ports:
       - "8080:8080"
+    volumes:
+      - ./audio:/app/audio
     environment:
+      - SERVER_ADDRESS=0.0.0.0
+      - SERVER_PORT=8080
       - SPRING_DATASOURCE_URL=jdbc:postgresql://street-voice-db:5432/street_voice_db
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=password
-      # Load API Keys from local environment or .env file
       - VIETMAP_API_KEY_SERVICES=${VIETMAP_API_KEY_SERVICES}
+      - AUDIO_BASE_URL=${AUDIO_BASE_URL}
     depends_on:
       - street-voice-db
     networks:

@@ -2,6 +2,11 @@ spring:
   application:
     name: StreetVoice
   
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+
   datasource:
     url: jdbc:postgresql://localhost:5432/street_voice_db
     username: postgres
@@ -44,3 +49,8 @@ springdoc:
   swagger-ui:
     path: /swagger-ui.html
     operationsSorter: method
+
+app:
+  audio:
+    local-path: /app/audio
+    base-url: ${AUDIO_BASE_URL:http://localhost:8080}

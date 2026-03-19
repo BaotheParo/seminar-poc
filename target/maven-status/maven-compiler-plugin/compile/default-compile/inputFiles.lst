@@ -4,12 +4,10 @@ D:\Project CV\street-voice-backend\src\main\java\com\foodstreet\voice\dto\ErrorR
 D:\Project CV\street-voice-backend\src\main\java\com\foodstreet\voice\controller\AnalyticsController.java
 D:\Project CV\street-voice-backend\src\main\java\com\foodstreet\voice\dto\GeofenceUpdateRequest.java
 D:\Project CV\street-voice-backend\src\main\java\com\foodstreet\voice\service\audio\GoogleTTSProvider.java
-D:\Project CV\street-voice-backend\src\main\java\com\foodstreet\voice\dto\vietmap\VietMapSearchResponse.java
-D:\Project CV\street-voice-backend\src\main\java\com\foodstreet\voice\dto\vietmap\VietMapPlaceResponse.java
 D:\Project CV\street-voice-backend\src\main\java\com\foodstreet\voice\config\OpenAPIConfig.java
 D:\Project CV\street-voice-backend\src\main\java\com\foodstreet\voice\dto\CreateFoodStallRequest.java
+D:\Project CV\street-voice-backend\src\main\java\com\foodstreet\voice\seeder\DatabaseSeeder.java
 D:\Project CV\street-voice-backend\src\main\java\com\foodstreet\voice\controller\AdminImportController.java
-D:\Project CV\street-voice-backend\src\main\java\com\foodstreet\voice\controller\AdminSyncController.java
 D:\Project CV\street-voice-backend\src\main\java\com\foodstreet\voice\service\AnalyticsService.java
 D:\Project CV\street-voice-backend\src\main\java\com\foodstreet\voice\service\FoodStallService.java
 D:\Project CV\street-voice-backend\src\main\java\com\foodstreet\voice\entity\FoodStall.java
@@ -18,7 +16,6 @@ D:\Project CV\street-voice-backend\src\main\java\com\foodstreet\voice\repository
 D:\Project CV\street-voice-backend\src\main\java\com\foodstreet\voice\dto\FoodStallResponse.java
 D:\Project CV\street-voice-backend\src\main\java\com\foodstreet\voice\repository\UserActivityRepository.java
 D:\Project CV\street-voice-backend\src\main\java\com\foodstreet\voice\service\audio\AudioProviderStrategy.java
-D:\Project CV\street-voice-backend\src\main\java\com\foodstreet\voice\service\VietMapSyncService.java
 D:\Project CV\street-voice-backend\src\main\java\com\foodstreet\voice\controller\FoodStallController.java
 D:\Project CV\street-voice-backend\src\main\java\com\foodstreet\voice\entity\UserActivity.java
 D:\Project CV\street-voice-backend\src\main\java\com\foodstreet\voice\exception\ResourceNotFoundException.java

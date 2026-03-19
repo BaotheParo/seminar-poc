@@ -2,21 +2,24 @@ package com.foodstreet.voice.service.audio;
 
 import org.springframework.stereotype.Service;
 
+import org.springframework.lang.NonNull;
 import java.nio.charset.StandardCharsets;
 
 @Service
 public class GoogleTTSProvider implements AudioProviderStrategy {
-    //TODO: Khi nào có API Key thật thì bỏ code gọi Google Cloud vào đây
     // Hien tai mock de test flow
     @Override
-    public byte[] generateAudio(String text, String languageCode){
+    @NonNull
+    @SuppressWarnings("null")
+    public byte[] generateAudio(@NonNull String text, @NonNull String languageCode) {
         System.out.println("google tts api [" + languageCode + "]: " + text);
 
         try {
             Thread.sleep(500);
-        }catch (InterruptedException e){}
+        } catch (InterruptedException e) {
+        }
 
-        return ("Dummy content: "+ text).getBytes(StandardCharsets.UTF_8);
+        return ("Dummy content: " + text).getBytes(StandardCharsets.UTF_8);
     }
 
     @Override

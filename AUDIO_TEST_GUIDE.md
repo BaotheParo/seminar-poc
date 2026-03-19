@@ -1,129 +1,159 @@
-# Audio Feature Testing & Troubleshooting Guide
+# Audio System - Guide & Architecture
 
+## Tổng quan
 
-This document outlines the steps to verify the Location-Based Audio feature and documents common issues encountered during development.
+Audio trong hệ thống **Street Voice** hoạt động theo mô hình **filename-based** — DB chỉ lưu tên file, URL đầy đủ được build tự động bởi backend khi trả về response.
 
-
-## 1. Prerequisites
-- **Java 17+**
-- **Docker** (for PostgreSQL + PostGIS)
-- **Maven** (via `mvnw`)
-
-
-## 2. Setup Database
-Ensure you have a PostgreSQL container with PostGIS enabled.
-```sh
-# Helper command to start a fresh DB container if needed
-docker run --name street-voice-db-new -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=password -e POSTGRES_DB=street_voice_db -p 5432:5432 -d postgis/postgis
 ```
-
-
-## 3. Testing Flow
-
-
-### Step 1: Start the Application
-Recommended to run via JAR to avoid Maven wrapper environment issues:
-```sh
-# Build
-./mvnw.cmd clean package -DskipTests
-
-
-# Run
-java -jar target/street-voice-backend-0.0.1-SNAPSHOT.jar
+DB: audio_url = 'oc_oanh.mp3'
+                 ↓ FoodStallService.resolveAudioUrl()
+API: audioUrl = 'http://192.168.31.216:8080/audio/oc_oanh.mp3'
 ```
-
-
-### Step 2: Seed Mock Data
-Since the database might be empty, create a dummy food stall.
-**Request:** `POST http://localhost:8080/api/v1/stalls`
-```json
-{
-  "name": "Test Stall",
-  "description": "Delicious food",
-  "latitude": 10.76,
-  "longitude": 106.70,
-  "imageUrl": "test.jpg"
-}
-```
-
-
-### Step 3: Test Audio Generation (Sync API)
-Call the sync endpoint. The backend should generate an audio file if it doesn't exist.
-**Request:** `GET http://localhost:8080/api/v1/stalls/sync?lat=10.76&lng=106.70&radius=5000`
-
-
-**Expected Response:**
-```json
-[
-  {
-    "id": 1,
-    "name": "Test Stall",
-    ...
-    "audioUrl": "/audio/120110422_vi.mp3"  <-- Check this
-  }
-]
-```
-
-
-**Verify File:**
-Check the project folder: `uploads/audio/`. You should see a `.mp3` file corresponding to the hash in `audioUrl`.
-
 
 ---
 
+## 1. Setup nhanh cho Team
 
-## 4. Troubleshooting & Known Issues
+### Bước 1 — Cấu hình `.env`
+```bash
+cp .env.example .env
+# Sửa IP của bạn:
+AUDIO_BASE_URL=http://192.168.x.x:8080
+```
 
+### Bước 2 — Đặt file audio vào thư mục `./audio/`
+```
+street-voice-backend/
+  audio/
+    oc_oanh.mp3      ← file thật
+    ten_quan_khac.mp3
+```
 
-During development, the following errors were encountered and fixed. If you see them, apply the corresponding fix.
+### Bước 3 — Chạy ứng dụng
+```bash
+docker-compose up --build -d
+```
 
+---
 
-### Issue 1: `application.yaml` Indentation Error
-**Symptom:** Application fails to connect to DB, properties not loaded.
-**Cause:** `datasource` and `jpa` were incorrectly nested under `spring.application`.
-**Fix:** Ensure `datasource` and `jpa` are direct children of `spring` (same level as `application`).
+## 2. API Endpoints
+
+### Lấy thông tin audio của một quán
+```
+GET /api/v1/stalls/{id}/audio
+```
+
+**Response (có audio):**
+```json
+{
+  "id": 8,
+  "name": "Quán Ốc Oanh",
+  "audioUrl": "http://192.168.31.216:8080/audio/oc_oanh.mp3",
+  "audioDuration": 120
+}
+```
+
+**Response (chưa có audio):**
+```json
+{
+  "id": 1,
+  "name": "Hải Sản Tươi Sống Sáu Nở",
+  "audioUrl": "",
+  "message": "Quan nay chua co audio. Vui long goi API /sync truoc."
+}
+```
+
+### Phát trực tiếp file audio
+```
+GET /audio/{filename}
+```
+Ví dụ: `GET http://192.168.31.216:8080/audio/oc_oanh.mp3`
+- Trả về file MP3, hỗ trợ `Range` header để mobile seek được
+- Cache 1 giờ (`Cache-Control: max-age=3600`)
+
+### Danh sách tất cả quán (có `audioUrl`)
+```
+GET /api/v1/stalls
+```
+Trường `audioUrl` trong mỗi quán đã là URL đầy đủ, sẵn sàng để phát.
+
+### Gen audio tự động cho tất cả quán
+```
+GET /api/v1/stalls/sync?lat=10.762622&lng=106.700174&radius=2000
+```
+Với những quán có `audioUrl` rỗng, backend sẽ tự gen audio qua Google TTS và điền vào DB.
+
+---
+
+## 3. Cập nhật audio_url cho một quán cụ thể
+
+Nếu bạn đã có file MP3 và muốn gán thủ công:
+
+**Cách 1 — qua API (khuyến nghị):**
+```bash
+curl -X PUT http://localhost:8080/api/v1/stalls/8 \
+  -H "Content-Type: application/json" \
+  -d '{"audioUrl": "oc_oanh.mp3"}'
+```
+
+**Cách 2 — trực tiếp DB:**
+```sql
+UPDATE food_stalls SET audio_url = 'oc_oanh.mp3' WHERE id = 8;
+```
+
+---
+
+## 4. Cấu hình hệ thống
+
+### `application.yaml`
 ```yaml
-spring:
-  application:
-    name: ...
-  datasource:  # Correct indentation
-    url: ...
+app:
+  audio:
+    local-path: /app/audio          # Đường dẫn bên trong container
+    base-url: ${AUDIO_BASE_URL:http://localhost:8080}  # Fallback nếu không có env
 ```
 
-
-### Issue 2: `PostgisPG95Dialect` Deprecation
-**Symptom:** `java.lang.ClassNotFoundException: org.hibernate.spatial.dialect.postgis.PostgisPG95Dialect`
-**Cause:** Explicitly defining a specific dialect version can cause conflicts with newer Hibernate versions (Hibernate 6+).
-**Fix:** Remove the `database-platform` line in `application.yaml`. Let Hibernate auto-detect the dialect.
+### `docker-compose.yml`
 ```yaml
-jpa:
-  # database-platform: ... (REMOVE THIS)
-  hibernate:
-    ddl-auto: update
+volumes:
+  - ./audio:/app/audio   # Mount thư mục audio local vào container
+environment:
+  - AUDIO_BASE_URL=${AUDIO_BASE_URL}
 ```
 
-
-### Issue 3: Missing `@Builder` on DTO
-**Symptom:** Compilation error: `symbol: method builder() location: class FoodStallResponse`.
-**Cause:** The service layer used `.builder()` but the DTO class was missing `@Builder`.
-**Fix:** Add `@Builder` annotation to `FoodStallResponse.java`.
+### `WebConfig.java`
+Đăng ký resource handler:
 ```java
-@Data
-@Builder // Add this
-@AllArgsConstructor
-public class FoodStallResponse { ... }
+registry.addResourceHandler("/audio/**")
+        .addResourceLocations("file:/app/audio/")
+        .setCachePeriod(3600);
 ```
+CORS cho phép mọi thiết bị trong mạng LAN (`192.168.*.*`).
 
+---
 
-### Issue 4: `FoodStallRepository` Query Mismatch
-**Symptom:** Error executing `findStallsWithinRadius`.
-**Cause:** The SQL query used generic parameters that didn't match the method signature or PostGIS types.
-**Fix:** Use explicit casting and parameter binding.
-```java
-// BEFORE (Error)
-WHERE ST_DWithin(f.location, :userLocation, :radius)
+## 5. Quy ước đặt tên file audio
 
+| Quán | Filename |
+|------|----------|
+| Quán Ốc Oanh | `oc_oanh.mp3` |
+| Hải Sản Sáu Nở | `hai_san_sau_no.mp3` |
+| (gen tự động) | `<hash>_vi.mp3` |
 
-// AFTER (Fixed)
-WHERE ST_DWithin(f.location::geography, ST_SetSRID(ST_MakePoint(:longitude, :latitude), 4326)::geography, :radiusInMeters)
-```
+---
+
+## 6. Troubleshooting
+
+### `audioUrl` trả về `null` hoặc rỗng
+→ Quán chưa có audio. Gọi `/sync` hoặc update thủ công.
+
+### HTTP 500 khi gọi `/audio/file.mp3`
+→ Kiểm tra file có tồn tại trong thư mục `./audio/` chưa.
+→ Kiểm tra Docker mount: `docker exec street-voice-backend ls /app/audio`.
+
+### Thiết bị mobile trong LAN không kết nối được
+→ Đảm bảo `AUDIO_BASE_URL` đang dùng IP thật của máy host (không phải `localhost`).
+→ Kiểm tra Firewall Windows có chặn port 8080 không.
+
+### CORS error từ FE
+→ IP của FE phải nằm trong dải `192.168.*.*`. Kiểm tra `WebConfig.allowedOriginPatterns`.

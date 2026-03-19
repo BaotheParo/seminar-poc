@@ -3,13 +3,13 @@ com\foodstreet\voice\entity\UserActivity$ActionType.class
 com\foodstreet\voice\dto\CreateFoodStallRequest.class
 com\foodstreet\voice\service\AnalyticsService.class
 com\foodstreet\voice\entity\UserActivity.class
+com\foodstreet\voice\seeder\DatabaseSeeder$1.class
 com\foodstreet\voice\entity\FoodStall.class
 com\foodstreet\voice\dto\ErrorResponse.class
 com\foodstreet\voice\repository\FoodStallRepository.class
+com\foodstreet\voice\seeder\DatabaseSeeder.class
 com\foodstreet\voice\service\AudioService.class
 com\foodstreet\voice\controller\AnalyticsController.class
-com\foodstreet\voice\dto\vietmap\VietMapPlaceResponse.class
-com\foodstreet\voice\service\VietMapSyncService.class
 com\foodstreet\voice\config\WebConfig.class
 com\foodstreet\voice\exception\GlobalExceptionHandler.class
 com\foodstreet\voice\config\OpenAPIConfig.class
@@ -18,7 +18,6 @@ com\foodstreet\voice\dto\FoodStallResponse$FoodStallResponseBuilder.class
 com\foodstreet\voice\dto\TrackEventRequest.class
 com\foodstreet\voice\dto\ErrorResponse$ErrorResponseBuilder.class
 com\foodstreet\voice\service\FoodStallService.class
-com\foodstreet\voice\service\VietMapSyncService$1.class
 com\foodstreet\voice\dto\GeofenceUpdateRequest.class
 com\foodstreet\voice\service\audio\GoogleTTSProvider.class
 com\foodstreet\voice\entity\UserActivity$UserActivityBuilder.class
@@ -29,8 +28,6 @@ com\foodstreet\voice\dto\UpdateFoodStallRequest$UpdateFoodStallRequestBuilder.cl
 com\foodstreet\voice\dto\UpdateFoodStallRequest.class
 com\foodstreet\voice\dto\NearbyRequest.class
 com\foodstreet\voice\controller\AdminImportController.class
-com\foodstreet\voice\dto\vietmap\VietMapSearchResponse.class
-com\foodstreet\voice\controller\AdminSyncController.class
 com\foodstreet\voice\dto\FoodStallImportDto$FoodStallImportDtoBuilder.class
 com\foodstreet\voice\service\audio\AudioProviderStrategy.class
 com\foodstreet\voice\dto\FoodStallResponse.class
