@@ -11,6 +11,10 @@ WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 COPY .env .env
 
+# Cai Python3 + edge-tts de tao audio thật
+RUN apk add --no-cache python3 py3-pip \
+    && pip3 install edge-tts --break-system-packages
+
 # Expose port
 EXPOSE 8080
 

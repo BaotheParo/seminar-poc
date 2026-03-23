@@ -1,0 +1,1 @@
+ALTER TABLE food_stalls ADD COLUMN priority INT DEFAULT 0;

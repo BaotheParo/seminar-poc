@@ -23,4 +23,5 @@ public class FoodStallImportDto {
     private Integer audioDuration;
     private List<String> featuredReviews;
     private Double rating;
+    private Integer priority;
 }

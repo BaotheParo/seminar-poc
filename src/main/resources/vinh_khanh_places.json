@@ -1,478 +1,506 @@
-﻿[
+[
     {
-        "name":  "Hải Sản Tươi Sống Sáu Nở",
-        "address":  "Đường Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
-        "lat":  10.763697,
-        "lng":  106.701733,
-        "description":  "Hải Sản Tươi Sống Sáu Nở là quán hải sản nổi tiếng trên phố Vĩnh Khánh với 2 chi nhánh, được nhiều thực khách biết đến nhờ nguồn hải sản tươi sống chất lượng. Các món được yêu thích gồm ốc nhung, ốc len và tôm hùm nướng bơ tỏi, chế biến đơn giản để giữ trọn vị ngọt tự nhiên. Quán mang phong cách vỉa hè đông đúc, sôi động, thường rất nhộn nhịp vào buổi tối. Mức giá nhỉnh hơn mặt bằng chung, nhưng được đánh giá xứng đáng nhờ độ tươi và chất lượng món ăn. Nhờ hương vị ngon và danh tiếng lâu năm, quán thường xuyên được nhắc đến trong danh sách những quán hải sản đáng thử tại phố Vĩnh Khánh",
-        "audioUrl":  "",
-        "triggerRadius":  20,
-        "rating":  4.4,
-        "minPrice":  30000,
-        "maxPrice":  150000,
-        "audioDuration":  120,
-        "featuredReviews":  [
-                                "Good food",
-                                "Nice place"
-                            ]
+        "name": "Hải Sản Tươi Sống Sáu Nở",
+        "address": "Đường Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
+        "lat": 10.763697,
+        "lng": 106.701733,
+        "description": "Hải Sản Tươi Sống Sáu Nở là quán hải sản nổi tiếng trên phố Vĩnh Khánh với 2 chi nhánh, được nhiều thực khách biết đến nhờ nguồn hải sản tươi sống chất lượng. Các món được yêu thích gồm ốc nhung, ốc len và tôm hùm nướng bơ tỏi, chế biến đơn giản để giữ trọn vị ngọt tự nhiên. Quán mang phong cách vỉa hè đông đúc, sôi động, thường rất nhộn nhịp vào buổi tối. Mức giá nhỉnh hơn mặt bằng chung, nhưng được đánh giá xứng đáng nhờ độ tươi và chất lượng món ăn. Nhờ hương vị ngon và danh tiếng lâu năm, quán thường xuyên được nhắc đến trong danh sách những quán hải sản đáng thử tại phố Vĩnh Khánh",
+        "audioUrl": "",
+        "triggerRadius": 20,
+        "rating": 4.4,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ],
+        "priority": 9
     },
     {
-        "name":  "Quán Hải Sản Tươi Sống Bé Ốc",
-        "address":  "Đường Vĩnh Khánh,Phường 9,Quận 4,Thành Phố Hồ Chí Minh",
-        "lat":  10.763378,
-        "lng":  106.702011,
-        "description":  "Bé Ốc là quán hải sản tươi sống quen thuộc trên phố Vĩnh Khánh, tập trung vào các món ốc và ngao được chọn lọc kỹ, chế biến đơn giản để giữ trọn độ tươi. Thực đơn gọn, dễ chọn, phù hợp ăn nhanh hoặc đi nhóm nhỏ. Quán mang phong cách vỉa hè, không gian đơn giản, tạo cảm giác gần gũi. Mức giá bình dân, hương vị tươi ngon, là điểm dừng chân phù hợp cho thực khách muốn thưởng thức hải sản tươi mà không quá cầu kỳ khi dạo phố ẩm thực Vĩnh Khánh",
-        "audioUrl":  "",
-        "triggerRadius":  12,
-        "rating":  4.2,
-        "minPrice":  30000,
-        "maxPrice":  150000,
-        "audioDuration":  120,
-        "featuredReviews":  [
-                                "Good food",
-                                "Nice place"
-                            ]
+        "name": "Quán Hải Sản Tươi Sống Bé Ốc",
+        "address": "Đường Vĩnh Khánh,Phường 9,Quận 4,Thành Phố Hồ Chí Minh",
+        "lat": 10.763378,
+        "lng": 106.702011,
+        "description": "Bé Ốc là quán hải sản tươi sống quen thuộc trên phố Vĩnh Khánh, tập trung vào các món ốc và ngao được chọn lọc kỹ, chế biến đơn giản để giữ trọn độ tươi. Thực đơn gọn, dễ chọn, phù hợp ăn nhanh hoặc đi nhóm nhỏ. Quán mang phong cách vỉa hè, không gian đơn giản, tạo cảm giác gần gũi. Mức giá bình dân, hương vị tươi ngon, là điểm dừng chân phù hợp cho thực khách muốn thưởng thức hải sản tươi mà không quá cầu kỳ khi dạo phố ẩm thực Vĩnh Khánh",
+        "audioUrl": "",
+        "triggerRadius": 12,
+        "rating": 4.2,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ],
+        "priority": 6
     },
     {
-        "name":  "Quán Hải Sản Hai Lữ",
-        "address":  "Đường Vĩnh Khánh,Phường 9,Quận 4,Thành Phố Hồ Chí Minh",
-        "lat":  10.763263,
-        "lng":  106.70211,
-        "description":  "Quán Hải Sản Hai Lữ là quán hải sản tươi sống với thực đơn chế biến đa dạng từ nướng, hấp đến xào. Hải sản được chọn tại chỗ, đảm bảo độ tươi ngon, dễ gọi khi đi nhóm đông. Quán mang phong cách vỉa hè, không gian đơn giản, phù hợp cho những buổi ăn uống đông người. Mức giá trung bình, chất lượng ổn định, là lựa chọn quen thuộc cho thực khách khi muốn thưởng thức hải sản tươi trên phố Vĩnh Khánh",
-        "audioUrl":  "",
-        "triggerRadius":  12,
-        "rating":  4.1,
-        "minPrice":  30000,
-        "maxPrice":  150000,
-        "audioDuration":  120,
-        "featuredReviews":  [
-                                "Good food",
-                                "Nice place"
-                            ]
+        "name": "Quán Hải Sản Hai Lữ",
+        "address": "Đường Vĩnh Khánh,Phường 9,Quận 4,Thành Phố Hồ Chí Minh",
+        "lat": 10.763263,
+        "lng": 106.70211,
+        "description": "Quán Hải Sản Hai Lữ là quán hải sản tươi sống với thực đơn chế biến đa dạng từ nướng, hấp đến xào. Hải sản được chọn tại chỗ, đảm bảo độ tươi ngon, dễ gọi khi đi nhóm đông. Quán mang phong cách vỉa hè, không gian đơn giản, phù hợp cho những buổi ăn uống đông người. Mức giá trung bình, chất lượng ổn định, là lựa chọn quen thuộc cho thực khách khi muốn thưởng thức hải sản tươi trên phố Vĩnh Khánh",
+        "audioUrl": "",
+        "triggerRadius": 12,
+        "rating": 4.1,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ],
+        "priority": 5
     },
     {
-        "name":  "Lẩu Bò Kỳ Kim",
-        "address":  "106B Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
-        "lat":  10.761425,
-        "lng":  106.702563,
-        "description":  "Lẩu Bò Kỳ Kim là quán lẩu bò tươi được nhiều thực khách lựa chọn tại phố Vĩnh Khánh, nổi bật với các món signature như lẩu bò nhúng giấm, lẩu bò kiểu Thái và bò nhúng giấm cay, ăn kèm rau sống và topping hải sản. Quán có không gian ngồi thoải mái, phù hợp cho gia đình và nhóm bạn. Mức giá trung bình, thịt bò được đánh giá mềm, ngọt, nước dùng đậm đà, dễ ăn, là lựa chọn phù hợp cho những ai yêu thích lẩu bò khi khám phá ẩm thực Vĩnh Khánh",
-        "audioUrl":  "",
-        "triggerRadius":  15,
-        "rating":  4.3,
-        "minPrice":  30000,
-        "maxPrice":  150000,
-        "audioDuration":  120,
-        "featuredReviews":  [
-                                "Good food",
-                                "Nice place"
-                            ]
+        "name": "Lẩu Bò Kỳ Kim",
+        "address": "106B Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
+        "lat": 10.761425,
+        "lng": 106.702563,
+        "description": "Lẩu Bò Kỳ Kim là quán lẩu bò tươi được nhiều thực khách lựa chọn tại phố Vĩnh Khánh, nổi bật với các món signature như lẩu bò nhúng giấm, lẩu bò kiểu Thái và bò nhúng giấm cay, ăn kèm rau sống và topping hải sản. Quán có không gian ngồi thoải mái, phù hợp cho gia đình và nhóm bạn. Mức giá trung bình, thịt bò được đánh giá mềm, ngọt, nước dùng đậm đà, dễ ăn, là lựa chọn phù hợp cho những ai yêu thích lẩu bò khi khám phá ẩm thực Vĩnh Khánh",
+        "audioUrl": "",
+        "triggerRadius": 15,
+        "rating": 4.3,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ],
+        "priority": 7
     },
     {
-        "name":  "Quán Ốc Loan",
-        "address":  "129 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
-        "lat":  10.761269,
-        "lng":  106.702652,
-        "description":  "Quán Ốc Loan là quán ốc vỉa hè quen thuộc trên phố Vĩnh Khánh, nổi bật với thời gian mở cửa muộn đến sáng và menu phong phú từ các món ốc xào, ốc sả ớt, ốc hương, hải sản nướng đến nhiều món nhậu ăn kèm. Quán có mức giá rất bình dân (nhiều món chỉ từ 30.000–60.000đ), hương vị dễ ăn, hợp khẩu vị số đông, nguyên liệu tươi và phục vụ nhanh nhẹn, thân thiện. Không gian thoáng, mang đúng tinh thần nhậu vỉa hè Sài Gòn, phù hợp nhóm bạn tụ tập ăn khuya và thường được xem là điểm dừng “không nên bỏ lỡ” khi khám phá ẩm thực Vĩnh Khánh",
-        "audioUrl":  "",
-        "triggerRadius":  12,
-        "rating":  4.3,
-        "minPrice":  30000,
-        "maxPrice":  150000,
-        "audioDuration":  120,
-        "featuredReviews":  [
-                                "Good food",
-                                "Nice place"
-                            ]
+        "name": "Quán Ốc Loan",
+        "address": "129 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
+        "lat": 10.761269,
+        "lng": 106.702652,
+        "description": "Quán Ốc Loan là quán ốc vỉa hè quen thuộc trên phố Vĩnh Khánh, nổi bật với thời gian mở cửa muộn đến sáng và menu phong phú từ các món ốc xào, ốc sả ớt, ốc hương, hải sản nướng đến nhiều món nhậu ăn kèm. Quán có mức giá rất bình dân (nhiều món chỉ từ 30.000–60.000đ), hương vị dễ ăn, hợp khẩu vị số đông, nguyên liệu tươi và phục vụ nhanh nhẹn, thân thiện. Không gian thoáng, mang đúng tinh thần nhậu vỉa hè Sài Gòn, phù hợp nhóm bạn tụ tập ăn khuya và thường được xem là điểm dừng “không nên bỏ lỡ” khi khám phá ẩm thực Vĩnh Khánh",
+        "audioUrl": "",
+        "triggerRadius": 12,
+        "rating": 4.3,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ],
+        "priority": 8
     },
     {
-        "name":  "Tiệm Phá Lấu 825",
-        "address":  "99 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
-        "lat":  10.761145,
-        "lng":  106.702901,
-        "description":  "Tiệm Phá Lấu 825 là quán phá lấu và đồ nhậu bình dân quen thuộc tại khu Vĩnh Khánh, nổi bật với các món phá lấu bò, phá lấu heo sốt cay, bánh mì phá lấu và lòng heo nướng. Thực đơn đơn giản nhưng dễ ăn, phù hợp ăn vặt hoặc nhậu nhẹ. Quán mang phong cách vỉa hè nhanh gọn, không gian giản dị, thu hút đông khách địa phương. Món ăn có hương vị đậm đà kiểu đường phố, mức giá rất rẻ (khoảng 50.000–150.000đ), thích hợp cho những bữa ăn khuya hoặc dừng chân nhanh khi khám phá ẩm thực Vĩnh Khánh",
-        "audioUrl":  "",
-        "triggerRadius":  10,
-        "rating":  4.0,
-        "minPrice":  30000,
-        "maxPrice":  150000,
-        "audioDuration":  120,
-        "featuredReviews":  [
-                                "Good food",
-                                "Nice place"
-                            ]
+        "name": "Tiệm Phá Lấu 825",
+        "address": "99 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
+        "lat": 10.761145,
+        "lng": 106.702901,
+        "description": "Tiệm Phá Lấu 825 là quán phá lấu và đồ nhậu bình dân quen thuộc tại khu Vĩnh Khánh, nổi bật với các món phá lấu bò, phá lấu heo sốt cay, bánh mì phá lấu và lòng heo nướng. Thực đơn đơn giản nhưng dễ ăn, phù hợp ăn vặt hoặc nhậu nhẹ. Quán mang phong cách vỉa hè nhanh gọn, không gian giản dị, thu hút đông khách địa phương. Món ăn có hương vị đậm đà kiểu đường phố, mức giá rất rẻ (khoảng 50.000–150.000đ), thích hợp cho những bữa ăn khuya hoặc dừng chân nhanh khi khám phá ẩm thực Vĩnh Khánh",
+        "audioUrl": "",
+        "triggerRadius": 10,
+        "rating": 4.0,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ],
+        "priority": 4
     },
     {
-        "name":  "Quán Ốc Hồng Nhung",
-        "address":  "38 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
-        "lat":  10.761099,
-        "lng":  106.702956,
-        "description":  "Quán Ốc Hồng Nhung là quán ốc lâu năm trên phố Vĩnh Khánh, được nhiều thực khách biết đến với các món ngon như ốc hương rang muối ớt và càng xanh. Quán mang phong cách vỉa hè thân thiện, không gian giản dị, dễ ngồi. Món ăn có hương vị tươi ngon, ổn định, mức giá hợp lý, phù hợp cho nhóm nhỏ muốn nhậu nhẹ hoặc ăn ốc buổi tối trong không khí thoải mái",
-        "audioUrl":  "",
-        "triggerRadius":  8,
-        "rating":  4.1,
-        "minPrice":  30000,
-        "maxPrice":  150000,
-        "audioDuration":  120,
-        "featuredReviews":  [
-                                "Good food",
-                                "Nice place"
-                            ]
+        "name": "Quán Ốc Hồng Nhung",
+        "address": "38 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
+        "lat": 10.761099,
+        "lng": 106.702956,
+        "description": "Quán Ốc Hồng Nhung là quán ốc lâu năm trên phố Vĩnh Khánh, được nhiều thực khách biết đến với các món ngon như ốc hương rang muối ớt và càng xanh. Quán mang phong cách vỉa hè thân thiện, không gian giản dị, dễ ngồi. Món ăn có hương vị tươi ngon, ổn định, mức giá hợp lý, phù hợp cho nhóm nhỏ muốn nhậu nhẹ hoặc ăn ốc buổi tối trong không khí thoải mái",
+        "audioUrl": "",
+        "triggerRadius": 8,
+        "rating": 4.1,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ],
+        "priority": 5
     },
     {
-        "name":  "Quán Ốc Oanh",
-        "address":  "534 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
-        "lat":  10.760852,
-        "lng":  106.703294,
-        "description":  "Quán Ốc Oanh là một trong những quán ốc – hải sản nổi tiếng bậc nhất trên phố ẩm thực Vĩnh Khánh, với hơn 20 năm hoạt động và được Michelin Guide vinh danh Bib Gourmand 2024. Quán nổi bật với các món đặc trưng như càng ghẹ rang muối ớt, ốc hương, sò điệp nướng mỡ hành, cháo hàu cùng thực đơn hải sản tươi sống phong phú, chế biến đa dạng từ nướng đến xào. Quán mang phong cách vỉa hè sôi động, không gian ngoài trời nhộn nhịp đúng chất ăn nhậu đường phố Sài Gòn, lúc nào cũng đông khách từ chiều tối đến khuya. Hương vị được đánh giá đậm đà, tươi ngon, khẩu phần khá hào phóng. Mức giá cao hơn mặt bằng chung khu vực (khoảng 150.000 – 400.000đ/người), nhưng được nhiều thực khách đánh giá là xứng đáng với chất lượng và danh tiếng của quán",
-        "audioUrl":  "",
-        "triggerRadius":  12,
-        "rating":  4.5,
-        "minPrice":  30000,
-        "maxPrice":  150000,
-        "audioDuration":  120,
-        "featuredReviews":  [
-                                "Good food",
-                                "Nice place"
-                            ]
+        "name": "Quán Ốc Oanh",
+        "address": "534 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
+        "lat": 10.760852,
+        "lng": 106.703294,
+        "description": "Quán Ốc Oanh là một trong những quán ốc – hải sản nổi tiếng bậc nhất trên phố ẩm thực Vĩnh Khánh, với hơn 20 năm hoạt động và được Michelin Guide vinh danh Bib Gourmand 2024. Quán nổi bật với các món đặc trưng như càng ghẹ rang muối ớt, ốc hương, sò điệp nướng mỡ hành, cháo hàu cùng thực đơn hải sản tươi sống phong phú, chế biến đa dạng từ nướng đến xào. Quán mang phong cách vỉa hè sôi động, không gian ngoài trời nhộn nhịp đúng chất ăn nhậu đường phố Sài Gòn, lúc nào cũng đông khách từ chiều tối đến khuya. Hương vị được đánh giá đậm đà, tươi ngon, khẩu phần khá hào phóng. Mức giá cao hơn mặt bằng chung khu vực (khoảng 150.000 – 400.000đ/người), nhưng được nhiều thực khách đánh giá là xứng đáng với chất lượng và danh tiếng của quán",
+        "audioUrl": "",
+        "triggerRadius": 12,
+        "rating": 4.5,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "priority": 10,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ]
     },
     {
-        "name":  "Quán Ốc 662",
-        "address":  "662 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
-        "lat":  10.760733,
-        "lng":  106.703442,
-        "description":  "Quán Ốc 662 chuyên phục vụ ốc tươi và hải sản nướng, xào theo phong cách vỉa hè kết hợp quán gia đình và nhậu. Thực đơn tập trung vào các món dễ ăn, chế biến đậm vị, nguyên liệu tươi sống, phù hợp cho nhóm đông người. Quán có không gian rộng rãi hơn so với nhiều quán xung quanh, tạo cảm giác thoải mái khi đi đông hoặc ngồi lâu. Giá cả phải chăng, được nhiều thực khách đánh giá ổn định, và thường đông khách vào cuối tuần",
-        "audioUrl":  "",
-        "triggerRadius":  10,
-        "rating":  4.2,
-        "minPrice":  30000,
-        "maxPrice":  150000,
-        "audioDuration":  120,
-        "featuredReviews":  [
-                                "Good food",
-                                "Nice place"
-                            ]
+        "name": "Quán Ốc 662",
+        "address": "662 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
+        "lat": 10.760733,
+        "lng": 106.703442,
+        "description": "Quán Ốc 662 chuyên phục vụ ốc tươi và hải sản nướng, xào theo phong cách vỉa hè kết hợp quán gia đình và nhậu. Thực đơn tập trung vào các món dễ ăn, chế biến đậm vị, nguyên liệu tươi sống, phù hợp cho nhóm đông người. Quán có không gian rộng rãi hơn so với nhiều quán xung quanh, tạo cảm giác thoải mái khi đi đông hoặc ngồi lâu. Giá cả phải chăng, được nhiều thực khách đánh giá ổn định, và thường đông khách vào cuối tuần",
+        "audioUrl": "",
+        "triggerRadius": 10,
+        "rating": 4.2,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ],
+        "priority": 6
     },
     {
-        "name":  "Ốc Vĩnh Khánh",
-        "address":  "131 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
-        "lat":  10.760609,
-        "lng":  106.703657,
-        "description":  "Ốc Vĩnh Khánh là quán ốc truyền thống được nhiều thực khách biết đến, nổi bật với các món đặc trưng như ốc len xào dừa, ốc bươu nướng cùng hải sản tươi. Quán mang phong cách vỉa hè nhậu kết hợp ăn uống gia đình, thực đơn dân dã, dễ ăn, phù hợp nhiều đối tượng. Món ăn có hương vị đậm đà, ngon miệng, mức giá bình dân, phù hợp túi tiền. Không gian đơn giản nhưng sạch sẽ, thoải mái, thích hợp cho cả giới trẻ lẫn gia đình khi muốn trải nghiệm ẩm thực đường phố Vĩnh Khánh",
-        "audioUrl":  "",
-        "triggerRadius":  10,
-        "rating":  4.0,
-        "minPrice":  30000,
-        "maxPrice":  150000,
-        "audioDuration":  120,
-        "featuredReviews":  [
-                                "Good food",
-                                "Nice place"
-                            ]
+        "name": "Ốc Vĩnh Khánh",
+        "address": "131 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
+        "lat": 10.760609,
+        "lng": 106.703657,
+        "description": "Ốc Vĩnh Khánh là quán ốc truyền thống được nhiều thực khách biết đến, nổi bật với các món đặc trưng như ốc len xào dừa, ốc bươu nướng cùng hải sản tươi. Quán mang phong cách vỉa hè nhậu kết hợp ăn uống gia đình, thực đơn dân dã, dễ ăn, phù hợp nhiều đối tượng. Món ăn có hương vị đậm đà, ngon miệng, mức giá bình dân, phù hợp túi tiền. Không gian đơn giản nhưng sạch sẽ, thoải mái, thích hợp cho cả giới trẻ lẫn gia đình khi muốn trải nghiệm ẩm thực đường phố Vĩnh Khánh",
+        "audioUrl": "",
+        "triggerRadius": 10,
+        "rating": 4.0,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ],
+        "priority": 4
     },
     {
-        "name":  "Lẩu Dê Toàn \u0026 Ký",
-        "address":  "Đường Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
-        "lat":  10.760539,
-        "lng":  106.703742,
-        "description":  "Lẩu Dê Toàn \u0026 Ký là quán lẩu dê đặc sản được nhiều thực khách lựa chọn khi ghé phố Vĩnh Khánh, nổi bật với các món signature như lẩu dê tái, dê nướng, dê thái, dê xào lăn và dê nướng mọi. Thực đơn tập trung vào các món dê nóng hổi, đậm vị, dễ chia sẻ khi đi đông. Quán mang phong cách nhậu kết hợp gia đình, không gian có mái che, tạo cảm giác thoải mái khi ngồi lâu. Mức giá trung bình (khoảng 200.000–400.000đ/người), thịt dê được đánh giá tươi, mềm, thơm gia vị, rất phù hợp cho nhóm đông và những ai yêu thích món dê vào buổi đêm khuya",
-        "audioUrl":  "",
-        "triggerRadius":  8,
-        "rating":  4.3,
-        "minPrice":  30000,
-        "maxPrice":  150000,
-        "audioDuration":  120,
-        "featuredReviews":  [
-                                "Good food",
-                                "Nice place"
-                            ]
+        "name": "Lẩu Dê Toàn & Ký",
+        "address": "Đường Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
+        "lat": 10.760539,
+        "lng": 106.703742,
+        "description": "Lẩu Dê Toàn & Ký là quán lẩu dê đặc sản được nhiều thực khách lựa chọn khi ghé phố Vĩnh Khánh, nổi bật với các món signature như lẩu dê tái, dê nướng, dê thái, dê xào lăn và dê nướng mọi. Thực đơn tập trung vào các món dê nóng hổi, đậm vị, dễ chia sẻ khi đi đông. Quán mang phong cách nhậu kết hợp gia đình, không gian có mái che, tạo cảm giác thoải mái khi ngồi lâu. Mức giá trung bình (khoảng 200.000–400.000đ/người), thịt dê được đánh giá tươi, mềm, thơm gia vị, rất phù hợp cho nhóm đông và những ai yêu thích món dê vào buổi đêm khuya",
+        "audioUrl": "",
+        "triggerRadius": 8,
+        "rating": 4.3,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ],
+        "priority": 7
     },
     {
-        "name":  "Lẩu Cá A Mín",
-        "address":  "333 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
-        "lat":  10.760595,
-        "lng":  106.70416,
-        "description":  "Lẩu Cá A Mín là quán lẩu cá đặc sản miền Tây, nổi bật với các món signature như lẩu cá lóc, cá lóc đồng và lẩu cá basa chua cay, ăn kèm các loại rau đặc trưng như rau đắng, bông súng. Hương vị mang nét dân dã, nước lẩu ngọt tự nhiên, dễ ăn. Quán mang phong cách vỉa hè kết hợp gia đình, không gian thoáng, phù hợp cho nhóm đông người. Mức giá bình dân, món ăn được đánh giá ngon, đậm chất miền Tây, là lựa chọn thích hợp cho những ai muốn đổi vị khi khám phá ẩm thực Vĩnh Khánh",
-        "audioUrl":  "",
-        "triggerRadius":  15,
-        "rating":  4.1,
-        "minPrice":  30000,
-        "maxPrice":  150000,
-        "audioDuration":  120,
-        "featuredReviews":  [
-                                "Good food",
-                                "Nice place"
-                            ]
+        "name": "Lẩu Cá A Mín",
+        "address": "333 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
+        "lat": 10.760595,
+        "lng": 106.70416,
+        "description": "Lẩu Cá A Mín là quán lẩu cá đặc sản miền Tây, nổi bật với các món signature như lẩu cá lóc, cá lóc đồng và lẩu cá basa chua cay, ăn kèm các loại rau đặc trưng như rau đắng, bông súng. Hương vị mang nét dân dã, nước lẩu ngọt tự nhiên, dễ ăn. Quán mang phong cách vỉa hè kết hợp gia đình, không gian thoáng, phù hợp cho nhóm đông người. Mức giá bình dân, món ăn được đánh giá ngon, đậm chất miền Tây, là lựa chọn thích hợp cho những ai muốn đổi vị khi khám phá ẩm thực Vĩnh Khánh",
+        "audioUrl": "",
+        "triggerRadius": 15,
+        "rating": 4.1,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ],
+        "priority": 6
     },
     {
-        "name":  "Lẩu Nướng Chilli",
-        "address":  "Đường Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
-        "lat":  10.760621,
-        "lng":  106.704276,
-        "description":  "Lẩu Nướng Chilli là quán lẩu nướng tự chọn đang được giới trẻ ưa chuộng tại phố Vĩnh Khánh. Các món signature gồm hải sản nướng, lẩu me chua cay, cơm chiên giòn, gà cay và sườn nướng, tạo nên thực đơn đa dạng, dễ chọn cho đi nhóm. Quán mang phong cách vỉa hè hiện đại kết hợp khu ngồi có mái che, không gian nhộn nhịp, thường đông khách trẻ. Mức giá phải chăng (khoảng 150.000–300.000đ/người), hương vị thiên về cay, đậm đà, được nhiều thực khách nhận xét là “ăn là ghiền”. Một số món lẩu me có vị chua rõ, có thể tùy khẩu vị, nhưng nhìn chung chất lượng ổn định, phù hợp tụ tập bạn bè",
-        "audioUrl":  "",
-        "triggerRadius":  10,
-        "rating":  4.4,
-        "minPrice":  30000,
-        "maxPrice":  150000,
-        "audioDuration":  120,
-        "featuredReviews":  [
-                                "Good food",
-                                "Nice place"
-                            ]
+        "name": "Lẩu Nướng Chilli",
+        "address": "Đường Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
+        "lat": 10.760621,
+        "lng": 106.704276,
+        "description": "Lẩu Nướng Chilli là quán lẩu nướng tự chọn đang được giới trẻ ưa chuộng tại phố Vĩnh Khánh. Các món signature gồm hải sản nướng, lẩu me chua cay, cơm chiên giòn, gà cay và sườn nướng, tạo nên thực đơn đa dạng, dễ chọn cho đi nhóm. Quán mang phong cách vỉa hè hiện đại kết hợp khu ngồi có mái che, không gian nhộn nhịp, thường đông khách trẻ. Mức giá phải chăng (khoảng 150.000–300.000đ/người), hương vị thiên về cay, đậm đà, được nhiều thực khách nhận xét là “ăn là ghiền”. Một số món lẩu me có vị chua rõ, có thể tùy khẩu vị, nhưng nhìn chung chất lượng ổn định, phù hợp tụ tập bạn bè",
+        "audioUrl": "",
+        "triggerRadius": 10,
+        "rating": 4.4,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ],
+        "priority": 8
     },
     {
-        "name":  "Lẩu Mẹt Nướng 79K",
-        "address":  "833 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
-        "lat":  10.760702,
-        "lng":  106.704363,
-        "description":  "Lẩu Mẹt Nướng 79K là quán lẩu nướng giá rẻ theo hình thức 79.000đ/người (ăn không giới hạn), phục vụ kết hợp hải sản, thịt nướng và lẩu. Mô hình đơn giản, dễ gọi, phù hợp đi đông. Quán mang phong cách bình dân, vui vẻ, không gian rộng rãi, thường đông khách trẻ và sinh viên. Món ăn có hương vị ổn định, nguyên liệu tươi, phục vụ nhanh, rất phù hợp với nhóm bạn hoặc những ai muốn ăn lẩu nướng tiết kiệm chi phí khi khám phá Vĩnh Khánh",
-        "audioUrl":  "",
-        "triggerRadius":  10,
-        "rating":  4.0,
-        "minPrice":  30000,
-        "maxPrice":  150000,
-        "audioDuration":  120,
-        "featuredReviews":  [
-                                "Good food",
-                                "Nice place"
-                            ]
+        "name": "Lẩu Mẹt Nướng 79K",
+        "address": "833 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
+        "lat": 10.760702,
+        "lng": 106.704363,
+        "description": "Lẩu Mẹt Nướng 79K là quán lẩu nướng giá rẻ theo hình thức 79.000đ/người (ăn không giới hạn), phục vụ kết hợp hải sản, thịt nướng và lẩu. Mô hình đơn giản, dễ gọi, phù hợp đi đông. Quán mang phong cách bình dân, vui vẻ, không gian rộng rãi, thường đông khách trẻ và sinh viên. Món ăn có hương vị ổn định, nguyên liệu tươi, phục vụ nhanh, rất phù hợp với nhóm bạn hoặc những ai muốn ăn lẩu nướng tiết kiệm chi phí khi khám phá Vĩnh Khánh",
+        "audioUrl": "",
+        "triggerRadius": 10,
+        "rating": 4.0,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ],
+        "priority": 5
     },
     {
-        "name":  "Quán Ốc Vân",
-        "address":  "Đường Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
-        "lat":  10.760668,
-        "lng":  106.704418,
-        "description":  "Quán Ốc Vân là quán ốc vỉa hè điển hình trên phố Vĩnh Khánh, chuyên các món ốc tươi xào, ốc sả ớt, ốc nướng cùng hải sản giá bình dân. Quán có không gian đơn giản, bàn ghế ngoài trời, thường đông khách vào buổi tối, phù hợp cho những buổi nhậu nhẹ cùng nhóm bạn. Hương vị món ăn ở mức ổn định, nguyên liệu tươi, mức giá được đánh giá mềm so với mặt bằng chung khu vực (khoảng 100.000–200.000đ/người). Tuy không có nhiều bài review chi tiết như các quán lớn trên phố, Ốc Vân vẫn là lựa chọn quen thuộc của khách địa phương khi muốn ăn ốc nhanh, gọn và tiết kiệm",
-        "audioUrl":  "",
-        "triggerRadius":  8,
-        "rating":  4.0,
-        "minPrice":  30000,
-        "maxPrice":  150000,
-        "audioDuration":  120,
-        "featuredReviews":  [
-                                "Good food",
-                                "Nice place"
-                            ]
+        "name": "Quán Ốc Vân",
+        "address": "Đường Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
+        "lat": 10.760668,
+        "lng": 106.704418,
+        "description": "Quán Ốc Vân là quán ốc vỉa hè điển hình trên phố Vĩnh Khánh, chuyên các món ốc tươi xào, ốc sả ớt, ốc nướng cùng hải sản giá bình dân. Quán có không gian đơn giản, bàn ghế ngoài trời, thường đông khách vào buổi tối, phù hợp cho những buổi nhậu nhẹ cùng nhóm bạn. Hương vị món ăn ở mức ổn định, nguyên liệu tươi, mức giá được đánh giá mềm so với mặt bằng chung khu vực (khoảng 100.000–200.000đ/người). Tuy không có nhiều bài review chi tiết như các quán lớn trên phố, Ốc Vân vẫn là lựa chọn quen thuộc của khách địa phương khi muốn ăn ốc nhanh, gọn và tiết kiệm",
+        "audioUrl": "",
+        "triggerRadius": 8,
+        "rating": 4.0,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ],
+        "priority": 4
     },
     {
-        "name":  "Lẩu Nướng An An Quán",
-        "address":  "122/27 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
-        "lat":  10.760733,
-        "lng":  106.704482,
-        "description":  "Lẩu Nướng An An Quán là quán lẩu nướng hải sản được nhiều thực khách yêu thích trên phố Vĩnh Khánh, nổi bật với các món đặc trưng như bạch tuộc xông hơi, cơm thố hải sản và sụn gà rang muối. Thực đơn đa dạng, chú trọng nguyên liệu tươi, dễ gọi khi đi nhóm. Quán mang phong cách vỉa hè thoải mái, không gian thoáng, tạo cảm giác dễ chịu khi ngồi lâu. Mức giá hợp lý, hương vị tươi ngon, ổn định, giúp quán luôn nằm trong nhóm địa điểm ăn uống được yêu thích tại phố ẩm thực Vĩnh Khánh",
-        "audioUrl":  "",
-        "triggerRadius":  8,
-        "rating":  4.2,
-        "minPrice":  30000,
-        "maxPrice":  150000,
-        "audioDuration":  120,
-        "featuredReviews":  [
-                                "Good food",
-                                "Nice place"
-                            ]
+        "name": "Lẩu Nướng An An Quán",
+        "address": "122/27 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
+        "lat": 10.760733,
+        "lng": 106.704482,
+        "description": "Lẩu Nướng An An Quán là quán lẩu nướng hải sản được nhiều thực khách yêu thích trên phố Vĩnh Khánh, nổi bật với các món đặc trưng như bạch tuộc xông hơi, cơm thố hải sản và sụn gà rang muối. Thực đơn đa dạng, chú trọng nguyên liệu tươi, dễ gọi khi đi nhóm. Quán mang phong cách vỉa hè thoải mái, không gian thoáng, tạo cảm giác dễ chịu khi ngồi lâu. Mức giá hợp lý, hương vị tươi ngon, ổn định, giúp quán luôn nằm trong nhóm địa điểm ăn uống được yêu thích tại phố ẩm thực Vĩnh Khánh",
+        "audioUrl": "",
+        "triggerRadius": 8,
+        "rating": 4.2,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ],
+        "priority": 6
     },
     {
-        "name":  "Ốc Đêm Vĩnh Khánh",
-        "address":  "474 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
-        "lat":  10.760781,
-        "lng":  106.704571,
-        "description":  "Ốc Đêm Vĩnh Khánh là quán chuyên phục vụ ăn khuya, nổi bật với các món ốc và hải sản tươi sống được chế biến nhanh như ốc xào, nướng mỡ hành. Quán mang phong cách nhậu đêm vỉa hè, không gian ngoài trời sôi động, thu hút đông khách vào khung giờ muộn. Món ăn có hương vị đậm đà, dễ ăn, giá cả bình dân, phù hợp nhóm bạn tụ tập ăn đêm hoặc nhậu nhẹ khi khám phá phố ẩm thực Vĩnh Khánh về khuya",
-        "audioUrl":  "",
-        "triggerRadius":  10,
-        "rating":  4.1,
-        "minPrice":  30000,
-        "maxPrice":  150000,
-        "audioDuration":  120,
-        "featuredReviews":  [
-                                "Good food",
-                                "Nice place"
-                            ]
+        "name": "Ốc Đêm Vĩnh Khánh",
+        "address": "474 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
+        "lat": 10.760781,
+        "lng": 106.704571,
+        "description": "Ốc Đêm Vĩnh Khánh là quán chuyên phục vụ ăn khuya, nổi bật với các món ốc và hải sản tươi sống được chế biến nhanh như ốc xào, nướng mỡ hành. Quán mang phong cách nhậu đêm vỉa hè, không gian ngoài trời sôi động, thu hút đông khách vào khung giờ muộn. Món ăn có hương vị đậm đà, dễ ăn, giá cả bình dân, phù hợp nhóm bạn tụ tập ăn đêm hoặc nhậu nhẹ khi khám phá phố ẩm thực Vĩnh Khánh về khuya",
+        "audioUrl": "",
+        "triggerRadius": 10,
+        "rating": 4.1,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ],
+        "priority": 5
     },
     {
-        "name":  "Quán Nhậu Ốc Đào",
-        "address":  "232 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
-        "lat":  10.760911,
-        "lng":  106.704759,
-        "description":  "Quán Nhậu Ốc Đào là quán nhậu chuyên ốc và hải sản tươi, nổi bật với các món ốc Đào xào, ốc sả và ốc nướng đậm vị. Quán mang phong cách nhậu vỉa hè đông vui, không khí sôi động, phù hợp cho những buổi tụ tập bạn bè. Không gian quán rộng rãi, dễ ngồi khi đi đông. Món ăn có hương vị đậm đà, giá cả bình dân, là lựa chọn quen thuộc cho nhóm bạn muốn ăn ốc, nhậu nhẹ tại phố Vĩnh Khánh",
-        "audioUrl":  "",
-        "triggerRadius":  10,
-        "rating":  4.2,
-        "minPrice":  30000,
-        "maxPrice":  150000,
-        "audioDuration":  120,
-        "featuredReviews":  [
-                                "Good food",
-                                "Nice place"
-                            ]
+        "name": "Quán Nhậu Ốc Đào",
+        "address": "232 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
+        "lat": 10.760911,
+        "lng": 106.704759,
+        "description": "Quán Nhậu Ốc Đào là quán nhậu chuyên ốc và hải sản tươi, nổi bật với các món ốc Đào xào, ốc sả và ốc nướng đậm vị. Quán mang phong cách nhậu vỉa hè đông vui, không khí sôi động, phù hợp cho những buổi tụ tập bạn bè. Không gian quán rộng rãi, dễ ngồi khi đi đông. Món ăn có hương vị đậm đà, giá cả bình dân, là lựa chọn quen thuộc cho nhóm bạn muốn ăn ốc, nhậu nhẹ tại phố Vĩnh Khánh",
+        "audioUrl": "",
+        "triggerRadius": 10,
+        "rating": 4.2,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ],
+        "priority": 5
     },
     {
-        "name":  "Quán Cá Biển Nướng",
-        "address":  "231B Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
-        "lat":  10.760968,
-        "lng":  106.70484,
-        "description":  "Quán Cá Biển Nướng chuyên phục vụ cá biển tươi nướng với các kiểu chế biến như nướng muối ớt, nướng mỡ hành, cùng nhiều món hải sản nướng khác. Món ăn mang hương vị biển đậm đà, nguyên liệu tươi, dễ ăn. Quán theo phong cách vỉa hè, không gian đơn giản, phù hợp cho những buổi nhậu nhóm. Mức giá bình dân, hương vị ngon, đậm vị, là điểm dừng quen thuộc của thực khách khi muốn thưởng thức cá nướng và hải sản tại phố Vĩnh Khánh",
-        "audioUrl":  "",
-        "triggerRadius":  10,
-        "rating":  4.1,
-        "minPrice":  30000,
-        "maxPrice":  150000,
-        "audioDuration":  120,
-        "featuredReviews":  [
-                                "Good food",
-                                "Nice place"
-                            ]
+        "name": "Quán Cá Biển Nướng",
+        "address": "231B Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
+        "lat": 10.760968,
+        "lng": 106.70484,
+        "description": "Quán Cá Biển Nướng chuyên phục vụ cá biển tươi nướng với các kiểu chế biến như nướng muối ớt, nướng mỡ hành, cùng nhiều món hải sản nướng khác. Món ăn mang hương vị biển đậm đà, nguyên liệu tươi, dễ ăn. Quán theo phong cách vỉa hè, không gian đơn giản, phù hợp cho những buổi nhậu nhóm. Mức giá bình dân, hương vị ngon, đậm vị, là điểm dừng quen thuộc của thực khách khi muốn thưởng thức cá nướng và hải sản tại phố Vĩnh Khánh",
+        "audioUrl": "",
+        "triggerRadius": 10,
+        "rating": 4.1,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ],
+        "priority": 5
     },
     {
-        "name":  "Nem Nướng Đặc Sản Quê Nhà",
-        "address":  "122/45 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
-        "lat":  10.760826,
-        "lng":  106.70489,
-        "description":  "Nem Nướng Đặc Sản Quê Nhà là quán nem nướng lâu đời với hơn 60 năm hoạt động, được nhiều thực khách yêu thích tại Quận 4. Món signature là nem nướng Nha Trang/Ninh Hòa ăn kèm bánh tráng, rau sống và mắm nêm đậm đà, bên cạnh nem nướng nguyên que thơm lừng, chuẩn vị miền Trung. Quán mang phong cách vỉa hè kết hợp gia đình, không gian sạch sẽ, thoáng, tạo cảm giác dễ chịu khi ngồi ăn. Mức giá phải chăng (khoảng 45.000–100.000đ/phần), hương vị đặc trưng miền Trung, tươi ngon, không ngấy. Nhờ chất lượng ổn định và danh tiếng lâu năm, quán thường được xếp vào nhóm những quán nem nướng ngon nhất Quận 4, phù hợp ăn nhẹ cùng bạn bè hoặc gia đình",
-        "audioUrl":  "",
-        "triggerRadius":  8,
-        "rating":  4.4,
-        "minPrice":  30000,
-        "maxPrice":  150000,
-        "audioDuration":  120,
-        "featuredReviews":  [
-                                "Good food",
-                                "Nice place"
-                            ]
+        "name": "Nem Nướng Đặc Sản Quê Nhà",
+        "address": "122/45 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
+        "lat": 10.760826,
+        "lng": 106.70489,
+        "description": "Nem Nướng Đặc Sản Quê Nhà là quán nem nướng lâu đời với hơn 60 năm hoạt động, được nhiều thực khách yêu thích tại Quận 4. Món signature là nem nướng Nha Trang/Ninh Hòa ăn kèm bánh tráng, rau sống và mắm nêm đậm đà, bên cạnh nem nướng nguyên que thơm lừng, chuẩn vị miền Trung. Quán mang phong cách vỉa hè kết hợp gia đình, không gian sạch sẽ, thoáng, tạo cảm giác dễ chịu khi ngồi ăn. Mức giá phải chăng (khoảng 45.000–100.000đ/phần), hương vị đặc trưng miền Trung, tươi ngon, không ngấy. Nhờ chất lượng ổn định và danh tiếng lâu năm, quán thường được xếp vào nhóm những quán nem nướng ngon nhất Quận 4, phù hợp ăn nhẹ cùng bạn bè hoặc gia đình",
+        "audioUrl": "",
+        "triggerRadius": 8,
+        "rating": 4.4,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ],
+        "priority": 8
     },
     {
-        "name":  "Ốc Bụi Quán",
-        "address":  "Đường Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
-        "lat":  10.761205,
-        "lng":  106.705879,
-        "description":  "Ốc Bụi là quán ốc bình dân được nhiều thực khách yêu thích tại phố Vĩnh Khánh, nổi bật với càng cúm xào muối nước – món đặc sản làm nên tên tuổi của quán. Thực đơn tập trung vào các món ốc xào, ốc sả ớt, ăn kèm sườn nướng, phù hợp cho những buổi nhậu khuya cùng bạn bè. Quán mang phong cách vỉa hè thoải mái, không gian đơn giản, mở cửa từ chiều đến khoảng 1 giờ sáng, rất được lòng khách đi ăn tối muộn. Món ăn có hương vị đậm đà, nguyên liệu tươi, giá cả bình dân (ốc khoảng 40.000–60.000đ/món), thường được đánh giá là “rẻ mà chất” so với mặt bằng chung khu vực",
-        "audioUrl":  "",
-        "triggerRadius":  15,
-        "rating":  4.2,
-        "minPrice":  30000,
-        "maxPrice":  150000,
-        "audioDuration":  120,
-        "featuredReviews":  [
-                                "Good food",
-                                "Nice place"
-                            ]
+        "name": "Ốc Bụi Quán",
+        "address": "Đường Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
+        "lat": 10.761205,
+        "lng": 106.705879,
+        "description": "Ốc Bụi là quán ốc bình dân được nhiều thực khách yêu thích tại phố Vĩnh Khánh, nổi bật với càng cúm xào muối nước – món đặc sản làm nên tên tuổi của quán. Thực đơn tập trung vào các món ốc xào, ốc sả ớt, ăn kèm sườn nướng, phù hợp cho những buổi nhậu khuya cùng bạn bè. Quán mang phong cách vỉa hè thoải mái, không gian đơn giản, mở cửa từ chiều đến khoảng 1 giờ sáng, rất được lòng khách đi ăn tối muộn. Món ăn có hương vị đậm đà, nguyên liệu tươi, giá cả bình dân (ốc khoảng 40.000–60.000đ/món), thường được đánh giá là “rẻ mà chất” so với mặt bằng chung khu vực",
+        "audioUrl": "",
+        "triggerRadius": 15,
+        "rating": 4.2,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "priority": 7,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ]
     },
     {
-        "name":  "Cơm Gà Xối Mỡ Cô Hai",
-        "address":  "8/11 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
-        "lat":  10.760946,
-        "lng":  106.706322,
-        "description":  "Cơm Gà Xối Mỡ Cô Hai là quán cơm gà xối mỡ dân dã nổi tiếng trong khu phố ẩm thực Vĩnh Khánh. Món signature là cơm gà xối mỡ giòn tan với da gà vàng ruộm, thịt mềm, mọng nước, ăn kèm nước mắm tỏi ớt và cơm dẻo thơm. Quán mang phong cách vỉa hè bình dân, không gian đơn giản nhưng lúc nào cũng đông khách xếp hàng, đặc biệt vào buổi tối. Mức giá rất rẻ (khoảng 35.000–60.000đ/phần), hương vị giòn ngon, đậm đà, thường được nhận xét là “ăn một lần là ghiền”. Đây là lựa chọn lý tưởng để ăn no bụng sau khi dạo phố hoặc dùng bữa khuya khi khám phá Vĩnh Khánh",
-        "audioUrl":  "",
-        "triggerRadius":  12,
-        "rating":  4.5,
-        "minPrice":  30000,
-        "maxPrice":  150000,
-        "audioDuration":  120,
-        "featuredReviews":  [
-                                "Good food",
-                                "Nice place"
-                            ]
+        "name": "Cơm Gà Xối Mỡ Cô Hai",
+        "address": "8/11 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
+        "lat": 10.760946,
+        "lng": 106.706322,
+        "description": "Cơm Gà Xối Mỡ Cô Hai là quán cơm gà xối mỡ dân dã nổi tiếng trong khu phố ẩm thực Vĩnh Khánh. Món signature là cơm gà xối mỡ giòn tan với da gà vàng ruộm, thịt mềm, mọng nước, ăn kèm nước mắm tỏi ớt và cơm dẻo thơm. Quán mang phong cách vỉa hè bình dân, không gian đơn giản nhưng lúc nào cũng đông khách xếp hàng, đặc biệt vào buổi tối. Mức giá rất rẻ (khoảng 35.000–60.000đ/phần), hương vị giòn ngon, đậm đà, thường được nhận xét là “ăn một lần là ghiền”. Đây là lựa chọn lý tưởng để ăn no bụng sau khi dạo phố hoặc dùng bữa khuya khi khám phá Vĩnh Khánh",
+        "audioUrl": "",
+        "triggerRadius": 12,
+        "rating": 4.5,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ],
+        "priority": 9
     },
     {
-        "name":  "Lẩu Sukiyaki Thái",
-        "address":  "Đường Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
-        "lat":  10.760927,
-        "lng":  106.706356,
-        "description":  "Lẩu Sukiyaki Thái là quán lẩu kiểu Thái với hương vị cay nồng đặc trưng, nổi bật với các set sukiyaki hải sản, bò hoặc Thái mix gồm topping tươi như tôm, mực, ngao. Nước dùng có vị chua cay đậm đà, phù hợp với những ai yêu thích lẩu cay ấm bụng về đêm. Quán có mái che, không gian thoải mái hơn quán vỉa hè thuần, thích hợp cho gia đình và nhóm bạn. Mức giá trung bình (khoảng 200.000–350.000đ/người), nguyên liệu tươi, hương vị được đánh giá chuẩn vị Thái, là lựa chọn đáng cân nhắc khi khám phá ẩm thực đêm Vĩnh Khánh",
-        "audioUrl":  "",
-        "triggerRadius":  8,
-        "rating":  4.3,
-        "minPrice":  30000,
-        "maxPrice":  150000,
-        "audioDuration":  120,
-        "featuredReviews":  [
-                                "Good food",
-                                "Nice place"
-                            ]
+        "name": "Lẩu Sukiyaki Thái",
+        "address": "Đường Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
+        "lat": 10.760927,
+        "lng": 106.706356,
+        "description": "Lẩu Sukiyaki Thái là quán lẩu kiểu Thái với hương vị cay nồng đặc trưng, nổi bật với các set sukiyaki hải sản, bò hoặc Thái mix gồm topping tươi như tôm, mực, ngao. Nước dùng có vị chua cay đậm đà, phù hợp với những ai yêu thích lẩu cay ấm bụng về đêm. Quán có mái che, không gian thoải mái hơn quán vỉa hè thuần, thích hợp cho gia đình và nhóm bạn. Mức giá trung bình (khoảng 200.000–350.000đ/người), nguyên liệu tươi, hương vị được đánh giá chuẩn vị Thái, là lựa chọn đáng cân nhắc khi khám phá ẩm thực đêm Vĩnh Khánh",
+        "audioUrl": "",
+        "triggerRadius": 8,
+        "rating": 4.3,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ],
+        "priority": 6
     },
     {
-        "name":  "Ốc Phát Quán",
-        "address":  "46 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
-        "lat":  10.760814,
-        "lng":  106.706552,
-        "description":  "Ốc Phát Quán là quán ốc và hải sản vỉa hè quen thuộc trên phố Vĩnh Khánh, tập trung vào các món ốc tươi chế biến đa dạng như xào me, xào bơ tỏi, nướng. Quán mang phong cách đường phố nhộn nhịp, không gian thoáng, bàn ghế đơn giản, phù hợp cho những buổi ăn khuya hoặc nhậu nhẹ. Món ăn được đánh giá ngon, dễ ăn, lên món nhanh, giá cả bình dân, phù hợp với nhiều nhóm khách. Nhờ chất lượng ổn định và phục vụ nhanh, quán là lựa chọn quen thuộc của thực khách địa phương trong khu vực",
-        "audioUrl":  "",
-        "triggerRadius":  10,
-        "rating":  4.1,
-        "minPrice":  30000,
-        "maxPrice":  150000,
-        "audioDuration":  120,
-        "featuredReviews":  [
-                                "Good food",
-                                "Nice place"
-                            ]
+        "name": "Ốc Phát Quán",
+        "address": "46 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
+        "lat": 10.760814,
+        "lng": 106.706552,
+        "description": "Ốc Phát Quán là quán ốc và hải sản vỉa hè quen thuộc trên phố Vĩnh Khánh, tập trung vào các món ốc tươi chế biến đa dạng như xào me, xào bơ tỏi, nướng. Quán mang phong cách đường phố nhộn nhịp, không gian thoáng, bàn ghế đơn giản, phù hợp cho những buổi ăn khuya hoặc nhậu nhẹ. Món ăn được đánh giá ngon, dễ ăn, lên món nhanh, giá cả bình dân, phù hợp với nhiều nhóm khách. Nhờ chất lượng ổn định và phục vụ nhanh, quán là lựa chọn quen thuộc của thực khách địa phương trong khu vực",
+        "audioUrl": "",
+        "triggerRadius": 10,
+        "rating": 4.1,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ],
+        "priority": 5
     },
     {
-        "name":  "Cá Lóc Nướng Thy Thy",
-        "address":  "Đường Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
-        "lat":  10.760836,
-        "lng":  106.706579,
-        "description":  "Cá Lóc Nướng Thy Thy là quán chuyên cá lóc nướng trui – món đặc sản miền Tây dân dã, ăn kèm muối ớt và mắm me chua ngọt. Cá được nướng nguyên con, giữ trọn vị thơm ngon tự nhiên, đúng chất ẩm thực quê. Quán mang phong cách vỉa hè mộc mạc, không gian đơn giản. Mức giá bình dân, hương vị chuẩn vị miền Tây, phù hợp cho ăn nhẹ hoặc những buổi nhậu lai rai cùng bạn bè khi dạo phố Vĩnh Khánh",
-        "audioUrl":  "",
-        "triggerRadius":  6,
-        "rating":  4.2,
-        "minPrice":  30000,
-        "maxPrice":  150000,
-        "audioDuration":  120,
-        "featuredReviews":  [
-                                "Good food",
-                                "Nice place"
-                            ]
+        "name": "Cá Lóc Nướng Thy Thy",
+        "address": "Đường Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
+        "lat": 10.760836,
+        "lng": 106.706579,
+        "description": "Cá Lóc Nướng Thy Thy là quán chuyên cá lóc nướng trui – món đặc sản miền Tây dân dã, ăn kèm muối ớt và mắm me chua ngọt. Cá được nướng nguyên con, giữ trọn vị thơm ngon tự nhiên, đúng chất ẩm thực quê. Quán mang phong cách vỉa hè mộc mạc, không gian đơn giản. Mức giá bình dân, hương vị chuẩn vị miền Tây, phù hợp cho ăn nhẹ hoặc những buổi nhậu lai rai cùng bạn bè khi dạo phố Vĩnh Khánh",
+        "audioUrl": "",
+        "triggerRadius": 6,
+        "rating": 4.2,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ],
+        "priority": 5
     },
     {
-        "name":  "Quán Nướng 79",
-        "address":  "Đường Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
-        "lat":  10.760765,
-        "lng":  106.706642,
-        "description":  "Quán Nướng 79 là quán nướng bình dân với thực đơn đồ nướng vỉa hè đa dạng gồm thịt, hải sản và rau củ. Các món được tẩm ướp đậm đà, dễ ăn, phù hợp cho những buổi ăn khuya hoặc nhậu nhẹ. Quán mang phong cách đường phố nhậu, không gian đơn giản, thường đông khách vào buổi tối. Mức giá rẻ, phù hợp túi tiền, là lựa chọn quen thuộc của thực khách khi muốn thưởng thức đồ nướng nhanh gọn tại phố Vĩnh Khánh",
-        "audioUrl":  "",
-        "triggerRadius":  8,
-        "rating":  4.0,
-        "minPrice":  30000,
-        "maxPrice":  150000,
-        "audioDuration":  120,
-        "featuredReviews":  [
-                                "Good food",
-                                "Nice place"
-                            ]
+        "name": "Quán Nướng 79",
+        "address": "Đường Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
+        "lat": 10.760765,
+        "lng": 106.706642,
+        "description": "Quán Nướng 79 là quán nướng bình dân với thực đơn đồ nướng vỉa hè đa dạng gồm thịt, hải sản và rau củ. Các món được tẩm ướp đậm đà, dễ ăn, phù hợp cho những buổi ăn khuya hoặc nhậu nhẹ. Quán mang phong cách đường phố nhậu, không gian đơn giản, thường đông khách vào buổi tối. Mức giá rẻ, phù hợp túi tiền, là lựa chọn quen thuộc của thực khách khi muốn thưởng thức đồ nướng nhanh gọn tại phố Vĩnh Khánh",
+        "audioUrl": "",
+        "triggerRadius": 8,
+        "rating": 4.0,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ],
+        "priority": 4
     },
     {
-        "name":  "Cô Út Nướng",
-        "address":  "24 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
-        "lat":  10.760673,
-        "lng":  106.70679,
-        "description":  "Cô Út Nướng là quán nướng hải sản và thịt quen thuộc trên phố Vĩnh Khánh, nổi bật với các món cá biển nướng và vú heo nướng được nhiều thực khách lựa chọn. Nguyên liệu tươi, cách nướng đơn giản nhưng giữ được hương vị tự nhiên. Quán mang phong cách vỉa hè kết hợp gia đình, không gian nhỏ gọn, tạo cảm giác gần gũi. Mức giá phải chăng, món ăn tươi ngon, cùng phong cách phục vụ nhiệt tình, phù hợp cho bữa tối nhẹ hoặc những buổi tụ tập thân mật",
-        "audioUrl":  "",
-        "triggerRadius":  10,
-        "rating":  4.1,
-        "minPrice":  30000,
-        "maxPrice":  150000,
-        "audioDuration":  120,
-        "featuredReviews":  [
-                                "Good food",
-                                "Nice place"
-                            ]
+        "name": "Cô Út Nướng",
+        "address": "24 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
+        "lat": 10.760673,
+        "lng": 106.70679,
+        "description": "Cô Út Nướng là quán nướng hải sản và thịt quen thuộc trên phố Vĩnh Khánh, nổi bật với các món cá biển nướng và vú heo nướng được nhiều thực khách lựa chọn. Nguyên liệu tươi, cách nướng đơn giản nhưng giữ được hương vị tự nhiên. Quán mang phong cách vỉa hè kết hợp gia đình, không gian nhỏ gọn, tạo cảm giác gần gũi. Mức giá phải chăng, món ăn tươi ngon, cùng phong cách phục vụ nhiệt tình, phù hợp cho bữa tối nhẹ hoặc những buổi tụ tập thân mật",
+        "audioUrl": "",
+        "triggerRadius": 10,
+        "rating": 4.1,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ],
+        "priority": 5
     },
     {
-        "name":  "Vú Heo Nướng Tiến Lên",
-        "address":  "89 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
-        "lat":  10.76049,
-        "lng":  106.707169,
-        "description":  "Vú Heo Nướng Tiến Lên là quán nhậu chuyên vú heo nướng giòn, món “tủ” thường được gọi kèm bia khi tụ tập bạn bè. Vú heo được nướng vàng, giữ độ giòn dai, tẩm ướp cay nhẹ, đậm vị, rất hợp khẩu vị nhậu. Quán mang phong cách vỉa hè nhậu, không gian vui vẻ, thoải mái, phù hợp cho nhóm bạn. Mức giá bình dân, dễ gọi nhiều món, là điểm dừng quen thuộc cho những buổi ăn tối hoặc nhậu nhẹ trên phố Vĩnh Khánh",
-        "audioUrl":  "",
-        "triggerRadius":  15,
-        "rating":  4.2,
-        "minPrice":  30000,
-        "maxPrice":  150000,
-        "audioDuration":  120,
-        "featuredReviews":  [
-                                "Good food",
-                                "Nice place"
-                            ]
+        "name": "Vú Heo Nướng Tiến Lên",
+        "address": "89 Vĩnh Khánh,Phường 8,Quận 4,Thành Phố Hồ Chí Minh",
+        "lat": 10.76049,
+        "lng": 106.707169,
+        "description": "Vú Heo Nướng Tiến Lên là quán nhậu chuyên vú heo nướng giòn, món “tủ” thường được gọi kèm bia khi tụ tập bạn bè. Vú heo được nướng vàng, giữ độ giòn dai, tẩm ướp cay nhẹ, đậm vị, rất hợp khẩu vị nhậu. Quán mang phong cách vỉa hè nhậu, không gian vui vẻ, thoải mái, phù hợp cho nhóm bạn. Mức giá bình dân, dễ gọi nhiều món, là điểm dừng quen thuộc cho những buổi ăn tối hoặc nhậu nhẹ trên phố Vĩnh Khánh",
+        "audioUrl": "",
+        "triggerRadius": 15,
+        "rating": 4.2,
+        "minPrice": 30000,
+        "maxPrice": 150000,
+        "audioDuration": 120,
+        "featuredReviews": [
+            "Good food",
+            "Nice place"
+        ],
+        "priority": 6
     }
 ]

@@ -60,9 +60,10 @@ public class DatabaseSeeder implements CommandLineRunner {
                             .minPrice(dto.getMinPrice())
                             .maxPrice(dto.getMaxPrice())
                             .audioDuration(dto.getAudioDuration())
-                            .featuredReviews(dto.getFeaturedReviews())
-                            .rating(dto.getRating())
-                            .build();
+                             .featuredReviews(dto.getFeaturedReviews())
+                             .rating(dto.getRating())
+                             .priority(dto.getPriority() != null ? dto.getPriority() : 0)
+                             .build();
 
                     foodStallRepository.save(stall);
                     count++;

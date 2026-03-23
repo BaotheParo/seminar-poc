@@ -33,4 +33,15 @@ public class AnalyticsController {
                 "status", "success",
                 "message", "Event received"));
     }
+
+    @PostMapping("/track/batch")
+    @Operation(summary = "Sync multiple tracking events when device comes back online")
+    public ResponseEntity<?> trackEventsBatch(@Valid @RequestBody java.util.List<TrackEventRequest> requests) {
+        analyticsService.trackEventsBatch(requests);
+
+        return ResponseEntity.ok(Map.of(
+                "status", "success",
+                "message", "Batch events received",
+                "count", requests.size()));
+    }
 }

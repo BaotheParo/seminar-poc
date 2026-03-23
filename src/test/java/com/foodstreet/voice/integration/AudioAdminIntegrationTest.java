@@ -2,21 +2,23 @@ package com.foodstreet.voice.integration;
 
 import com.foodstreet.voice.entity.FoodStall;
 import com.foodstreet.voice.repository.FoodStallRepository;
+import com.foodstreet.voice.service.audio.AudioProviderStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -32,13 +34,19 @@ public class AudioAdminIntegrationTest {
     @Autowired
     private FoodStallRepository foodStallRepository;
 
+    // Mock AudioProviderStrategy de tranh goi edge-tts CLI that trong test
+    @MockBean
+    private AudioProviderStrategy audioProvider;
+
     private final String UPLOAD_DIR = "./uploads/audio/";
 
     @BeforeEach
     void setUp() throws Exception {
         Files.createDirectories(Paths.get(UPLOAD_DIR));
-        // Clear any existing test files in the directory if needed,
-        // but for safety in local environments, we'll just create specific test files.
+        // Mock tra ve bytes gia (MP3-like) de AudioService luu file thanh cong
+        when(audioProvider.generateAudio(anyString(), anyString()))
+                .thenReturn("fake-mp3-bytes-for-test".getBytes());
+        when(audioProvider.getProviderName()).thenReturn("mock_tts");
     }
 
     @Test
@@ -86,3 +94,4 @@ public class AudioAdminIntegrationTest {
         Files.deleteIfExists(orphanedFile);
     }
 }
+

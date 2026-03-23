@@ -148,7 +148,12 @@ curl "http://localhost:8080/api/v1/stalls/nearby?lat=21.0285&lon=105.8542"
 - `404 Not Found`: Không tìm thấy quán ăn nào gần vị trí
 - `500 Internal Server Error`: Lỗi server
 
+### Batch Analytics Sync
 
+**Endpoint:** `POST /api/v1/analytics/track/batch`
+- Dùng cho App Mobile đồng bộ lại danh sách events tracking sau khi tải dữ liệu Offline (giúp chống Spam/DDoS lên quá nhiều requests riêng sảnh).
+
+---
 
 ## 🗄️ Database Schema
 
@@ -221,6 +226,8 @@ src/main/java/com/foodstreet/voice/
 ✅ **Exception Handling**: Xử lý lỗi tập trung  
 ✅ **RESTful API**: Tuân thủ chuẩn REST  
 ✅ **Logging**: Ghi log chi tiết cho debugging
+✅ **Race Condition Prevention**: Chống Duplicate Request với Executor/ConcurrentHashMap  
+✅ **Hỗ trợ Offline Mobile**: Tính toán Pack Size, đồng bộ Analytics Batching  
 
 ## 📝 License
 

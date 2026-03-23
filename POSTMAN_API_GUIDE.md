@@ -267,6 +267,72 @@ DELETE http://localhost:8080/api/v1/stalls/6
 
 ---
 
+### 7. **GET** - Pack-Info (Offline Mode)
+
+**Endpoint:** `GET /api/v1/stalls/pack-info`
+
+**Mô tả:** Lấy thông tin dung lượng file audio dựa trên ngôn ngữ, kèm thời gian cập nhật để App Mobile đối chiếu bộ nhớ (Offline Mode).
+
+**Query Parameters:**
+- `lang` (optional, default="vi"): Mã ngôn ngữ (VD: "vi", "en")
+
+**Request:**
+```http
+GET http://localhost:8080/api/v1/stalls/pack-info?lang=vi
+```
+
+**Response (200 OK):**
+```json
+{
+    "language":  "vi",
+    "totalFiles":  28,
+    "totalSizeBytes":  11468800,
+    "estimatedSizeMb":  10.9375,
+    "lastUpdated":  "2026-03-22T16:27:32.692661"
+}
+```
+
+---
+
+### 8. **POST** - Batch Analytics Sync
+
+**Endpoint:** `POST /api/v1/analytics/track/batch`
+
+**Mô tả:** Đồng bộ hàng loạt event (nghe audio, chuyển vùng) khi App Mobile offline và có mạng trở lại. Giúp tối ưu truy vấn Database thay vì gọi API lẻ tẻ.
+
+**Headers:**
+```
+Content-Type: application/json
+```
+
+**Request Body:**
+```json
+[
+  {
+    "deviceId": "DEVICE_01",
+    "stallId": 1,
+    "action": "ENTER_REGION"
+  },
+  {
+    "deviceId": "DEVICE_01",
+    "stallId": 1,
+    "action": "AUTO_PLAY",
+    "duration": 45
+  }
+]
+```
+
+**Response (200 OK):**
+```json
+{
+    "status":  "success",
+    "message":  "Batch events received",
+    "count":  2
+}
+```
+
+---
+
 ## 🧪 Test Scenarios với Postman
 
 ### Scenario 1: CRUD Flow hoàn chỉnh
@@ -329,6 +395,8 @@ Sử dụng trong requests: `{{base_url}}/api/v1/stalls/{{stall_id}}`
 | `/api/v1/stalls` | POST | 201 / 400 | Object / Error |
 | `/api/v1/stalls/{id}` | PUT | 200 / 404 | Object / Error |
 | `/api/v1/stalls/{id}` | DELETE | 204 / 404 | Empty / Error |
+| `/api/v1/stalls/pack-info` | GET | 200 | Object |
+| `/api/v1/analytics/track/batch` | POST | 200 / 400 | Object / Error |
 
 ---
 

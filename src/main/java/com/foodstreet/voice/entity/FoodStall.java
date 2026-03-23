@@ -59,6 +59,10 @@ public class FoodStall {
     @Column(name = "featured_reviews", columnDefinition = "jsonb")
     private List<String> featuredReviews;
 
+    @Column(name = "priority")
+    @Builder.Default
+    private Integer priority = 0;
+
     @Column(name = "rating")
     private Double rating;
 

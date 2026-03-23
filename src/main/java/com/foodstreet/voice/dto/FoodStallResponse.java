@@ -29,4 +29,7 @@ public class FoodStallResponse {
     private Integer audioDuration;
     private List<String> featuredReviews;
     private Double rating;
+    @Schema(description = "Language actually used for audio/name/description (vi=fallback)", example = "vi")
+    private String usedLanguage;
+    private Integer priority;
 }

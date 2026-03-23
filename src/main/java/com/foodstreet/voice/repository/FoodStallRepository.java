@@ -1,5 +1,6 @@
 package com.foodstreet.voice.repository;
 
+import com.foodstreet.voice.dto.projection.GeofenceMatchProjection;
 import com.foodstreet.voice.entity.FoodStall;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -42,8 +43,28 @@ public interface FoodStallRepository extends JpaRepository<FoodStall, Long>, Jpa
         // Tim danh sach cac quan an ma nguoi dung dang dung trong vung ban kinh cua no
         // (Dynamic Radius)
         // Logic: Distance(User, Stall) <= Stall.triggerRadius
-        @Query(value = "SELECT * FROM food_stalls f " +
-                        "WHERE ST_DWithin(CAST(f.location AS geography), CAST(ST_SetSRID(ST_MakePoint(:longitude, :latitude), 4326) AS geography), f.trigger_radius)", nativeQuery = true)
-        List<FoodStall> findGeofenceMatches(@Param("latitude") double latitude,
-                        @Param("longitude") double longitude);
-}
+        // MUST SORT by: priority DESC (first), then distance ASC (second).
+        @Query(value = """
+            SELECT 
+                id, 
+                name, 
+                description, 
+                audio_url as "audioUrl", 
+                trigger_radius as "triggerRadius", 
+                priority,
+                ST_Y(CAST(location AS geometry)) as "latitude", 
+                ST_X(CAST(location AS geometry)) as "longitude",
+                ST_Distance(CAST(location AS geography), CAST(ST_SetSRID(ST_MakePoint(:longitude, :latitude), 4326) AS geography)) AS "distance"
+            FROM food_stalls
+            WHERE ST_DWithin(CAST(location AS geography), CAST(ST_SetSRID(ST_MakePoint(:longitude, :latitude), 4326) AS geography), :radius)
+            ORDER BY priority DESC, distance ASC
+            LIMIT 5
+            """, nativeQuery = true)
+        List<GeofenceMatchProjection> findGeofenceMatches(
+                @Param("latitude") double latitude, 
+                @Param("longitude") double longitude,
+                @Param("radius") double radius);
+
+        @Query("SELECT MAX(f.createdAt) FROM FoodStall f")
+        Optional<java.time.LocalDateTime> findMaxCreatedAt();
+}

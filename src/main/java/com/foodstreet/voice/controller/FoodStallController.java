@@ -2,12 +2,14 @@ package com.foodstreet.voice.controller;
 
 import com.foodstreet.voice.dto.CreateFoodStallRequest;
 import com.foodstreet.voice.dto.FoodStallResponse;
+import com.foodstreet.voice.dto.GeofenceStallResponse;
 import com.foodstreet.voice.dto.NearbyRequest;
 import com.foodstreet.voice.dto.UpdateFoodStallRequest;
 import com.foodstreet.voice.entity.FoodStall;
 import com.foodstreet.voice.repository.FoodStallRepository;
 import com.foodstreet.voice.service.AudioService;
 import com.foodstreet.voice.service.FoodStallService;
+import com.foodstreet.voice.service.LocalizationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -33,6 +36,7 @@ import java.util.stream.Collectors;
 public class FoodStallController {
 
     private final FoodStallService foodStallService;
+    private final LocalizationService localizationService;
 
     @GetMapping("/search")
     @Operation(summary = "Search and filter food stalls with pagination")
@@ -49,6 +53,18 @@ public class FoodStallController {
         return ResponseEntity.ok(results);
     }
 
+    @GetMapping("/geofence")
+    @Operation(summary = "Get food stalls within geofence radius, ordered by priority and distance",
+               description = "API dành cho Mobile App (Flutter) để quét danh sách các quán ăn xung quanh vị trí hiện tại của người dùng. Trả về tối đa 5 quán, ưu tiên quán có priority cao trước, sau đó mới xét đến khoảng cách.")
+    public ResponseEntity<List<GeofenceStallResponse>> getGeofenceMatches(
+            @io.swagger.v3.oas.annotations.Parameter(description = "Vĩ độ (Latitude) hiện tại của người dùng", example = "10.762622") @RequestParam double lat,
+            @io.swagger.v3.oas.annotations.Parameter(description = "Kinh độ (Longitude) hiện tại của người dùng", example = "106.700174") @RequestParam double lng,
+            @io.swagger.v3.oas.annotations.Parameter(description = "Bán kính quét để lọc quán (mặc định 50 mét)", example = "50.0") @RequestParam(defaultValue = "50.0") double radius) {
+        log.info("Received request for geofence matches: lat={}, lng={}, radius={}", lat, lng, radius);
+        List<GeofenceStallResponse> results = foodStallService.getGeofenceMatches(lat, lng, radius);
+        return ResponseEntity.ok(results);
+    }
+
     @GetMapping
     @Operation(summary = "Get all food stalls")
     public ResponseEntity<List<FoodStallResponse>> getAllStalls() {
@@ -59,10 +75,12 @@ public class FoodStallController {
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Get a food stall by ID")
-    public ResponseEntity<FoodStallResponse> getStallById(@PathVariable Long id) {
-        log.info("Da nhan request de lay quan an co id: {}", id);
-        FoodStallResponse stall = foodStallService.getStallById(id);
+    @Operation(summary = "Get a food stall by ID with optional language (fallback to vi)")
+    public ResponseEntity<FoodStallResponse> getStallById(
+            @PathVariable Long id,
+            @RequestParam(defaultValue = "vi") String lang) {
+        log.info("Da nhan request de lay quan an co id: {}, lang={}", id, lang);
+        FoodStallResponse stall = foodStallService.getStallByIdWithLang(id, lang);
         return ResponseEntity.ok(stall);
     }
 
@@ -123,6 +141,25 @@ public class FoodStallController {
         return ResponseEntity.ok(stall);
     }
 
+    @PostMapping("/{id}/audio/generate")
+    @Operation(summary = "On-demand: generate/regenerate audio for a food stall in a specific language")
+    public ResponseEntity<?> generateAudioOnDemand(
+            @PathVariable Long id,
+            @RequestParam(defaultValue = "vi") String lang) {
+        log.info("On-demand audio generate: stallId={}, lang={}", id, lang);
+        try {
+            String audioUrl = localizationService.generateLocalization(id, lang);
+            return ResponseEntity.ok(Map.of(
+                    "audioUrl", audioUrl,
+                    "language", lang,
+                    "cached", false
+            ));
+        } catch (Exception e) {
+            log.error("Failed to generate audio on-demand for stallId={}, lang={}: {}", id, lang, e.getMessage());
+            return ResponseEntity.internalServerError().body(Map.of("error", e.getMessage()));
+        }
+    }
+
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a food stall")
     public ResponseEntity<Void> deleteStall(@PathVariable Long id) {
@@ -164,6 +201,14 @@ public class FoodStallController {
         }).collect(Collectors.toList());
 
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/pack-info")
+    @Operation(summary = "Get audio pack info and latest data version for offline downloading")
+    public ResponseEntity<com.foodstreet.voice.dto.PackInfoResponse> getPackInfo(
+            @RequestParam(defaultValue = "vi") String lang) {
+        log.info("Received request for pack info with lang={}", lang);
+        return ResponseEntity.ok(foodStallService.getPackInfo(lang));
     }
 
     private FoodStallResponse convertToResponse(FoodStall stall) {

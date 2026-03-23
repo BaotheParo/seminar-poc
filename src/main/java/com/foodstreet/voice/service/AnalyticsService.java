@@ -46,4 +46,33 @@ public class AnalyticsService {
             // Don't rethrow, just log, so we don't crash the client if analytics fails
         }
     }
+
+    @Async // Run in background to avoid blocking API response
+    @Transactional
+    public void trackEventsBatch(java.util.List<TrackEventRequest> requests) {
+        log.debug("Tracking batch of {} events", requests.size());
+
+        try {
+            java.util.List<UserActivity> activities = new java.util.ArrayList<>();
+
+            for (TrackEventRequest request : requests) {
+                FoodStall stall = foodStallRepository.getReferenceById(request.getStallId());
+
+                UserActivity activity = UserActivity.builder()
+                        .deviceId(request.getDeviceId())
+                        .foodStall(stall)
+                        .actionType(request.getAction())
+                        .durationSeconds(request.getDuration())
+                        .build();
+
+                activities.add(activity);
+            }
+
+            userActivityRepository.saveAll(activities);
+            log.info("Saved batch of {} analytics events", activities.size());
+
+        } catch (Exception e) {
+            log.error("Failed to save batch analytics events", e);
+        }
+    }
 }
