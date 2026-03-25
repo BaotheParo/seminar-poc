@@ -3,6 +3,7 @@ package com.foodstreet.voice.integration;
 import com.foodstreet.voice.entity.FoodStall;
 import com.foodstreet.voice.repository.FoodStallRepository;
 import com.foodstreet.voice.service.audio.AudioProviderStrategy;
+import com.foodstreet.voice.config.AudioProperties;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +39,17 @@ public class AudioAdminIntegrationTest {
     @MockBean
     private AudioProviderStrategy audioProvider;
 
-    private final String UPLOAD_DIR = "./uploads/audio/";
+    @Autowired
+    private AudioProperties audioProperties;
+
+    private String getUploadDir() {
+        String path = audioProperties.getLocalPath();
+        return path.endsWith("/") ? path : path + "/";
+    }
 
     @BeforeEach
     void setUp() throws Exception {
-        Files.createDirectories(Paths.get(UPLOAD_DIR));
+        Files.createDirectories(Paths.get(getUploadDir()));
         // Mock tra ve bytes gia (MP3-like) de AudioService luu file thanh cong
         when(audioProvider.generateAudio(anyString(), anyString()))
                 .thenReturn("fake-mp3-bytes-for-test".getBytes());
@@ -51,7 +58,7 @@ public class AudioAdminIntegrationTest {
 
     @Test
     void listAudioFiles() throws Exception {
-        Path testFile = Paths.get(UPLOAD_DIR + "test_audio.mp3");
+        Path testFile = Paths.get(getUploadDir() + "test_audio.mp3");
         Files.write(testFile, "test data".getBytes());
 
         mockMvc.perform(get("/api/v1/admin/audio"))
@@ -78,13 +85,13 @@ public class AudioAdminIntegrationTest {
         // Clean up generated file
         FoodStall updated = foodStallRepository.findById(stall.getId()).orElseThrow();
         if (updated.getAudioUrl() != null) {
-            Files.deleteIfExists(Paths.get("./uploads/audio/" + updated.getAudioUrl().replace("/audio/", "")));
+            Files.deleteIfExists(Paths.get(getUploadDir() + updated.getAudioUrl().replace("/audio/", "")));
         }
     }
 
     @Test
     void listOrphanedFiles() throws Exception {
-        Path orphanedFile = Paths.get(UPLOAD_DIR + "orphaned_audio.mp3");
+        Path orphanedFile = Paths.get(getUploadDir() + "orphaned_audio.mp3");
         Files.write(orphanedFile, "orphaned data".getBytes());
 
         mockMvc.perform(get("/api/v1/admin/audio/orphaned"))

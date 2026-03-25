@@ -93,12 +93,12 @@ Nếu bạn đã có file MP3 và muốn gán thủ công:
 ```bash
 curl -X PUT http://localhost:8080/api/v1/stalls/8 \
   -H "Content-Type: application/json" \
-  -d '{"audioUrl": "oc_oanh.mp3"}'
+  -d '{"audioUrl": "8_vi.mp3"}'
 ```
 
 **Cách 2 — trực tiếp DB:**
 ```sql
-UPDATE food_stalls SET audio_url = 'oc_oanh.mp3' WHERE id = 8;
+UPDATE food_stalls SET audio_url = '8_vi.mp3' WHERE id = 8;
 ```
 
 ---

@@ -2,6 +2,7 @@ package com.foodstreet.voice.service;
 
 import com.foodstreet.voice.dto.CreateFoodStallRequest;
 import com.foodstreet.voice.dto.FoodStallResponse;
+import com.foodstreet.voice.dto.LocalizationResponse;
 import com.foodstreet.voice.dto.GeofenceStallResponse;
 import com.foodstreet.voice.dto.projection.GeofenceMatchProjection;
 import com.foodstreet.voice.dto.UpdateFoodStallRequest;
@@ -25,7 +26,9 @@ import org.springframework.transaction.annotation.Transactional;
 import jakarta.persistence.criteria.Predicate;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,14 +38,15 @@ public class FoodStallService {
 
     private final FoodStallRepository foodStallRepository;
     private final FoodStallLocalizationRepository localizationRepository;
+    private final LocalizationService localizationService;
     private static final GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 4326);
     private static final String DEFAULT_LANG = "vi";
 
     @Transactional(readOnly = true)
     public Page<FoodStallResponse> searchStalls(String keyword, Integer minPrice, Integer maxPrice, Double minRating,
-            Pageable pageable) {
-        log.debug("Searching stalls with keyword={}, minPrice={}, maxPrice={}, minRating={}", keyword, minPrice,
-                maxPrice, minRating);
+            String lang, Pageable pageable) {
+        log.debug("Searching stalls with keyword={}, minPrice={}, maxPrice={}, minRating={}, lang={}", keyword, minPrice,
+                maxPrice, minRating, lang);
 
         Specification<FoodStall> spec = (root, query, cb) -> {
             List<Predicate> predicates = new ArrayList<>();
@@ -56,12 +60,10 @@ public class FoodStallService {
             }
 
             if (minPrice != null) {
-                // Stall is relevant if its MAX price is at least the filter's MIN price
                 predicates.add(cb.greaterThanOrEqualTo(root.get("maxPrice"), minPrice));
             }
 
             if (maxPrice != null) {
-                // Stall is relevant if its MIN price is at most the filter's MAX price
                 predicates.add(cb.lessThanOrEqualTo(root.get("minPrice"), maxPrice));
             }
 
@@ -72,18 +74,49 @@ public class FoodStallService {
             return cb.and(predicates.toArray(new Predicate[0]));
         };
 
-        return foodStallRepository.findAll(spec, pageable)
-                .map(this::mapToResponse);
+        Page<FoodStall> stallPage = foodStallRepository.findAll(spec, pageable);
+        List<Long> stallIds = stallPage.getContent().stream().map(FoodStall::getId).toList();
+        
+        // Fetch localizations in bulk
+        Map<Long, FoodStallLocalization> locMap = fetchLocalizationMap(stallIds, lang);
+
+        return stallPage.map(stall -> mapToResponseWithLang(stall, locMap.get(stall.getId()), lang));
     }
 
     @Transactional(readOnly = true)
-    public List<FoodStallResponse> getAllStalls() {
-        log.debug("Lay danh sach tat ca quan an");
+    public List<FoodStallResponse> getAllStalls(String lang) {
+        log.debug("Lay danh sach tat ca quan an, lang={}", lang);
         List<FoodStall> stalls = foodStallRepository.findAll();
-        log.debug("Da lay duoc {} quan an", stalls.size());
+        List<Long> stallIds = stalls.stream().map(FoodStall::getId).toList();
+
+        // Fetch localizations in bulk
+        Map<Long, FoodStallLocalization> locMap = fetchLocalizationMap(stallIds, lang);
+
         return stalls.stream()
-                .map(this::mapToResponse)
+                .map(stall -> mapToResponseWithLang(stall, locMap.get(stall.getId()), lang))
                 .collect(Collectors.toList());
+    }
+
+    private Map<Long, FoodStallLocalization> fetchLocalizationMap(List<Long> stallIds, String lang) {
+        if (stallIds.isEmpty()) return Collections.emptyMap();
+        
+        List<FoodStallLocalization> locs = localizationRepository.findAllByLanguageCodeAndFoodStallIdIn(lang, stallIds);
+        
+        // Neu khong phai tieng Viet va bi thieu, fallback ve tieng Viet
+        if (!DEFAULT_LANG.equals(lang) && locs.size() < stallIds.size()) {
+            List<FoodStallLocalization> viLocs = localizationRepository.findAllByLanguageCodeAndFoodStallIdIn(DEFAULT_LANG, stallIds);
+            Map<Long, FoodStallLocalization> viMap = viLocs.stream()
+                .collect(Collectors.toMap(l -> l.getFoodStall().getId(), l -> l, (a, b) -> a));
+            
+            Map<Long, FoodStallLocalization> targetMap = locs.stream()
+                .collect(Collectors.toMap(l -> l.getFoodStall().getId(), l -> l, (a, b) -> a));
+            
+            // Merge: target ghi de vi
+            viMap.putAll(targetMap);
+            return viMap;
+        }
+
+        return locs.stream().collect(Collectors.toMap(l -> l.getFoodStall().getId(), l -> l, (a, b) -> a));
     }
 
     @Transactional(readOnly = true)
@@ -115,12 +148,26 @@ public class FoodStallService {
                     .orElse(null);
         }
 
-        return mapToResponseWithLang(stall, localization, effectiveLang);
+        FoodStallResponse response = mapToResponseWithLang(stall, localization, effectiveLang);
+
+        // Fetch all localizations to show in Admin UI
+        List<FoodStallLocalization> allLocs = localizationRepository.findAllByFoodStallId(id);
+        List<LocalizationResponse> locResponses = allLocs.stream()
+                .map(l -> LocalizationResponse.builder()
+                        .languageCode(l.getLanguageCode())
+                        .name(l.getName())
+                        .description(l.getDescription())
+                        .audioUrl(l.getAudioUrl())
+                        .build())
+                .collect(Collectors.toList());
+        response.setLocalizations(locResponses);
+
+        return response;
     }
 
     @Transactional(readOnly = true)
-    public FoodStallResponse findNearestStall(double latitude, double longitude) {
-        log.debug("Tim kiem quan an gan nhat tai toa do: lat={}, lon={}", latitude, longitude);
+    public FoodStallResponse findNearestStall(double latitude, double longitude, String lang) {
+        log.debug("Tim kiem quan an gan nhat tai toa do: lat={}, lon={}, lang={}", latitude, longitude, lang);
 
         FoodStall stall = foodStallRepository.findNearestStall(latitude, longitude)
                 .orElseThrow(() -> new ResourceNotFoundException(
@@ -128,7 +175,7 @@ public class FoodStallService {
 
         log.debug("Tim thay quan an gan nhat: {}", stall.getName());
 
-        return mapToResponse(stall);
+        return getStallByIdWithLang(stall.getId(), lang);
     }
 
     @Transactional(readOnly = true)
@@ -141,7 +188,7 @@ public class FoodStallService {
                 .id(p.getId())
                 .name(p.getName())
                 .description(p.getDescription())
-                .audioUrl(p.getAudioUrl())
+                .audioUrl("/audio/" + p.getId() + "_vi.mp3")
                 .triggerRadius(p.getTriggerRadius())
                 .priority(p.getPriority())
                 .latitude(p.getLatitude())
@@ -172,6 +219,9 @@ public class FoodStallService {
 
         FoodStall savedStall = foodStallRepository.save(stall);
         log.debug("Da tao quan an moi: {}", savedStall.getId());
+
+        // Tu dong sinh audio da ngon ngu (chay ngam)
+        localizationService.generateAllLanguagesForStall(savedStall.getId());
 
         return mapToResponse(savedStall);
     }
@@ -217,6 +267,9 @@ public class FoodStallService {
 
         FoodStall updatedStall = foodStallRepository.save(stall);
         log.debug("Updated food stall: {}", updatedStall.getName());
+
+        // Neu ten hoac mo ta thay doi (hoac gia su la vay), cap nhat lai audio da ngon ngu
+        localizationService.generateAllLanguagesForStall(updatedStall.getId());
 
         return mapToResponse(updatedStall);
     }
@@ -277,7 +330,9 @@ public class FoodStallService {
                     .rating(req.getRating())
                     .build();
 
-            foodStallRepository.save(stall);
+            FoodStall savedStall = foodStallRepository.save(stall);
+            // Tu dong sinh audio cho tung quan duoc import
+            localizationService.generateAllLanguagesForStall(savedStall.getId());
             count++;
         }
         log.info("Da import {} quan an moi", count);
@@ -333,6 +388,52 @@ public class FoodStallService {
                 .build();
     }
 
+    public org.springframework.core.io.Resource exportAudioPack(String lang) throws java.io.IOException {
+        String effectiveLang = (lang == null || lang.trim().isEmpty()) ? DEFAULT_LANG : lang;
+        return generateZipResource((d, name) -> name.endsWith("_" + effectiveLang + ".mp3"));
+    }
+
+    public org.springframework.core.io.Resource exportAllAudio() throws java.io.IOException {
+        return generateZipResource((d, name) -> name.endsWith(".mp3"));
+    }
+
+    public org.springframework.core.io.Resource exportStallAudio(Long id) throws java.io.IOException {
+        log.debug("Exporting all audio for stallId={}", id);
+        String prefix = id + "_";
+        return generateZipResource((d, name) -> name.startsWith(prefix) && name.endsWith(".mp3"));
+    }
+
+    private org.springframework.core.io.Resource generateZipResource(java.io.FilenameFilter filter) throws java.io.IOException {
+        java.io.File dir = new java.io.File("uploads/audio/");
+        if (!dir.exists() || !dir.isDirectory()) {
+            throw new ResourceNotFoundException("Audio directory not found.");
+        }
+
+        java.io.File[] files = dir.listFiles(filter);
+        if (files == null || files.length == 0) {
+            throw new ResourceNotFoundException("No audio files found for the requested pack.");
+        }
+
+        java.nio.file.Path tempZipFile = java.nio.file.Files.createTempFile("audio_pack_", ".zip");
+        
+        try (java.util.zip.ZipOutputStream zos = new java.util.zip.ZipOutputStream(new java.io.FileOutputStream(tempZipFile.toFile()))) {
+            for (java.io.File file : files) {
+                java.util.zip.ZipEntry zipEntry = new java.util.zip.ZipEntry(file.getName());
+                zos.putNextEntry(zipEntry);
+                try (java.io.FileInputStream fis = new java.io.FileInputStream(file)) {
+                    byte[] buffer = new byte[1024 * 4];
+                    int len;
+                    while ((len = fis.read(buffer)) > 0) {
+                        zos.write(buffer, 0, len);
+                    }
+                }
+                zos.closeEntry();
+            }
+        }
+        
+        return new org.springframework.core.io.FileSystemResource(tempZipFile.toFile());
+    }
+
     private FoodStallResponse mapToResponse(FoodStall stall) {
         return mapToResponseWithLang(stall, null, DEFAULT_LANG);
     }
@@ -341,7 +442,8 @@ public class FoodStallService {
         String name = (loc != null && loc.getName() != null) ? loc.getName() : stall.getName();
         String description = (loc != null && loc.getDescription() != null) ? loc.getDescription()
                 : stall.getDescription();
-        String audioUrl = (loc != null && loc.getAudioUrl() != null) ? loc.getAudioUrl() : stall.getAudioUrl();
+        String langSuffix = (usedLang != null && !usedLang.isBlank()) ? usedLang : DEFAULT_LANG;
+        String audioUrl = "/audio/" + stall.getId() + "_" + langSuffix + ".mp3";
 
         return FoodStallResponse.builder()
                 .id(stall.getId())

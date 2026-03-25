@@ -7,6 +7,7 @@ import com.foodstreet.voice.repository.FoodStallLocalizationRepository;
 import com.foodstreet.voice.repository.FoodStallRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,25 @@ public class LocalizationService {
     private final FoodStallLocalizationRepository localizationRepository;
     private final TranslationService translationService;
     private final AudioService audioService;
+
+    /**
+     * Tu dong tao localization cho tat ca cac ngon ngu ho tro (en, ja, ko, zh).
+     * Chay bat dong bo de khong lam cham luong tao quan an.
+     */
+    @Async
+    public void generateAllLanguagesForStall(Long stallId) {
+        String[] languages = {"vi", "en", "ja", "ko", "zh"};
+        log.info("[Localization] Bat dau tu dong tao audio cho {} ngon ngu, stallId={}", languages.length, stallId);
+        
+        for (String lang : languages) {
+            try {
+                this.generateLocalization(stallId, lang);
+            } catch (Exception e) {
+                log.error("[Localization] Loi khi tu dong tao lang={} cho stallId={}: {}", lang, stallId, e.getMessage());
+            }
+        }
+        log.info("[Localization] Hoan thanh tu dong tao audio cho stallId={}", stallId);
+    }
 
     /**
      * Tao hoac cap nhat localization cho mot quan an.
@@ -65,7 +85,7 @@ public class LocalizationService {
         String audioText = translatedName + ". " + translatedDesc;
         log.info("[Localization] Tao audio lang={}, do dai text={} chars", targetLang, audioText.length());
         @SuppressWarnings("null")
-        String audioUrl = audioService.getOrCreateAudio(audioText, targetLang);
+        String audioUrl = audioService.getOrCreateAudioForStall(stallId, audioText, targetLang);
 
         // 4. Luu hoac cap nhat localization
         FoodStallLocalization localization = localizationRepository

@@ -30,11 +30,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(@NonNull ResourceHandlerRegistry registry) {
-        String localPath = audioProperties.getLocalPath();
-        // Đảm bảo path kết thúc bằng slash
-        if (!localPath.endsWith("/")) {
-            localPath = localPath + "/";
-        }
+        String localPath = audioProperties.getResolvedLocalPath();
         registry.addResourceHandler("/audio/**")
                 .addResourceLocations("file:" + localPath)
                 .setCachePeriod(3600);

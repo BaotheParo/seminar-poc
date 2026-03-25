@@ -18,6 +18,7 @@ com\example\audioguide\modules\store\entity\Store.class
 com\foodstreet\voice\dto\GeofenceUpdateRequest.class
 com\foodstreet\voice\service\audio\GoogleTTSProvider.class
 com\foodstreet\voice\dto\UpdateFoodStallRequest$UpdateFoodStallRequestBuilder.class
+com\foodstreet\voice\dto\projection\AudioEngagementProjection.class
 com\foodstreet\voice\dto\NearbyRequest.class
 com\foodstreet\voice\dto\PackInfoResponse$PackInfoResponseBuilder.class
 com\foodstreet\voice\entity\FoodStallLocalization.class
@@ -50,6 +51,7 @@ com\foodstreet\voice\exception\ResourceNotFoundException.class
 com\foodstreet\voice\service\TranslationService.class
 com\foodstreet\voice\dto\TrackEventRequest$TrackEventRequestBuilder.class
 com\foodstreet\voice\dto\UpdateFoodStallRequest.class
+com\foodstreet\voice\dto\projection\SessionStatsProjection.class
 com\example\audioguide\core\utils\GeoUtils.class
 com\foodstreet\voice\dto\GeofenceStallResponse$GeofenceStallResponseBuilder.class
 com\foodstreet\voice\controller\AdminImportController.class
@@ -58,5 +60,8 @@ com\foodstreet\voice\controller\AdminSyncController.class
 com\foodstreet\voice\dto\FoodStallImportDto$FoodStallImportDtoBuilder.class
 com\foodstreet\voice\service\audio\AudioProviderStrategy.class
 com\example\audioguide\core\config\WebConfig.class
+com\foodstreet\voice\dto\projection\HourlyHeatmapProjection.class
 com\foodstreet\voice\dto\FoodStallImportDto.class
+com\foodstreet\voice\dto\projection\PoiRankingProjection.class
+com\foodstreet\voice\dto\projection\DailySummaryProjection.class
 com\foodstreet\voice\controller\AudioAdminController.class

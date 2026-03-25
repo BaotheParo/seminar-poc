@@ -115,7 +115,7 @@ INSERT INTO food_stalls (name, description, audio_url, image_url, location, trig
 (
     'Quán Ốc Oanh',
     'Quán Ốc Oanh là một trong những quán ốc – hải sản nổi tiếng bậc nhất trên phố ẩm thực Vĩnh Khánh, với hơn 20 năm hoạt động và được Michelin Guide vinh danh Bib Gourmand 2024. Quán nổi bật với các món đặc trưng như càng ghẹ rang muối ớt, ốc hương, sò điệp nướng mỡ hành, cháo hàu cùng thực đơn hải sản tươi sống phong phú, chế biến đa dạng từ nướng đến xào. Quán mang phong cách vỉa hè sôi động, không gian ngoài trời nhộn nhịp đúng chất ăn nhậu đường phố Sài Gòn, lúc nào cũng đông khách từ chiều tối đến khuya. Hương vị được đánh giá đậm đà, tươi ngon, khẩu phần khá hào phóng. Mức giá cao hơn mặt bằng chung khu vực (khoảng 150.000 – 400.000đ/người), nhưng được nhiều thực khách đánh giá là xứng đáng với chất lượng và danh tiếng của quán',
-    'oc_oanh.mp3',
+    '8_vi.mp3',
     NULL,
     ST_GeogFromText('POINT(106.703294 10.760852)'),
     12,

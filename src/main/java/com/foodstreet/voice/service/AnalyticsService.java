@@ -1,5 +1,10 @@
 package com.foodstreet.voice.service;
 
+import com.foodstreet.voice.dto.projection.AudioEngagementProjection;
+import com.foodstreet.voice.dto.projection.DailySummaryProjection;
+import com.foodstreet.voice.dto.projection.HourlyHeatmapProjection;
+import com.foodstreet.voice.dto.projection.PoiRankingProjection;
+import com.foodstreet.voice.dto.projection.SessionStatsProjection;
 import com.foodstreet.voice.dto.TrackEventRequest;
 import com.foodstreet.voice.entity.FoodStall;
 import com.foodstreet.voice.entity.UserActivity;
@@ -12,6 +17,14 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -19,6 +32,118 @@ public class AnalyticsService {
 
     private final UserActivityRepository userActivityRepository;
     private final FoodStallRepository foodStallRepository;
+
+    @Transactional(readOnly = true)
+    public long getActiveUsers(int minutes) {
+        Long count = userActivityRepository.countActiveUsersInLastMinutes(minutes);
+        return count != null ? count : 0L;
+    }
+
+//poi-ranking
+    @Transactional(readOnly = true)
+    public List<Map<String, Object>> getPoiRanking(LocalDate fromDate, LocalDate toDate, int limit) {
+        LocalDateTime fromTime = fromDate.atStartOfDay();
+        LocalDateTime toTimeExclusive = toDate.plusDays(1).atStartOfDay();
+
+        List<PoiRankingProjection> rows = userActivityRepository.getPoiRanking(fromTime, toTimeExclusive, limit);
+        List<Map<String, Object>> response = new ArrayList<>();
+
+        int rank = 1;
+        for (PoiRankingProjection row : rows) {
+            long visits = row.getVisits() != null ? row.getVisits() : 0L;
+            long plays = row.getPlays() != null ? row.getPlays() : 0L;
+            double engagementRate = visits == 0 ? 0.0 : Math.round(((double) plays / visits) * 10000.0) / 10000.0;
+
+            Map<String, Object> item = new LinkedHashMap<>();
+            item.put("rank", rank++);
+            item.put("stallId", row.getStallId());
+            item.put("stallName", row.getStallName());
+            item.put("visits", visits);
+            item.put("plays", plays);
+            item.put("engagementRate", engagementRate);
+            response.add(item);
+        }
+
+        return response;
+    }
+
+//hourly-heatmap
+    @Transactional(readOnly = true)
+    public List<Map<String, Object>> getHourlyHeatmap(Long stallId) {
+        List<HourlyHeatmapProjection> rows = userActivityRepository.getHourlyHeatmap(stallId);
+        List<Map<String, Object>> response = new ArrayList<>();
+
+        for (HourlyHeatmapProjection row : rows) {
+            Map<String, Object> item = new LinkedHashMap<>();
+            item.put("hourOfDay", row.getHourOfDay());
+            item.put("visits", row.getVisits() != null ? row.getVisits() : 0L);
+            response.add(item);
+        }
+
+        return response;
+    }
+
+//audio-engagement
+    @Transactional(readOnly = true)
+    public List<Map<String, Object>> getAudioEngagement(Long stallId) {
+        List<AudioEngagementProjection> rows = userActivityRepository.getAudioEngagement(stallId);
+        List<Map<String, Object>> response = new ArrayList<>();
+
+        int rank = 1;
+        for (AudioEngagementProjection row : rows) {
+            Map<String, Object> item = new LinkedHashMap<>();
+            item.put("rank", rank++);
+            item.put("stallId", row.getStallId());
+            item.put("stallName", row.getStallName());
+            item.put("enters", row.getEnters() != null ? row.getEnters() : 0L);
+            item.put("plays", row.getPlays() != null ? row.getPlays() : 0L);
+
+            BigDecimal engagementRate = row.getEngagementRate() != null ? row.getEngagementRate() : BigDecimal.ZERO;
+            item.put("engagementRate", engagementRate);
+            response.add(item);
+        }
+
+        return response;
+    }
+
+//session-stats
+    @Transactional(readOnly = true)
+    public List<Map<String, Object>> getSessionStats() {
+        List<SessionStatsProjection> rows = userActivityRepository.getSessionStatsByDay();
+        List<Map<String, Object>> response = new ArrayList<>();
+
+        for (SessionStatsProjection row : rows) {
+            Map<String, Object> item = new LinkedHashMap<>();
+            item.put("day", row.getDay());
+            item.put("sessions", row.getSessions() != null ? row.getSessions() : 0L);
+            item.put("avgStallsPerSession", row.getAvgStallsPerSession() != null ? row.getAvgStallsPerSession() : BigDecimal.ZERO);
+            item.put("avgSessionDurationMinutes", row.getAvgSessionDurationMinutes() != null ? row.getAvgSessionDurationMinutes() : BigDecimal.ZERO);
+            response.add(item);
+        }
+
+        return response;
+    }
+
+//daily-summary
+    @Transactional(readOnly = true)
+    public List<Map<String, Object>> getDailySummary(LocalDate fromDate, LocalDate toDate) {
+        LocalDateTime fromTime = fromDate.atStartOfDay();
+        LocalDateTime toTimeExclusive = toDate.plusDays(1).atStartOfDay();
+
+        List<DailySummaryProjection> rows = userActivityRepository.getDailySummary(fromTime, toTimeExclusive);
+        List<Map<String, Object>> response = new ArrayList<>();
+
+        for (DailySummaryProjection row : rows) {
+            Map<String, Object> item = new LinkedHashMap<>();
+            item.put("day", row.getDay());
+            item.put("users", row.getUsers() != null ? row.getUsers() : 0L);
+            item.put("visits", row.getVisits() != null ? row.getVisits() : 0L);
+            item.put("plays", row.getPlays() != null ? row.getPlays() : 0L);
+            response.add(item);
+        }
+
+        return response;
+    }
 
     @Async // Run in background to avoid blocking API response
     @Transactional

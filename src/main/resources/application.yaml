@@ -40,7 +40,7 @@ logging:
     org.hibernate.SQL: DEBUG
 
 vietmap:
-  api-key: ${VIETMAP_API_KEY_SERVICES}
+  api-key: ${VIETMAP_API_KEY_SERVICES:}
   base-url: https://maps.vietmap.vn/api
 
 springdoc:
@@ -52,5 +52,5 @@ springdoc:
 
 app:
   audio:
-    local-path: /app/audio
+    local-path: ./audio
     base-url: ${AUDIO_BASE_URL:http://localhost:8080}

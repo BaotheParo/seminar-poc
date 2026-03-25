@@ -45,11 +45,12 @@ public class FoodStallController {
             @RequestParam(required = false) Integer minPrice,
             @RequestParam(required = false) Integer maxPrice,
             @RequestParam(required = false) Double minRating,
+            @RequestParam(defaultValue = "vi") String lang,
             @PageableDefault(size = 10) Pageable pageable) {
-        log.info("Received request to search stalls: keyword={}, minPrice={}, maxPrice={}, minRating={}",
-                keyword, minPrice, maxPrice, minRating);
+        log.info("Received request to search stalls: keyword={}, minPrice={}, maxPrice={}, minRating={}, lang={}",
+                keyword, minPrice, maxPrice, minRating, lang);
         Page<FoodStallResponse> results = foodStallService.searchStalls(keyword, minPrice, maxPrice, minRating,
-                pageable);
+                lang, pageable);
         return ResponseEntity.ok(results);
     }
 
@@ -67,9 +68,9 @@ public class FoodStallController {
 
     @GetMapping
     @Operation(summary = "Get all food stalls")
-    public ResponseEntity<List<FoodStallResponse>> getAllStalls() {
-        log.info("Da nhan request de lay tat ca cac quan an");
-        List<FoodStallResponse> stalls = foodStallService.getAllStalls();
+    public ResponseEntity<List<FoodStallResponse>> getAllStalls(@RequestParam(defaultValue = "vi") String lang) {
+        log.info("Da nhan request de lay tat ca cac quan an, lang={}", lang);
+        List<FoodStallResponse> stalls = foodStallService.getAllStalls(lang);
         log.info("Returning {} food stalls", stalls.size());
         return ResponseEntity.ok(stalls);
     }
@@ -109,12 +110,15 @@ public class FoodStallController {
 
     @GetMapping("/nearby")
     @Operation(summary = "Find the nearest food stall")
-    public ResponseEntity<FoodStallResponse> findNearestStall(@Valid @ModelAttribute NearbyRequest request) {
-        log.info("Da nhan request de tim quan an gan nhat: lat={}, lon={}", request.getLat(), request.getLon());
+    public ResponseEntity<FoodStallResponse> findNearestStall(
+            @Valid @ModelAttribute NearbyRequest request,
+            @RequestParam(defaultValue = "vi") String lang) {
+        log.info("Da nhan request de tim quan an gan nhat: lat={}, lon={}, lang={}", request.getLat(), request.getLon(), lang);
 
         FoodStallResponse response = foodStallService.findNearestStall(
                 request.getLat(),
-                request.getLon());
+                request.getLon(),
+                lang);
 
         log.info("Da tra ve quan an gan nhat: {}", response.getName());
 
@@ -160,6 +164,22 @@ public class FoodStallController {
         }
     }
 
+    @PostMapping("/{id}/audio/generate-all")
+    @Operation(summary = "On-demand: generate/regenerate audio for ALL supported languages for a specific food stall")
+    public ResponseEntity<?> generateAllAudioForStallOnDemand(@PathVariable Long id) {
+        log.info("On-demand ALL languages audio generate: stallId={}", id);
+        try {
+            localizationService.generateAllLanguagesForStall(id);
+            return ResponseEntity.ok(Map.of(
+                    "message", "Phát dẫn đa ngôn ngữ đang được tạo ngầm cho stallId=" + id,
+                    "languages", List.of("en", "ja", "ko", "zh")
+            ));
+        } catch (Exception e) {
+            log.error("Failed to generate ALL audio on-demand for stallId={}: {}", id, e.getMessage());
+            return ResponseEntity.internalServerError().body(Map.of("error", e.getMessage()));
+        }
+    }
+
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a food stall")
     public ResponseEntity<Void> deleteStall(@PathVariable Long id) {
@@ -190,11 +210,10 @@ public class FoodStallController {
         List<FoodStallResponse> response = stalls.stream().map(stall -> {
             FoodStallResponse res = convertToResponse(stall);
 
-            // Lazy gen
-            if (res.getAudioUrl() == null || res.getAudioUrl().isEmpty()) {
-                String audioUrl = audioService.getOrCreateAudio(
-                        "Xin chao day la " + stall.getName() + ". " + stall.getDescription(),
-                        "vi");
+            // Lazy generation check
+            if (res.getAudioUrl() == null || res.getAudioUrl().isEmpty() || res.getAudioUrl().equals("null")) {
+                String audioText = "Xin chào, đây là " + stall.getName() + ". " + stall.getDescription();
+                String audioUrl = audioService.getOrCreateAudioForStall(stall.getId(), audioText, "vi");
                 res.setAudioUrl(audioUrl);
             }
             return res;
@@ -209,6 +228,64 @@ public class FoodStallController {
             @RequestParam(defaultValue = "vi") String lang) {
         log.info("Received request for pack info with lang={}", lang);
         return ResponseEntity.ok(foodStallService.getPackInfo(lang));
+    }
+
+    @GetMapping("/audio/download-pack")
+    @Operation(summary = "Download a ZIP package containing all audio files for a specific language")
+    public ResponseEntity<org.springframework.core.io.Resource> downloadAudioPack(
+            @RequestParam(defaultValue = "vi") String lang) {
+        log.info("Received request to download audio pack for lang={}", lang);
+        try {
+            org.springframework.core.io.Resource zipResource = foodStallService.exportAudioPack(lang);
+            return ResponseEntity.ok()
+                    .header(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"audio_pack_" + lang + ".zip\"")
+                    .contentType(org.springframework.http.MediaType.valueOf("application/zip"))
+                    .body(zipResource);
+        } catch (com.foodstreet.voice.exception.ResourceNotFoundException e) {
+            log.warn("Audio pack not found: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } catch (java.io.IOException e) {
+            log.error("Error creating audio pack ZIP", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/{id}/audio/download-all")
+    @Operation(summary = "Download a ZIP package containing all audio files across all languages for a specific stall")
+    public ResponseEntity<org.springframework.core.io.Resource> downloadStallAudioPack(@PathVariable Long id) {
+        log.info("Received request to download all audio files for stallId={}", id);
+        try {
+            org.springframework.core.io.Resource zipResource = foodStallService.exportStallAudio(id);
+            return ResponseEntity.ok()
+                    .header(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"stall_" + id + "_all_audio.zip\"")
+                    .contentType(org.springframework.http.MediaType.valueOf("application/zip"))
+                    .body(zipResource);
+        } catch (com.foodstreet.voice.exception.ResourceNotFoundException e) {
+            log.warn("No audio files found for stallId={}", id);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } catch (java.io.IOException e) {
+            log.error("Error creating stall audio pack ZIP", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/audio/download-all")
+    @Operation(summary = "Download a ZIP package containing all audio files across all languages")
+    public ResponseEntity<org.springframework.core.io.Resource> downloadAllAudio() {
+        log.info("Received request to download all audio files");
+        try {
+            org.springframework.core.io.Resource zipResource = foodStallService.exportAllAudio();
+            return ResponseEntity.ok()
+                    .header(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"street_voice_full_audio.zip\"")
+                    .contentType(org.springframework.http.MediaType.valueOf("application/zip"))
+                    .body(zipResource);
+        } catch (com.foodstreet.voice.exception.ResourceNotFoundException e) {
+            log.warn("Audio directory is empty: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } catch (java.io.IOException e) {
+            log.error("Error creating total audio pack ZIP", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     private FoodStallResponse convertToResponse(FoodStall stall) {

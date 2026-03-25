@@ -15,8 +15,22 @@ public class AudioProperties {
     public String getBaseUrl() { return baseUrl; }
     public String getLocalPath() { return localPath; }
 
+    public String getResolvedLocalPath() {
+        String path = localPath;
+        if (!path.startsWith("/") && !path.startsWith("C:") && !path.startsWith("D:")) {
+            String userDir = System.getProperty("user.dir");
+            if (userDir.endsWith("senimar") && !userDir.endsWith("street-voice-backend")) {
+                path = "street-voice-backend/" + path;
+            }
+        }
+        if (!path.endsWith("/")) {
+            path += "/";
+        }
+        return path;
+    }
+
     // Helper: build URL từ tên file
-    // buildAudioUrl("oc_oanh.mp3") → "http://192.168.1.5:8080/audio/oc_oanh.mp3"
+    // buildAudioUrl("8_vi.mp3") → "http://192.168.1.5:8080/audio/oc_oanh.mp3"
     public String buildAudioUrl(String filename) {
         if (filename == null || filename.isEmpty()) {
             return "";
