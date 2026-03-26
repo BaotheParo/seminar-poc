@@ -1,0 +1,926 @@
+[
+  {
+    "id": 1,
+    "name": "Hải Sản Tươi Sống Sáu Nở",
+    "address": "123 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
+    "translations": {
+      "en": {
+        "name": "Sau No Fresh Seafood",
+        "description": "The restaurant name is Sau No Fresh Seafood. Address at 123 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City. Sau No Fresh Seafood is a renowned seafood restaurant on Vinh Khanh Street with two branches, beloved by many diners for its high-quality fresh live seafood. Signature dishes include velvet snails, len snails, and garlic butter grilled lobster, prepared simply to preserve their natural sweetness. The restaurant features a lively, bustling sidewalk vibe, especially vibrant in the evenings. Prices are slightly above average, but well worth it for the exceptional freshness and quality. Thanks to its delicious flavors and long-standing reputation, it is frequently recommended as one of the must-try seafood spots on Vinh Khanh Food Street.",
+        "address": "123 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City"
+      },
+      "ja": {
+        "name": "サウノー新鮮シーフード",
+        "description": "レストランの名前はサウノー新鮮シーフードです。住所は123 ヴィンカン通り、8区、4区、ホーチミン市です。サウノー新鮮シーフードは、ヴィンカン通りで人気のシーフード専門店で、2店舗を構え、新鮮な活き海鮮の質の高さで多くの食通に愛されています。おすすめはヌンム貝、レン貝、ガーリックバターのロブスター焼きで、シンプルに調理することで自然な甘みを最大限に引き出しています。賑やかな歩道スタイルの活気ある雰囲気で、特に夜は大変盛り上がります。価格は周辺よりやや高めですが、その新鮮さとクオリティに見合う価値があります。長年の評判と美味しい味わいから、ヴィンカン美食ストリートのシーフード店としてぜひ訪れたい一軒です。",
+        "address": "123 ヴィンカン通り、8区、4区、ホーチミン市"
+      },
+      "ko": {
+        "name": "사우노 신선 해산물",
+        "description": "레스토랑 이름은 사우노 신선 해산물입니다. 주소는 123 빈칸 거리, 8구, 4구, 호치민시입니다. 시그니처 메뉴로는 벨벳 소라, 렌 소라, 마늘 버터 랍스터 구이가 있으며, 간단하게 조리해 자연스러운 단맛을 그대로 살렸습니다. 활기찬 보도 스타일의 북적이는 분위기로, 특히 저녁에 매우 활기찹니다. 가격은 주변보다 약간 높지만, 뛰어난 신선도와 품질로 충분히 가치가 있습니다. 맛있는 풍미와 오랜 명성 덕분에 빈칸 푸드 스트리트에서 꼭 가봐야 할 해산물 맛집으로 자주 추천됩니다.",
+        "address": "123 빈칸 거리, 8구, 4구, 호치민시"
+      },
+      "zh": {
+        "name": "Sau No 新鲜海鲜",
+        "description": "餐厅名称是Sau No 新鲜海鲜。地址是胡志明市第四郡第八区永庆街123号。Sau No 新鲜海鲜是永庆街著名的海鲜餐厅，拥有两家分店，以高品质新鲜活海鲜深受食客喜爱。招牌菜包括绒毛螺、 len 螺和蒜蓉黄油烤龙虾，简单烹饪以保留天然甜味。餐厅采用热闹的路边摊风格，氛围活泼，尤其晚上人气爆棚。价格略高于周边平均水平，但凭借出色的新鲜度和品质，物超所值。凭借美味口感和多年口碑，它经常被列入永庆美食街必试海鲜餐厅名单。",
+        "address": "胡志明市第四郡第八区永庆街123号"
+      },
+      "vi": {
+        "name": "Hải Sản Tươi Sống Sáu Nở",
+        "description": "Tên quán là Hải Sản Tươi Sống Sáu Nở. Địa chỉ tại 123 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM. Hải Sản Tươi Sống Sáu Nở là quán hải sản nổi tiếng trên phố Vĩnh Khánh với 2 chi nhánh, được nhiều thực khách biết đến nhờ nguồn hải sản tươi sống chất lượng. Các món được yêu thích gồm ốc nhung, ốc len và tôm hùm nướng bơ tỏi, chế biến đơn giản để giữ trọn vị ngọt tự nhiên. Quán mang phong cách vỉa hè đông đúc, sôi động, thường rất nhộn nhịp vào buổi tối. Mức giá nhỉnh hơn mặt bằng chung, nhưng được đánh giá xứng đáng nhờ độ tươi và chất lượng món ăn. Nhờ hương vị ngon và danh tiếng lâu năm, quán thường xuyên được nhắc đến trong danh sách những quán hải sản đáng thử tại phố Vĩnh Khánh",
+        "address": "123 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM"
+      }
+    },
+    "priority": 1
+  },
+  {
+    "id": 2,
+    "name": "Quán Hải Sản Tươi Sống Bé Ốc",
+    "address": "456 Bến Vân Đồn, Phường 13, Quận 4, TP.HCM",
+    "translations": {
+      "en": {
+        "name": "Be Oc Fresh Seafood",
+        "description": "The restaurant name is Be Oc Fresh Seafood. Address at 456 Ben Van Don, Ward 13, District 4, Ho Chi Minh City. Be Oc is a familiar fresh seafood restaurant on Vinh Khanh Street, specializing in carefully selected snails and clams that are simply prepared to retain maximum freshness. The menu is concise and easy to choose from, ideal for quick meals or small groups. With its casual sidewalk setting and simple space, it offers a welcoming, homey atmosphere. Affordable prices and fresh flavors make it a perfect stop for diners seeking quality fresh seafood without fuss while exploring Vinh Khanh Food Street.",
+        "address": "456 Ben Van Don, Ward 13, District 4, Ho Chi Minh City"
+      },
+      "ja": {
+        "name": "ベオック新鮮シーフード",
+        "description": "レストランの名前はベオック新鮮シーフードです。住所は456 ベン ヴァン ドン、13区、4区、ホーチミン市です。ベオックはヴィンカン通りにある親しみやすい新鮮シーフードレストランで、厳選したカタツムリとアサリをシンプルに調理し、新鮮さを最大限に保っています。メニューはシンプルで選びやすく、素早い食事や少人数のグループに最適です。歩道スタイルの気軽な空間で、温かみのある雰囲気を提供します。手頃な価格と新鮮な味わいは、ヴィンカン美食ストリートを散策しながら、気負わず新鮮シーフードを楽しみたい人にぴったりのスポットです。",
+        "address": "456 ベン ヴァン ドン、13区、4区、ホーチミン市"
+      },
+      "ko": {
+        "name": "베옥 신선 해산물",
+        "description": "레스토랑 이름은 베옥 신선 해산물입니다. 주소는 456 벤 반 돈, 13구, 4구, 호치민시입니다. 메뉴는 간결하고 선택하기 쉬워 빠른 식사나 소규모 그룹에게 적합합니다. 보도 스타일의 캐주얼한 공간으로 친근하고 아늑한 분위기를 자아냅니다. 합리적인 가격과 신선한 맛은 빈칸 푸드 스트리트를 둘러보며 부담 없이 신선 해산물을 즐기고 싶은 손님에게 완벽한 선택입니다.",
+        "address": "456 벤 반 돈, 13구, 4구, 호치민시"
+      },
+      "zh": {
+        "name": "贝螺新鲜海鲜",
+        "description": "餐厅名称是贝螺新鲜海鲜。地址是胡志明市第四郡第十三区本云顿街456号。贝螺是永庆街上一家熟悉的新鲜海鲜餐厅，专注于精心挑选的螺和蛤蜊，以简单方式烹调以保留最大新鲜度。菜单简洁易选，适合快速用餐或小团体。采用路边休闲风格，空间简单，营造出亲切温馨的氛围。价格亲民，口味新鲜，是在探索永庆美食街时想轻松享用新鲜海鲜的食客的理想停留点。",
+        "address": "胡志明市第四郡第十三区本云顿街456号"
+      },
+      "vi": {
+        "name": "Quán Hải Sản Tươi Sống Bé Ốc",
+        "description": "Tên quán là Quán Hải Sản Tươi Sống Bé Ốc. Địa chỉ tại 456 Bến Vân Đồn, Phường 13, Quận 4, TP.HCM. Bé Ốc là quán hải sản tươi sống quen thuộc trên phố Vĩnh Khánh, tập trung vào các món ốc và ngao được chọn lọc kỹ, chế biến đơn giản để giữ trọn độ tươi. Thực đơn gọn, dễ chọn, phù hợp ăn nhanh hoặc đi nhóm nhỏ. Quán mang phong cách vỉa hè, không gian đơn giản, tạo cảm giác gần gũi. Mức giá bình dân, hương vị tươi ngon, là điểm dừng chân phù hợp cho thực khách muốn thưởng thức hải sản tươi mà không quá cầu kỳ khi dạo phố ẩm thực Vĩnh Khánh",
+        "address": "456 Bến Vân Đồn, Phường 13, Quận 4, TP.HCM"
+      }
+    },
+    "priority": 2
+  },
+  {
+    "id": 3,
+    "name": "Quán Hải Sản Hai Lữ",
+    "address": "133 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
+    "translations": {
+      "en": {
+        "name": "Hai Lu Seafood Restaurant",
+        "description": "The restaurant name is Hai Lu Seafood Restaurant. Address at 133 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City. Hai Lu Seafood is a fresh seafood restaurant on Vinh Khanh Street offering a diverse menu including grilled, steamed, and stir-fried dishes. Seafood is selected on the spot to ensure top freshness and is easy to order for large groups. With its simple sidewalk style and straightforward space, it is ideal for lively group meals. Reasonable prices and consistent quality make it a reliable favorite for diners seeking fresh seafood on Vinh Khanh Street.",
+        "address": "133 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City"
+      },
+      "ja": {
+        "name": "ハイルー シーフードレストラン",
+        "description": "レストランの名前はハイルー シーフードレストランです。住所は133 ヴィンカン通り、8区、4区、ホーチミン市です。ハイルー シーフードはヴィンカン通りにある新鮮シーフードレストランで、グリル、蒸し物、炒め物など多彩なメニューを提供しています。海鮮は現地で選べ、新鮮さを保証し、大人数でも注文しやすいです。シンプルな歩道スタイルの空間で、賑やかなグループ食事に最適です。手頃な価格と安定した品質から、ヴィンカン通りで新鮮シーフードを楽しみたい人に親しまれているお店です。",
+        "address": "133 ヴィンカン通り、8区、4区、ホーチミン市"
+      },
+      "ko": {
+        "name": "하이루 해산물 레스토랑",
+        "description": "레스토랑 이름은 하이루 해산물 레스토랑입니다. 주소는 133 빈칸 거리, 8구, 4구, 호치민시입니다. 해산물은 현장에서 선택 가능해 신선함이 뛰어나며, 대규모 그룹도 주문하기 쉽습니다. 간단한 보도 스타일의 공간으로 활기찬 단체 식사에 적합합니다. 합리적인 가격과 안정적인 품질로 빈칸 거리에서 신선 해산물을 찾는 손님들에게 믿을 수 있는 인기 맛집입니다.",
+        "address": "133 빈칸 거리, 8구, 4구, 호치민시"
+      },
+      "zh": {
+        "name": "海路海鲜餐厅",
+        "description": "餐厅名称是海路海鲜餐厅。地址是胡志明市第四郡第八区永庆街133号。海路海鲜是永庆街上的新鲜海鲜餐厅，菜单丰富多样，包括烤、蒸和炒制菜品。海鲜可现场挑选，确保新鲜度，且适合大团体轻松点餐。采用简单的路边风格和朴实空间，非常适合热闹的聚餐。价格适中，品质稳定，是在永庆街享用新鲜海鲜的可靠选择。",
+        "address": "胡志明市第四郡第八区永庆街133号"
+      },
+      "vi": {
+        "name": "Quán Hải Sản Hai Lữ",
+        "description": "Tên quán là Quán Hải Sản Hai Lữ. Địa chỉ tại 133 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM. Quán Hải Sản Hai Lữ là quán hải sản tươi sống với thực đơn chế biến đa dạng từ nướng, hấp đến xào. Hải sản được chọn tại chỗ, đảm bảo độ tươi ngon, dễ gọi khi đi nhóm đông. Quán mang phong cách vỉa hè, không gian đơn giản, phù hợp cho những buổi ăn uống đông người. Mức giá trung bình, chất lượng ổn định, là lựa chọn quen thuộc cho thực khách khi muốn thưởng thức hải sản tươi trên phố Vĩnh Khánh",
+        "address": "133 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM"
+      }
+    },
+    "priority": 3
+  },
+  {
+    "id": 4,
+    "name": "Lẩu Bò Kỳ Kim",
+    "address": "150 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
+    "translations": {
+      "en": {
+        "name": "Ky Kim Beef Hotpot",
+        "description": "The restaurant name is Ky Kim Beef Hotpot. Address at 150 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City. Ky Kim Beef Hotpot is a popular fresh beef hotpot restaurant on Vinh Khanh Street, famous for signature dishes like vinegar-dipped beef hotpot, Thai-style beef hotpot, and spicy vinegar beef, served with fresh vegetables and seafood toppings. The comfortable seating makes it suitable for families and groups of friends. With average pricing, tender and sweet beef, and rich broth, it is an excellent choice for beef hotpot lovers exploring Vinh Khanh cuisine.",
+        "address": "150 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City"
+      },
+      "ja": {
+        "name": "キーキム ビーフ鍋",
+        "description": "レストランの名前はキーキム ビーフ鍋です。住所は150 ヴィンカン通り、8区、4区、ホーチミン市です。キーキム ビーフ鍋はヴィンカン通りで人気の新鮮牛肉鍋専門店で、酢牛肉鍋、タイ風牛肉鍋、スパイシー酢牛肉などのシグネチャーメニューが自慢です。新鮮野菜とシーフードトッピングを添えて提供します。快適な座席で家族や友人グループにぴったりです。平均的な価格で、柔らかく甘みのある牛肉と濃厚なスープが魅力。ヴィンカン料理を探索する牛肉鍋好きにおすすめです。",
+        "address": "150 ヴィンカン通り、8区、4区、ホーチミン市"
+      },
+      "ko": {
+        "name": "키킴 소고기 핫팟",
+        "description": "레스토랑 이름은 키킴 소고기 핫팟입니다. 주소는 150 빈칸 거리, 8구, 4구, 호치민시입니다. 신선한 채소와 해산물 토핑을 함께 제공합니다. 편안한 좌석으로 가족과 친구 모임에 적합합니다. 평균 가격대에 부드럽고 달콤한 소고기와 진한 육수가 매력적입니다. 빈칸 요리를 즐기는 소고기 핫팟 애호가에게 좋은 선택입니다.",
+        "address": "150 빈칸 거리, 8구, 4구, 호치민시"
+      },
+      "zh": {
+        "name": "奇金牛肉火锅",
+        "description": "餐厅名称是奇金牛肉火锅。地址是胡志明市第四郡第八区永庆街150号。奇金牛肉火锅是永庆街受欢迎的新鲜牛肉火锅店，以蘸醋牛肉火锅、泰式牛肉火锅和辣醋牛肉等招牌菜闻名，搭配新鲜蔬菜和海鲜配料。舒适的座位适合家庭和朋友聚会。价格适中，牛肉嫩滑甘甜，汤底浓郁，是探索永庆美食时喜爱牛肉火锅人士的理想选择。",
+        "address": "胡志明市第四郡第八区永庆街150号"
+      },
+      "vi": {
+        "name": "Lẩu Bò Kỳ Kim",
+        "description": "Tên quán là Lẩu Bò Kỳ Kim. Địa chỉ tại 150 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM. Lẩu Bò Kỳ Kim là quán lẩu bò tươi được nhiều thực khách lựa chọn tại phố Vĩnh Khánh, nổi bật với các món signature như lẩu bò nhúng giấm, lẩu bò kiểu Thái và bò nhúng giấm cay, ăn kèm rau sống và topping hải sản. Quán có không gian ngồi thoải mái, phù hợp cho gia đình và nhóm bạn. Mức giá trung bình, thịt bò được đánh giá mềm, ngọt, nước dùng đậm đà, dễ ăn, là lựa chọn phù hợp cho những ai yêu thích lẩu bò khi khám phá ẩm thực Vĩnh Khánh",
+        "address": "150 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM"
+      }
+    },
+    "priority": 4
+  },
+  {
+    "id": 5,
+    "name": "Quán Ốc Loan",
+    "address": "168 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
+    "translations": {
+      "en": {
+        "name": "Oc Loan Snail Restaurant",
+        "description": "The restaurant name is Oc Loan Snail Restaurant. Address at 168 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City. Oc Loan is a classic sidewalk snail restaurant on Vinh Khanh Street, well-known for staying open late into the morning. Its extensive menu features stir-fried snails, lemongrass chili snails, fragrant snails, grilled seafood, and many drinking snacks. Extremely affordable prices (many items from 30,000–60,000 VND), easy-to-enjoy flavors loved by the crowd, fresh ingredients, and friendly quick service. The airy space captures the true spirit of Saigon sidewalk drinking culture, perfect for groups gathering for late-night meals and often considered a “must-not-miss” stop when exploring Vinh Khanh cuisine.",
+        "address": "168 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City"
+      },
+      "ja": {
+        "name": "オック ローン カタツムリレストラン",
+        "description": "レストランの名前はオック ローン カタツムリレストランです。住所は168 ヴィンカン通り、8区、4区、ホーチミン市です。オック ローンはヴィンカン通りにある定番の歩道カタツムリ専門店で、朝方まで営業していることで知られています。豊富なメニューに炒めカタツムリ、レモングラスチリカタツムリ、香り高いカタツムリ、グリルシーフード、おつまみ各種が揃います。非常に手頃な価格（多くの品目が30,000〜60,000 VND）、大衆に愛される食べやすい味わい、新鮮な食材、親切で迅速なサービス。開放的な空間はサイゴン路地飲み文化の真髄を体現し、深夜のグループ食事に最適で、ヴィンカン美食探索の「外せない」スポットとしてよく挙げられます。",
+        "address": "168 ヴィンカン通り、8区、4区、ホーチミン市"
+      },
+      "ko": {
+        "name": "옥 론 소라 레스토랑",
+        "description": "레스토랑 이름은 옥 론 소라 레스토랑입니다. 주소는 168 빈칸 거리, 8구, 4구, 호치민시입니다. 다양한 메뉴에 볶음 소라, 레몬그라스 칠리 소라, 향기로운 소라, 구운 해산물, 안주류가 가득합니다. 매우 저렴한 가격(많은 메뉴 30,000~60,000 VND), 대중이 좋아하는 쉬운 맛, 신선한 재료, 친절하고 빠른 서비스. 쾌적한 공간은 사이공 길거리 음주 문화의 본질을 담아내고, 늦은 밤 그룹 모임에 딱이며 빈칸 요리 탐방 시 ‘놓치지 말아야 할’ 장소로 자주 추천됩니다.",
+        "address": "168 빈칸 거리, 8구, 4구, 호치민시"
+      },
+      "zh": {
+        "name": "螺 Loan 螺餐厅",
+        "description": "餐厅名称是螺 Loan 螺餐厅。地址是胡志明市第四郡第八区永庆街168号。螺 Loan 是永庆街经典的路边螺餐厅，以营业至凌晨闻名。菜单丰富，包括炒螺、香茅辣螺、香螺、烤海鲜及多种下酒小菜。价格非常亲民（许多菜品仅30,000–60,000越南盾），口味大众化易入口，食材新鲜，服务快速亲切。宽敞空间完美体现西贡路边摊饮酒文化，适合朋友聚会吃夜宵，常被视为探索永庆美食时“不可错过”的停留点。",
+        "address": "胡志明市第四郡第八区永庆街168号"
+      },
+      "vi": {
+        "name": "Quán Ốc Loan",
+        "description": "Tên quán là Quán Ốc Loan. Địa chỉ tại 168 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM. Quán Ốc Loan là quán ốc vỉa hè quen thuộc trên phố Vĩnh Khánh, nổi bật với thời gian mở cửa muộn đến sáng và menu phong phú từ các món ốc xào, ốc sả ớt, ốc hương, hải sản nướng đến nhiều món nhậu ăn kèm. Quán có mức giá rất bình dân (nhiều món chỉ từ 30.000–60.000đ), hương vị dễ ăn, hợp khẩu vị số đông, nguyên liệu tươi và phục vụ nhanh nhẹn, thân thiện. Không gian thoáng, mang đúng tinh thần nhậu vỉa hè Sài Gòn, phù hợp nhóm bạn tụ tập ăn khuya và thường được xem là điểm dừng “không nên bỏ lỡ” khi khám phá ẩm thực Vĩnh Khánh",
+        "address": "168 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM"
+      }
+    },
+    "priority": 2
+  },
+  {
+    "id": 6,
+    "name": "Tiệm Phá Lấu 825",
+    "address": "189 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
+    "translations": {
+      "en": {
+        "name": "Pho Lau 825 Shop",
+        "description": "The restaurant name is Pho Lau 825 Shop. Address at 189 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City. Pho Lau 825 is a popular, affordable offal and drinking snack shop in the Vinh Khanh area, famous for beef offal, spicy pork offal, offal baguette, and grilled pork intestines. The simple yet tasty menu is perfect for light bites or casual drinking. With its quick sidewalk style and casual space, it attracts many local customers. The dishes deliver bold street-food flavors at very cheap prices (around 50,000–150,000 VND), making it ideal for late-night meals or a quick stop while exploring Vinh Khanh cuisine.",
+        "address": "189 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City"
+      },
+      "ja": {
+        "name": "フォー ラウ 825",
+        "description": "レストランの名前はフォー ラウ 825です。住所は189 ヴィンカン通り、8区、4区、ホーチミン市です。フォー ラウ 825はヴィンカン地区で人気の手頃なモツとおつまみ専門店で、牛モツ、辛い豚モツ、モツバゲット、グリル豚腸が有名です。シンプルながら美味しいメニューは軽食や気軽な飲み会に最適。素早い歩道スタイルのカジュアルな空間で、地元のお客様を多く集めています。ストリートフードらしい濃厚な味わいを非常に安い価格（約50,000〜150,000 VND）で提供し、深夜の食事やヴィンカン探索中のクイックストップにぴったりです。",
+        "address": "189 ヴィンカン通り、8区、4区、ホーチミン市"
+      },
+      "ko": {
+        "name": "포 라우 825",
+        "description": "레스토랑 이름은 포 라우 825입니다. 주소는 189 빈칸 거리, 8구, 4구, 호치민시입니다. 단순하지만 맛있는 메뉴는 간단한 간식이나 캐주얼 음주에 적합합니다. 빠른 보도 스타일의 편안한 공간으로 현지 손님을 많이 끌어들입니다. 강렬한 길거리 음식 풍미를 매우 저렴한 가격(약 50,000~150,000 VND)에 제공해 야식이나 빈칸 요리 탐방 중 빠른 들르기에 좋습니다.",
+        "address": "189 빈칸 거리, 8구, 4구, 호치민시"
+      },
+      "zh": {
+        "name": "破捞825店",
+        "description": "餐厅名称是破捞825店。地址是胡志明市第四郡第八区永庆街189号。破捞825是永庆地区受欢迎的平价内脏和小吃店，以牛杂、辣猪杂、内脏法棍和烤猪肠闻名。菜单简单却美味，适合小食或轻松小酌。快速的路边风格和休闲空间吸引众多本地客人。菜品带有浓郁街头风味，价格非常实惠（约50,000–150,000越南盾），是深夜用餐或探索永庆美食时快速停留的理想选择。",
+        "address": "胡志明市第四郡第八区永庆街189号"
+      },
+      "vi": {
+        "name": "Tiệm Phá Lấu 825",
+        "description": "Tên quán là Tiệm Phá Lấu 825. Địa chỉ tại 189 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM. Tiệm Phá Lấu 825 là quán phá lấu và đồ nhậu bình dân quen thuộc tại khu Vĩnh Khánh, nổi bật với các món phá lấu bò, phá lấu heo sốt cay, bánh mì phá lấu và lòng heo nướng. Thực đơn đơn giản nhưng dễ ăn, phù hợp ăn vặt hoặc nhậu nhẹ. Quán mang phong cách vỉa hè nhanh gọn, không gian giản dị, thu hút đông khách địa phương. Món ăn có hương vị đậm đà kiểu đường phố, mức giá rất rẻ (khoảng 50.000–150.000đ), thích hợp cho những bữa ăn khuya hoặc dừng chân nhanh khi khám phá ẩm thực Vĩnh Khánh",
+        "address": "189 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM"
+      }
+    },
+    "priority": 5
+  },
+  {
+    "id": 7,
+    "name": "Quán Ốc Hồng Nhung",
+    "address": "203 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
+    "translations": {
+      "en": {
+        "name": "Hong Nhung Snail Restaurant",
+        "description": "The restaurant name is Hong Nhung Snail Restaurant. Address at 203 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City. Hong Nhung Snail Restaurant is a long-established snail spot on Vinh Khanh Street, popular for signature dishes like salted chili fragrant snails and green crab claws. It offers a friendly sidewalk atmosphere with simple, comfortable seating. The food delivers consistent fresh flavors at reasonable prices, making it suitable for small groups wanting a relaxed evening of snails and light drinks.",
+        "address": "203 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City"
+      },
+      "ja": {
+        "name": "ホンニュン カタツムリレストラン",
+        "description": "レストランの名前はホンニュン カタツムリレストランです。住所は203 ヴィンカン通り、8区、4区、ホーチミン市です。ホンニュン カタツムリレストランはヴィンカン通りにある老舗のカタツムリ専門店で、塩チリ香りカタツムリや緑色の蟹爪などの看板メニューで人気です。親しみやすい歩道スタイルのシンプルで座りやすい空間を提供します。新鮮で安定した味わいを手頃な価格で楽しめ、軽くお酒を飲みながらゆったりカタツムリを味わいたい少人数グループに最適です。",
+        "address": "203 ヴィンカン通り、8区、4区、ホーチミン市"
+      },
+      "ko": {
+        "name": "홍능 소라 레스토랑",
+        "description": "레스토랑 이름은 홍능 소라 레스토랑입니다. 주소는 203 빈칸 거리, 8구, 4구, 호치민시입니다. 친근한 보도 스타일에 간단하고 편안한 좌석을 갖추고 있습니다. 신선하고 일관된 맛을 합리적인 가격에 제공해 가볍게 술을 즐기며 소라를 먹고 싶은 소규모 모임에 좋습니다.",
+        "address": "203 빈칸 거리, 8구, 4구, 호치민시"
+      },
+      "zh": {
+        "name": "红绒螺餐厅",
+        "description": "餐厅名称是红绒螺餐厅。地址是胡志明市第四郡第八区永庆街203号。红绒螺餐厅是永庆街上的老字号螺店，以盐辣香螺和青蟹钳等招牌菜受欢迎。提供友好的路边氛围，座位简单舒适。菜品口味新鲜稳定，价格合理，适合想在轻松氛围中享用螺和小酌的小团体。",
+        "address": "胡志明市第四郡第八区永庆街203号"
+      },
+      "vi": {
+        "name": "Quán Ốc Hồng Nhung",
+        "description": "Tên quán là Quán Ốc Hồng Nhung. Địa chỉ tại 203 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM. Quán Ốc Hồng Nhung là quán ốc lâu năm trên phố Vĩnh Khánh, được nhiều thực khách biết đến với các món ngon như ốc hương rang muối ớt và càng xanh. Quán mang phong cách vỉa hè thân thiện, không gian giản dị, dễ ngồi. Món ăn có hương vị tươi ngon, ổn định, mức giá hợp lý, phù hợp cho nhóm nhỏ muốn nhậu nhẹ hoặc ăn ốc buổi tối trong không khí thoải mái",
+        "address": "203 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM"
+      }
+    },
+    "priority": 6
+  },
+  {
+    "id": 8,
+    "name": "Quán Ốc Oanh",
+    "address": "288 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
+    "translations": {
+      "en": {
+        "name": "Oc Oanh Snail & Seafood",
+        "description": "The restaurant name is Oc Oanh Snail & Seafood. Address at 288 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City. Oc Oanh is one of the most famous snail and seafood restaurants on Vinh Khanh Food Street, operating for over 20 years and awarded Michelin Guide Bib Gourmand 2024. It stands out with signature dishes such as salted chili grilled crab claws, fragrant snails, scallops grilled with scallion oil, oyster porridge, and a rich selection of fresh live seafood prepared in various styles from grilling to stir-frying. The lively sidewalk setting with outdoor seating perfectly captures Saigon street drinking culture and is always packed from early evening until late night. Flavors are bold and fresh with generous portions. Prices are higher than average in the area (around 150,000–400,000 VND per person), but widely regarded as worth it for the quality and reputation.",
+        "address": "288 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City"
+      },
+      "ja": {
+        "name": "オック オアン シーフード",
+        "description": "レストランの名前はオック オアン シーフードです。住所は288 ヴィンカン通り、8区、4区、ホーチミン市です。オック オアンはヴィンカン美食ストリートで最も有名なカタツムリ＆シーフードレストランの一つで、20年以上営業し、2024年ミシュランガイド ビブグルマンに選ばれました。塩チリガニ爪焼き、香りカタツムリ、ネギ油ホタテ焼き、カキ粥など看板メニューと、新鮮活き海鮮をグリルや炒めなど多彩に楽しめる豊富なメニューが特徴です。賑やかな歩道の屋外席はサイゴン路地飲み文化そのもので、夕方から深夜まで常に満席。味わいは濃厚で新鮮、ボリュームもたっぷり。地域平均より価格は高め（1人あたり約150,000〜400,000 VND）ですが、品質と名声に見合うと高く評価されています。",
+        "address": "288 ヴィンカン通り、8区、4区、ホーチミン市"
+      },
+      "ko": {
+        "name": "옥 오안 해산물",
+        "description": "레스토랑 이름은 옥 오안 해산물입니다. 주소는 288 빈칸 거리, 8구, 4구, 호치민시입니다. 소금 칠리 게 집게 구이, 향 소라, 파 기름 가리비 구이, 굴 죽 등 시그니처와 신선 활 해산물을 구이, 볶음 등 다양한 방식으로 즐길 수 있는 풍부한 메뉴가 강점입니다. 활기찬 보도 야외 좌석은 사이공 길거리 음주 문화의 정수이며 저녁부터 심야까지 항상 붐빕니다. 맛은 진하고 신선하며 양도 푸짐합니다. 지역 평균보다 가격이 높지만(1인당 약 150,000~400,000 VND), 품질과 명성에 비해 충분히 가치 있다는 평가를 받고 있습니다.",
+        "address": "288 빈칸 거리, 8구, 4구, 호치민시"
+      },
+      "zh": {
+        "name": "Oanh螺海鲜",
+        "description": "餐厅名称是Oanh螺海鲜。地址是胡志明市第四郡第八区永庆街288号。Oanh螺海鲜是永庆美食街最著名的螺和海鲜餐厅之一，经营超过20年，并荣获2024年米其林指南必比登推荐。招牌菜包括盐辣烤蟹钳、香螺、葱油扇贝、蚝粥，以及丰富的新鲜活海鲜，可通过烤、炒等多种方式烹制。热闹的路边户外座位完美还原西贡街头饮酒氛围，从傍晚到深夜始终人满为患。口味浓郁新鲜，分量慷慨。价格高于区域平均水平（人均约150,000–400,000越南盾），但因品质和口碑被广泛认为物有所值。",
+        "address": "胡志明市第四郡第八区永庆街288号"
+      },
+      "vi": {
+        "name": "Quán Ốc Oanh",
+        "description": "Tên quán là Quán Ốc Oanh. Địa chỉ tại 288 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM. Quán Ốc Oanh là một trong những quán ốc – hải sản nổi tiếng bậc nhất trên phố ẩm thực Vĩnh Khánh, với hơn 20 năm hoạt động và được Michelin Guide vinh danh Bib Gourmand 2024. Quán nổi bật với các món đặc trưng như càng ghẹ rang muối ớt, ốc hương, sò điệp nướng mỡ hành, cháo hàu cùng thực đơn hải sản tươi sống phong phú, chế biến đa dạng từ nướng đến xào. Quán mang phong cách vỉa hè sôi động, không gian ngoài trời nhộn nhịp đúng chất ăn nhậu đường phố Sài Gòn, lúc nào cũng đông khách từ chiều tối đến khuya. Hương vị được đánh giá đậm đà, tươi ngon, khẩu phần khá hào phóng. Mức giá cao hơn mặt bằng chung khu vực (khoảng 150.000 – 400.000đ/người), nhưng được nhiều thực khách đánh giá là xứng đáng với chất lượng và danh tiếng của quán",
+        "address": "288 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM"
+      }
+    },
+    "priority": 0
+  },
+  {
+    "id": 9,
+    "name": "Quán Ốc 662",
+    "address": "377 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
+    "translations": {
+      "en": {
+        "name": "Oc 662 Snail Restaurant",
+        "description": "The restaurant name is Oc 662 Snail Restaurant. Address at 377 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City. Oc 662 specializes in fresh snails and grilled/stir-fried seafood in a sidewalk style that combines family dining and casual drinking. The menu focuses on easy-to-eat, flavorful dishes using fresh ingredients, perfect for large groups. It offers more spacious seating than many nearby spots, providing a comfortable experience for bigger parties or longer stays. Affordable prices, consistent quality, and often crowded on weekends make it a popular choice on Vinh Khanh Street.",
+        "address": "377 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City"
+      },
+      "ja": {
+        "name": "オック 662",
+        "description": "レストランの名前はオック 662です。住所は377 ヴィンカン通り、8区、4区、ホーチミン市です。オック 662は新鮮カタツムリとグリル・炒めシーフードを専門に、ファミリーとカジュアル飲み会を組み合わせた歩道スタイルで提供します。食べやすく風味豊かな料理を新鮮な食材で作り、大人数に適しています。周辺の多くのお店より広い座席で、大きなグループや長居にも快適。手頃な価格と安定した品質で、週末は特に賑わうヴィンカン通りの人気店です。",
+        "address": "377 ヴィンカン通り、8区、4区、ホーチミン市"
+      },
+      "ko": {
+        "name": "옥 662 소라 레스토랑",
+        "description": "레스토랑 이름은 옥 662 소라 레스토랑입니다. 주소는 377 빈칸 거리, 8구, 4구, 호치민시입니다. 신선한 재료로 간편하고 맛있는 요리를 중심으로 대규모 모임에 적합합니다. 주변 가게들보다 넓은 좌석으로 큰 그룹이나 오래 앉아 있기 편안합니다. 저렴한 가격과 일관된 품질로 주말에 특히 붐비는 빈칸 거리의 인기 맛집입니다.",
+        "address": "377 빈칸 거리, 8구, 4구, 호치민시"
+      },
+      "zh": {
+        "name": "662螺餐厅",
+        "description": "餐厅名称是662螺餐厅。地址是胡志明市第四郡第八区永庆街377号。662螺餐厅专营新鲜螺和烤炒海鲜，采用结合家庭用餐与休闲小酌的路边风格。菜单以易食、风味十足的新鲜食材菜品为主，适合大团体。座位比周边许多店铺更宽敞，适合大型聚会或久坐。价格亲民，品质稳定，周末经常满座，是永庆街的热门选择。",
+        "address": "胡志明市第四郡第八区永庆街377号"
+      },
+      "vi": {
+        "name": "Quán Ốc 662",
+        "description": "Tên quán là Quán Ốc 662. Địa chỉ tại 377 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM. Quán Ốc 662 chuyên phục vụ ốc tươi và hải sản nướng, xào theo phong cách vỉa hè kết hợp quán gia đình và nhậu. Thực đơn tập trung vào các món dễ ăn, chế biến đậm vị, nguyên liệu tươi sống, phù hợp cho nhóm đông người. Quán có không gian rộng rãi hơn so với nhiều quán xung quanh, tạo cảm giác thoải mái khi đi đông hoặc ngồi lâu. Giá cả phải chăng, được nhiều thực khách đánh giá ổn định, và thường đông khách vào cuối tuần",
+        "address": "377 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM"
+      }
+    },
+    "priority": 4
+  },
+  {
+    "id": 10,
+    "name": "Ốc Vĩnh Khánh",
+    "address": "474 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
+    "translations": {
+      "en": {
+        "name": "Vinh Khanh Snail",
+        "description": "The restaurant name is Vinh Khanh Snail. Address at 474 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City. Vinh Khanh Snail is a traditional snail restaurant well-known to many diners, featuring specialties like coconut stir-fried wool snails and grilled big snails with fresh seafood. It blends sidewalk drinking culture with family dining, offering a rustic, easy-to-enjoy menu suitable for various customers. Dishes are flavorful and delicious at budget-friendly prices. The space is simple yet clean and comfortable, ideal for both young people and families wanting to experience Vinh Khanh street food.",
+        "address": "474 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City"
+      },
+      "ja": {
+        "name": "ヴィンカン カタツムリ",
+        "description": "レストランの名前はヴィンカン カタツムリです。住所は474 ヴィンカン通り、8区、4区、ホーチミン市です。ヴィンカン カタツムリは多くの食通に知られる伝統的なカタツムリレストランで、ココナッツ炒めウールカタツムリや新鮮シーフードを添えた大カタツムリ焼きなどの特産品が自慢です。歩道飲み文化と家族食事を融合させ、素朴で食べやすいメニューを幅広い客層に提供します。風味豊かで美味しい料理を手頃な価格で楽しめ、シンプルながら清潔で快適な空間は、若者から家族までヴィンカンストリートフードを体験したい人に最適です。",
+        "address": "474 ヴィンカン通り、8区、4区、ホーチミン市"
+      },
+      "ko": {
+        "name": "빈칸 소라",
+        "description": "레스토랑 이름은 빈칸 소라입니다. 주소는 474 빈칸 거리, 8구, 4구, 호치민시입니다. 길거리 음주 문화와 가족 식사를 조화롭게 하여 소박하고 먹기 쉬운 메뉴를 다양한 고객층에게 제공합니다. 풍미 있고 맛있는 요리를 예산 친화적인 가격에 즐길 수 있으며, 단순하지만 깨끗하고 편안한 공간은 젊은이와 가족 모두가 빈칸 길거리 음식을 경험하기 좋습니다.",
+        "address": "474 빈칸 거리, 8구, 4구, 호치민시"
+      },
+      "zh": {
+        "name": "永庆螺",
+        "description": "餐厅名称是永庆螺。地址是胡志明市第四郡第八区永庆街474号。永庆螺是一家深受食客喜爱的传统螺餐厅，以椰子炒羊毛螺和新鲜海鲜烤大螺等特色菜闻名。融合路边饮酒文化与家庭用餐，提供质朴易食的菜单，适合各类顾客。菜品风味浓郁美味，价格亲民。空间简单却干净舒适，是年轻人和家庭体验永庆街头美食的理想去处。",
+        "address": "胡志明市第四郡第八区永庆街474号"
+      },
+      "vi": {
+        "name": "Ốc Vĩnh Khánh",
+        "description": "Tên quán là Ốc Vĩnh Khánh. Địa chỉ tại 474 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM. Ốc Vĩnh Khánh là quán ốc truyền thống được nhiều thực khách biết đến, nổi bật với các món đặc trưng như ốc len xào dừa, ốc bươu nướng cùng hải sản tươi. Quán mang phong cách vỉa hè nhậu kết hợp ăn uống gia đình, thực đơn dân dã, dễ ăn, phù hợp nhiều đối tượng. Món ăn có hương vị đậm đà, ngon miệng, mức giá bình dân, phù hợp túi tiền. Không gian đơn giản nhưng sạch sẽ, thoải mái, thích hợp cho cả giới trẻ lẫn gia đình khi muốn trải nghiệm ẩm thực đường phố Vĩnh Khánh",
+        "address": "474 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM"
+      }
+    },
+    "priority": 5
+  },
+  {
+    "id": 11,
+    "name": "Lẩu Dê Toàn & Ký",
+    "address": "506 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
+    "translations": {
+      "en": {
+        "name": "Toan & Ky Goat Hotpot",
+        "description": "The restaurant name is Toan & Ky Goat Hotpot. Address at 506 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City. Toan & Ky Goat Hotpot is a popular specialty goat hotpot restaurant on Vinh Khanh Street, famous for signature dishes such as rare goat hotpot, grilled goat, sliced goat, stir-fried goat, and rustic grilled goat. The menu focuses on hot, flavorful goat dishes that are easy to share in large groups. With a casual drinking-and-family style and covered seating, it offers a comfortable space for long gatherings. Average pricing (around 200,000–400,000 VND per person), with fresh, tender, and aromatic goat meat, makes it an excellent choice for groups and goat lovers enjoying late-night meals on Vinh Khanh.",
+        "address": "506 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City"
+      },
+      "ja": {
+        "name": "トアン＆キー ヤギ鍋",
+        "description": "レストランの名前はトアン＆キー ヤギ鍋です。住所は506 ヴィンカン通り、8区、4区、ホーチミン市です。トアン＆キー ヤギ鍋はヴィンカン通りで人気のヤギ鍋専門店で、レアヤギ鍋、ヤギ焼き、薄切りヤギ、ヤギ炒め、田舎風ヤギ焼きなどのシグネチャーメニューが自慢です。熱々で風味豊かなヤギ料理を中心に、大人数でシェアしやすいメニュー構成です。飲み会と家族食事を組み合わせたカジュアルスタイルに屋根付き席があり、長時間くつろげる快適な空間を提供します。平均価格（1人あたり約200,000〜400,000 VND）で、新鮮で柔らかく香り高いヤギ肉は、グループやヤギ好きの深夜食事に最適です。",
+        "address": "506 ヴィンカン通り、8区、4区、ホーチミン市"
+      },
+      "ko": {
+        "name": "또안 & 끼 염소 핫팟",
+        "description": "레스토랑 이름은 또안 & 끼 염소 핫팟입니다. 주소는 506 빈칸 거리, 8구, 4구, 호치민시입니다. 뜨겁고 풍미 깊은 염소 요리를 중심으로 대규모 모임에서 나누어 먹기 좋습니다. 음주와 가족 식사를 결합한 캐주얼 스타일에 지붕이 있는 좌석으로 오래 앉아 있기 편안합니다. 평균 가격대(1인당 약 200,000~400,000 VND)에 신선하고 부드러우며 향기로운 염소 고기로, 그룹이나 염소 요리를 좋아하는 늦은 밤 식사에 좋은 선택입니다.",
+        "address": "506 빈칸 거리, 8구, 4구, 호치민시"
+      },
+      "zh": {
+        "name": "全记羊肉火锅",
+        "description": "餐厅名称是全记羊肉火锅。地址是胡志明市第四郡第八区永庆街506号。全记羊肉火锅是永庆街受欢迎的特色羊肉火锅店，以生羊肉火锅、烤羊肉、羊肉片、羊肉炒、乡村烤羊肉等招牌菜闻名。菜单以热腾腾、风味十足的羊肉菜品为主，便于大团体分享。采用休闲小酌与家庭聚餐风格，设有遮雨座位，适合长时间聚会。人均约200,000–400,000越南盾，羊肉新鲜嫩滑、香气扑鼻，是喜欢羊肉的团体在永庆街享用夜宵的理想选择。",
+        "address": "胡志明市第四郡第八区永庆街506号"
+      },
+      "vi": {
+        "name": "Lẩu Dê Toàn & Ký",
+        "description": "Tên quán là Lẩu Dê Toàn & Ký. Địa chỉ tại 506 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM. Lẩu Dê Toàn & Ký là quán lẩu dê đặc sản được nhiều thực khách lựa chọn khi ghé phố Vĩnh Khánh, nổi bật với các món signature như lẩu dê tái, dê nướng, dê thái, dê xào lăn và dê nướng mọi. Thực đơn tập trung vào các món dê nóng hổi, đậm vị, dễ chia sẻ khi đi đông. Quán mang phong cách nhậu kết hợp gia đình, không gian có mái che, tạo cảm giác thoải mái khi ngồi lâu. Mức giá trung bình (khoảng 200.000–400.000đ/người), thịt dê được đánh giá tươi, mềm, thơm gia vị, rất phù hợp cho nhóm đông và những ai yêu thích món dê vào buổi đêm khuya",
+        "address": "506 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM"
+      }
+    },
+    "priority": 3
+  },
+  {
+    "id": 12,
+    "name": "Lẩu Cá A Mín",
+    "address": "495 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
+    "translations": {
+      "en": {
+        "name": "A Min Fish Hotpot",
+        "description": "The restaurant name is A Min Fish Hotpot. Address at 495 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City. A Min Fish Hotpot is a Western-style specialty fish hotpot restaurant on Vinh Khanh Street, renowned for signature dishes like snakehead fish hotpot, field-caught snakehead, and spicy-sour basa fish hotpot, served with characteristic Mekong vegetables such as bitter greens and water lily stems. The broth is naturally sweet with a rustic flavor, easy to enjoy. The casual sidewalk-family setting with airy space makes it suitable for large groups. Affordable prices and authentic Mekong taste make it a great option to change flavors while exploring Vinh Khanh cuisine.",
+        "address": "495 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City"
+      },
+      "ja": {
+        "name": "アミン フィッシュ鍋",
+        "description": "レストランの名前はアミン フィッシュ鍋です。住所は495 ヴィンカン通り、8区、4区、ホーチミン市です。アミン フィッシュ鍋はヴィンカン通りにあるメコン地方風の魚鍋専門店で、ヘビ頭魚鍋、野性ヘビ頭魚、スパイシー＆サワー・バサ魚鍋などのシグネチャーメニューが自慢です。メコン特有の苦菜や睡蓮の茎などの野菜と一緒に提供され、自然な甘みのある素朴な味わいのスープが特徴です。歩道と家族スタイルの開放的な空間で大人数にも対応。手頃な価格と本格的なメコン風味は、ヴィンカン料理探索中に味を変えたい時に最適です。",
+        "address": "495 ヴィンカン通り、8区、4区、ホーチミン市"
+      },
+      "ko": {
+        "name": "아민 피쉬 핫팟",
+        "description": "레스토랑 이름은 아민 피쉬 핫팟입니다. 주소는 495 빈칸 거리, 8구, 4구, 호치민시입니다. 메콩 특유의 쓴 채소와 수련 줄기 등과 함께 제공되며, 자연스러운 단맛이 나는 소박한 국물이 특징입니다. 보도와 가족 스타일의 쾌적한 공간으로 대규모 모임에 적합합니다. 저렴한 가격과 진정한 메콩 맛으로 빈칸 요리를 탐방하며 맛을 바꾸고 싶을 때 좋은 선택입니다.",
+        "address": "495 빈칸 거리, 8구, 4구, 호치민시"
+      },
+      "zh": {
+        "name": "A Min 鱼火锅",
+        "description": "餐厅名称是A Min 鱼火锅。地址是胡志明市第四郡第八区永庆街495号。A Min 鱼火锅是永庆街上的西式特色鱼火锅店，以蛇头鱼火锅、野生蛇头鱼和酸辣巴沙鱼火锅等招牌菜闻名，搭配苦菜、水莲茎等典型湄公河蔬菜。汤底自然甘甜，带有乡村风味，容易入口。采用路边家庭风格，空间宽敞，适合大团体。人均价格亲民，口味正宗湄公河风，是探索永庆美食时换换口味的好选择。",
+        "address": "胡志明市第四郡第八区永庆街495号"
+      },
+      "vi": {
+        "name": "Lẩu Cá A Mín",
+        "description": "Tên quán là Lẩu Cá A Mín. Địa chỉ tại 495 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM. Lẩu Cá A Mín là quán lẩu cá đặc sản miền Tây, nổi bật với các món signature như lẩu cá lóc, cá lóc đồng và lẩu cá basa chua cay, ăn kèm các loại rau đặc trưng như rau đắng, bông súng. Hương vị mang nét dân dã, nước lẩu ngọt tự nhiên, dễ ăn. Quán mang phong cách vỉa hè kết hợp gia đình, không gian thoáng, phù hợp cho nhóm đông người. Mức giá bình dân, món ăn được đánh giá ngon, đậm chất miền Tây, là lựa chọn thích hợp cho những ai muốn đổi vị khi khám phá ẩm thực Vĩnh Khánh",
+        "address": "495 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM"
+      }
+    },
+    "priority": 4
+  },
+  {
+    "id": 13,
+    "name": "Lẩu Nướng Chilli",
+    "address": "463 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
+    "translations": {
+      "en": {
+        "name": "Chilli Hotpot & Grill",
+        "description": "The restaurant name is Chilli Hotpot & Grill. Address at 463 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City. Chilli Hotpot & Grill is a self-serve hotpot and grill restaurant popular among young people on Vinh Khanh Street. Signature items include grilled seafood, sour-spicy tamarind hotpot, crispy fried rice, spicy chicken, and grilled ribs, offering a diverse and easy-to-choose menu for groups. The modern sidewalk style with covered seating creates a lively atmosphere, often crowded with young customers. Affordable prices (around 150,000–300,000 VND per person) with bold, spicy flavors that many describe as addictive. Some tamarind hotpots have a distinct sour note that can be adjusted to taste, but overall quality is consistent and perfect for friend gatherings.",
+        "address": "463 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City"
+      },
+      "ja": {
+        "name": "チリ ホットポット＆グリル",
+        "description": "レストランの名前はチリ ホットポット＆グリルです。住所は463 ヴィンカン通り、8区、4区、ホーチミン市です。チリ ホットポット＆グリルはヴィンカン通りで若者に人気のセルフ式ホットポット＆グリル店です。グリルシーフード、タマリンドの酸っぱ辛い鍋、サクサクチャーハン、辛鶏、グリルリブなど多彩で選びやすいメニューが揃っています。現代的な歩道スタイルに屋根付き席で賑やかな雰囲気、若いお客様でよく賑わいます。手頃な価格（1人あたり約150,000〜300,000 VND）で、濃厚で辛い味わいが「食べたらハマる」と評判。一部のタマリンド鍋は酸味が強いですが好みで調整可能で、全体的に安定したクオリティで友人同士の集まりに最適です。",
+        "address": "463 ヴィンカン通り、8区、4区、ホーチミン市"
+      },
+      "ko": {
+        "name": "칠리 핫팟 & 그릴",
+        "description": "레스토랑 이름은 칠리 핫팟 & 그릴입니다. 주소는 463 빈칸 거리, 8구, 4구, 호치민시입니다. 구운 해산물, 타마린드 새콤 매운 핫팟, 바삭 볶음밥, 매운 치킨, 갈비 구이 등 다양하고 선택하기 쉬운 메뉴를 제공합니다. 현대적인 보도 스타일에 지붕이 있는 좌석으로 활기찬 분위기, 젊은 손님들로 자주 붐빕니다. 저렴한 가격(1인당 약 150,000~300,000 VND)에 강렬하고 매운 맛이 “먹으면 중독된다”는 평가를 받습니다. 일부 타마린드 핫팟은 신맛이 강하지만 취향에 맞게 조절 가능하며, 전체적으로 안정적인 품질로 친구 모임에 딱입니다.",
+        "address": "463 빈칸 거리, 8구, 4구, 호치민시"
+      },
+      "zh": {
+        "name": "Chilli 火锅烧烤",
+        "description": "餐厅名称是Chilli 火锅烧烤。地址是胡志明市第四郡第八区永庆街463号。Chilli 火锅烧烤是永庆街深受年轻人喜爱的自助火锅烧烤店。招牌包括烤海鲜、酸辣罗望子火锅、脆炸饭、辣鸡和烤排骨，菜单丰富多样，适合团体轻松选择。现代路边风格搭配遮雨座位，氛围热闹，常有年轻顾客光顾。人均约150,000–300,000越南盾，口味偏辣浓郁，许多人称“吃一次就上瘾”。部分罗望子火锅酸味明显，可按口味调整，但整体品质稳定，是朋友聚会的理想选择。",
+        "address": "胡志明市第四郡第八区永庆街463号"
+      },
+      "vi": {
+        "name": "Lẩu Nướng Chilli",
+        "description": "Tên quán là Lẩu Nướng Chilli. Địa chỉ tại 463 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM. Lẩu Nướng Chilli là quán lẩu nướng tự chọn đang được giới trẻ ưa chuộng tại phố Vĩnh Khánh. Các món signature gồm hải sản nướng, lẩu me chua cay, cơm chiên giòn, gà cay và sườn nướng, tạo nên thực đơn đa dạng, dễ chọn cho đi nhóm. Quán mang phong cách vỉa hè hiện đại kết hợp khu ngồi có mái che, không gian nhộn nhịp, thường đông khách trẻ. Mức giá phải chăng (khoảng 150.000–300.000đ/người), hương vị thiên về cay, đậm đà, được nhiều thực khách nhận xét là “ăn là ghiền”. Một số món lẩu me có vị chua rõ, có thể tùy khẩu vị, nhưng nhìn chung chất lượng ổn định, phù hợp tụ tập bạn bè",
+        "address": "463 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM"
+      }
+    },
+    "priority": 2
+  },
+  {
+    "id": 14,
+    "name": "Lẩu Mẹt Nướng 79K",
+    "address": "414 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
+    "translations": {
+      "en": {
+        "name": "79K Hotpot & Grill Buffet",
+        "description": "The restaurant name is 79K Hotpot & Grill Buffet. Address at 414 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City. 79K Hotpot & Grill Buffet is an affordable all-you-can-eat hotpot and grill restaurant on Vinh Khanh Street priced at just 79,000 VND per person. It serves a combination of seafood, grilled meats, and hotpot in a simple, fun model perfect for large groups. With a casual, cheerful atmosphere and spacious seating, it is especially popular with young people and students. The food offers consistent flavors with fresh ingredients and quick service, making it an excellent budget-friendly choice for friends or anyone wanting to enjoy hotpot and grill while exploring Vinh Khanh without breaking the bank.",
+        "address": "414 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City"
+      },
+      "ja": {
+        "name": "79K ホットポット＆グリル食べ放題",
+        "description": "レストランの名前は79K ホットポット＆グリル食べ放題です。住所は414 ヴィンカン通り、8区、4区、ホーチミン市です。79K ホットポット＆グリル食べ放題はヴィンカン通りにある一人79,000 VNDのコスパ抜群の食べ放題店です。シーフード、グリル肉、鍋を組み合わせたシンプルで楽しいスタイルで、大人数に最適。気軽で楽しい雰囲気と広い座席で、特に若者や学生に人気です。新鮮な食材で安定した味わいと迅速なサービスを提供し、予算を抑えてヴィンカン探索中にホットポット＆グリルを楽しみたい友人グループにぴったりのお店です。",
+        "address": "414 ヴィンカン通り、8区、4区、ホーチミン市"
+      },
+      "ko": {
+        "name": "79K 핫팟 & 그릴 뷔페",
+        "description": "레스토랑 이름은 79K 핫팟 & 그릴 뷔페입니다. 주소는 414 빈칸 거리, 8구, 4구, 호치민시입니다. 해산물, 구운 고기, 핫팟을 함께 제공하는 간단하고 재미있는 모델로 대규모 모임에 적합합니다. 캐주얼하고 즐거운 분위기와 넓은 좌석으로 특히 젊은이와 학생들에게 인기 있습니다. 신선한 재료로 안정적인 맛과 빠른 서비스를 제공해 예산 부담 없이 빈칸을 탐방하며 핫팟과 그릴을 즐기고 싶은 친구 모임에게 좋은 선택입니다.",
+        "address": "414 빈칸 거리, 8구, 4구, 호치민시"
+      },
+      "zh": {
+        "name": "79K 火锅烧烤自助",
+        "description": "餐厅名称是79K 火锅烧烤自助。地址是胡志明市第四郡第八区永庆街414号。79K 火锅烧烤自助是永庆街人均仅79,000越南盾的平价无限量火锅烧烤店。结合海鲜、烤肉和火锅，模式简单有趣，非常适合大团体。氛围轻松欢乐，座位宽敞，尤其受年轻人和学生欢迎。食材新鲜，口味稳定，服务迅速，是想节省预算在探索永庆美食时享用火锅烧烤的朋友们的理想选择。",
+        "address": "胡志明市第四郡第八区永庆街414号"
+      },
+      "vi": {
+        "name": "Lẩu Mẹt Nướng 79K",
+        "description": "Tên quán là Lẩu Mẹt Nướng 79K. Địa chỉ tại 414 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM. Lẩu Mẹt Nướng 79K là quán lẩu nướng giá rẻ theo hình thức 79.000đ/người (ăn không giới hạn), phục vụ kết hợp hải sản, thịt nướng và lẩu. Mô hình đơn giản, dễ gọi, phù hợp đi đông. Quán mang phong cách bình dân, vui vẻ, không gian rộng rãi, thường đông khách trẻ và sinh viên. Món ăn có hương vị ổn định, nguyên liệu tươi, phục vụ nhanh, rất phù hợp với nhóm bạn hoặc những ai muốn ăn lẩu nướng tiết kiệm chi phí khi khám phá Vĩnh Khánh",
+        "address": "414 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM"
+      }
+    },
+    "priority": 1
+  },
+  {
+    "id": 15,
+    "name": "Quán Ốc Vân",
+    "address": "453 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
+    "translations": {
+      "en": {
+        "name": "Oc Van Snail Restaurant",
+        "description": "The restaurant name is Oc Van Snail Restaurant. Address at 453 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City. Oc Van is a typical sidewalk snail restaurant on Vinh Khanh Street, specializing in fresh stir-fried snails, lemongrass chili snails, grilled snails, and affordable seafood. With simple outdoor tables and chairs, it is often busy in the evenings and perfect for casual drinking sessions with friends. The flavors are consistent with fresh ingredients, and prices are considered soft compared to the area (around 100,000–200,000 VND per person). Although it may not have as many detailed reviews as bigger spots, Oc Van remains a familiar local choice for quick, convenient, and budget-friendly snail meals.",
+        "address": "453 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City"
+      },
+      "ja": {
+        "name": "オック ヴァン",
+        "description": "レストランの名前はオック ヴァンです。住所は453 ヴィンカン通り、8区、4区、ホーチミン市です。オック ヴァンはヴィンカン通りにある典型的な歩道カタツムリ店で、新鮮な炒めカタツムリ、レモングラスチリカタツムリ、グリルカタツムリ、手頃なシーフードを専門にしています。シンプルな屋外テーブルと椅子で、夕方以降に賑わい、友人との気軽な飲み会に最適です。新鮮な食材で安定した味わいを提供し、地域比で価格が手頃（1人あたり約100,000〜200,000 VND）。大きな店ほどレビューは多くありませんが、素早く手軽で予算に優しいカタツムリ食事として地元の人々に親しまれています。",
+        "address": "453 ヴィンカン通り、8区、4区、ホーチミン市"
+      },
+      "ko": {
+        "name": "옥 반 소라 레스토랑",
+        "description": "레스토랑 이름은 옥 반 소라 레스토랑입니다. 주소는 453 빈칸 거리, 8구, 4구, 호치민시입니다. 간단한 야외 테이블과 의자로 저녁에 자주 붐비며 친구들과 가볍게 마시는 데 적합합니다. 신선한 재료로 안정적인 맛을 제공하고 지역 대비 가격이 부담 적습니다(1인당 약 100,000~200,000 VND). 큰 가게만큼 리뷰는 많지 않지만, 빠르고 간편하며 예산 친화적인 소라 식사로 현지인들에게 익숙한 선택입니다.",
+        "address": "453 빈칸 거리, 8구, 4구, 호치민시"
+      },
+      "zh": {
+        "name": "云螺餐厅",
+        "description": "餐厅名称是云螺餐厅。地址是胡志明市第四郡第八区永庆街453号。云螺是永庆街典型的路边螺餐厅，专营新鲜炒螺、香茅辣螺、烤螺和实惠海鲜。简单户外桌椅，晚上常有客人，适合朋友轻松小酌。口味稳定，食材新鲜，价格相对区域较亲民（人均约100,000–200,000越南盾）。虽然详细评价不如大店多，但仍是本地人快速、方便、省钱吃螺的熟悉选择。",
+        "address": "胡志明市第四郡第八区永庆街453号"
+      },
+      "vi": {
+        "name": "Quán Ốc Vân",
+        "description": "Tên quán là Quán Ốc Vân. Địa chỉ tại 453 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM. Quán Ốc Vân là quán ốc vỉa hè điển hình trên phố Vĩnh Khánh, chuyên các món ốc tươi xào, ốc sả ớt, ốc nướng cùng hải sản giá bình dân. Quán có không gian đơn giản, bàn ghế ngoài trời, thường đông khách vào buổi tối, phù hợp cho những buổi nhậu nhẹ cùng nhóm bạn. Hương vị món ăn ở mức ổn định, nguyên liệu tươi, mức giá được đánh giá mềm so với mặt bằng chung khu vực (khoảng 100.000–200.000đ/người). Tuy không có nhiều bài review chi tiết như các quán lớn trên phố, Ốc Vân vẫn là lựa chọn quen thuộc của khách địa phương khi muốn ăn ốc nhanh, gọn và tiết kiệm",
+        "address": "453 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM"
+      }
+    },
+    "priority": 6
+  },
+  {
+    "id": 16,
+    "name": "Lẩu Nướng An An Quán",
+    "address": "391 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
+    "translations": {
+      "en": {
+        "name": "An An Hotpot & Grill",
+        "description": "The restaurant name is An An Hotpot & Grill. Address at 391 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City. An An Hotpot & Grill is a beloved seafood hotpot and grill restaurant on Vinh Khanh Street, highlighted by specialties such as steamed octopus, seafood claypot rice, and salted chicken cartilage. The diverse menu emphasizes fresh ingredients and is easy to order for groups. With its comfortable sidewalk style and airy space, it creates a pleasant environment for long meals. Reasonable prices and consistently fresh, tasty flavors keep it among the favorite dining spots on Vinh Khanh Food Street.",
+        "address": "391 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City"
+      },
+      "ja": {
+        "name": "アンアン ホットポット＆グリル",
+        "description": "レストランの名前はアンアン ホットポット＆グリルです。住所は391 ヴィンカン通り、8区、4区、ホーチミン市です。アンアン ホットポット＆グリルはヴィンカン通りで愛されるシーフード鍋＆グリル店で、タコ蒸し、シーフード土鍋ご飯、塩味鶏軟骨などの特長メニューが人気です。多様なメニューは新鮮な食材にこだわり、グループで注文しやすいです。快適な歩道スタイルと開放的な空間で、長時間食事するのに心地よい環境を提供します。手頃な価格と安定した新鮮で美味しい味わいから、ヴィンカン美食ストリートの人気店の一つとして親しまれています。",
+        "address": "391 ヴィンカン通り、8区、4区、ホーチミン市"
+      },
+      "ko": {
+        "name": "안안 핫팟 & 그릴",
+        "description": "레스토랑 이름은 안안 핫팟 & 그릴입니다. 주소는 391 빈칸 거리, 8구, 4구, 호치민시입니다. 다양한 메뉴는 신선한 재료를 강조하며 그룹 주문이 쉽습니다. 편안한 보도 스타일과 쾌적한 공간으로 오래 앉아 식사하기 좋은 환경을 제공합니다. 합리적인 가격과 일관된 신선하고 맛있는 풍미로 빈칸 푸드 스트리트의 인기 맛집 중 하나입니다.",
+        "address": "391 빈칸 거리, 8구, 4구, 호치민시"
+      },
+      "zh": {
+        "name": "安安火锅烧烤",
+        "description": "餐厅名称是安安火锅烧烤。地址是胡志明市第四郡第八区永庆街391号。安安火锅烧烤是永庆街深受喜爱的海鲜火锅烧烤店，亮点包括蒸章鱼、海鲜煲仔饭和盐焗鸡软骨。菜单多样，注重新鲜食材，适合团体点餐。舒适的路边风格和宽敞空间，营造出适合久坐用餐的愉快环境。价格合理，口味新鲜稳定，是永庆美食街的热门用餐地点之一。",
+        "address": "胡志明市第四郡第八区永庆街391号"
+      },
+      "vi": {
+        "name": "Lẩu Nướng An An Quán",
+        "description": "Tên quán là Lẩu Nướng An An Quán. Địa chỉ tại 391 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM. Lẩu Nướng An An Quán là quán lẩu nướng hải sản được nhiều thực khách yêu thích trên phố Vĩnh Khánh, nổi bật với các món đặc trưng như bạch tuộc xông hơi, cơm thố hải sản và sụn gà rang muối. Thực đơn đa dạng, chú trọng nguyên liệu tươi, dễ gọi khi đi nhóm. Quán mang phong cách vỉa hè thoải mái, không gian thoáng, tạo cảm giác dễ chịu khi ngồi lâu. Mức giá hợp lý, hương vị tươi ngon, ổn định, giúp quán luôn nằm trong nhóm địa điểm ăn uống được yêu thích tại phố ẩm thực Vĩnh Khánh",
+        "address": "391 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM"
+      }
+    },
+    "priority": 3
+  },
+  {
+    "id": 17,
+    "name": "Ốc Đêm Vĩnh Khánh",
+    "address": "341 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
+    "translations": {
+      "en": {
+        "name": "Vinh Khanh Night Snails",
+        "description": "The restaurant name is Vinh Khanh Night Snails. Address at 341 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City. Vinh Khanh Night Snails specializes in late-night dining, featuring quick-prepared fresh snails and seafood such as stir-fried snails and grilled snails with scallion oil. The lively sidewalk nighttime drinking atmosphere with outdoor seating attracts many customers during late hours. Dishes deliver bold, easy-to-enjoy flavors at affordable prices, making it perfect for groups of friends gathering for midnight snacks or casual drinking while exploring Vinh Khanh Food Street at night.",
+        "address": "341 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City"
+      },
+      "ja": {
+        "name": "ヴィンカン ナイト カタツムリ",
+        "description": "レストランの名前はヴィンカン ナイト カタツムリです。住所は341 ヴィンカン通り、8区、4区、ホーチミン市です。ヴィンカン ナイト カタツムリは深夜営業に特化した店で、新鮮なカタツムリとシーフードを素早く調理した炒めカタツムリやネギ油グリルカタツムリなどが人気です。夜の賑やかな歩道飲み雰囲気と屋外席で、遅い時間帯に多くのお客様を集めます。濃厚で食べやすい味わいを手頃な価格で提供し、深夜の友人グループでの軽食や気軽な飲み会、夜のヴィンカン美食ストリート探索に最適です。",
+        "address": "341 ヴィンカン通り、8区、4区、ホーチミン市"
+      },
+      "ko": {
+        "name": "빈칸 나이트 소라",
+        "description": "레스토랑 이름은 빈칸 나이트 소라입니다. 주소는 341 빈칸 거리, 8구, 4구, 호치민시입니다. 밤의 활기찬 보도 음주 분위기와 야외 좌석으로 늦은 시간에 많은 손님을 끌어들입니다. 진하고 먹기 쉬운 맛을 합리적인 가격에 제공해 자정 스낵이나 가벼운 음주를 즐기는 친구 모임, 밤의 빈칸 푸드 스트리트 탐방에 딱입니다.",
+        "address": "341 빈칸 거리, 8구, 4구, 호치민시"
+      },
+      "zh": {
+        "name": "永庆夜螺",
+        "description": "餐厅名称是永庆夜螺。地址是胡志明市第四郡第八区永庆街341号。永庆夜螺专营深夜用餐，以快速烹制的鲜螺和海鲜为主，如炒螺和葱油烤螺。热闹的路边夜间饮酒氛围搭配户外座位，深夜时段吸引众多客人。菜品口味浓郁易食，价格亲民，非常适合朋友们深夜聚会吃宵夜或小酌，同时探索夜间的永庆美食街。",
+        "address": "胡志明市第四郡第八区永庆街341号"
+      },
+      "vi": {
+        "name": "Ốc Đêm Vĩnh Khánh",
+        "description": "Tên quán là Ốc Đêm Vĩnh Khánh. Địa chỉ tại 341 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM. Ốc Đêm Vĩnh Khánh là quán chuyên phục vụ ăn khuya, nổi bật với các món ốc và hải sản tươi sống được chế biến nhanh như ốc xào, nướng mỡ hành. Quán mang phong cách nhậu đêm vỉa hè, không gian ngoài trời sôi động, thu hút đông khách vào khung giờ muộn. Món ăn có hương vị đậm đà, dễ ăn, giá cả bình dân, phù hợp nhóm bạn tụ tập ăn đêm hoặc nhậu nhẹ khi khám phá phố ẩm thực Vĩnh Khánh về khuya",
+        "address": "341 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM"
+      }
+    },
+    "priority": 5
+  },
+  {
+    "id": 18,
+    "name": "Quán Nhậu Ốc Đào",
+    "address": "271 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
+    "translations": {
+      "en": {
+        "name": "Dao Snail Drinking Restaurant",
+        "description": "The restaurant name is Dao Snail Drinking Restaurant. Address at 271 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City. Dao Snail Drinking Restaurant specializes in fresh snails and seafood for casual drinking, standing out with bold-flavored dishes like stir-fried Dao snails, lemongrass snails, and grilled snails. The lively sidewalk drinking atmosphere makes it ideal for friend gatherings. Spacious seating is comfortable for larger groups. Dishes offer strong flavors at affordable prices, making it a familiar local favorite for enjoying snails and light drinking on Vinh Khanh Street.",
+        "address": "271 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City"
+      },
+      "ja": {
+        "name": "ダオ カタツムリ飲み屋",
+        "description": "レストランの名前はダオ カタツムリ飲み屋です。住所は271 ヴィンカン通り、8区、4区、ホーチミン市です。ダオ カタツムリ飲み屋は新鮮カタツムリとシーフードのおつまみ専門店で、ダオカタツムリ炒め、レモングラスカタツムリ、グリルカタツムリなど濃いめの味わいの料理が特徴です。賑やかな歩道飲み雰囲気で友人同士の集まりに最適。広い座席で大人数でも快適です。しっかりした風味を手頃な価格で楽しめ、ヴィンカン通りでカタツムリとおつまみを気軽に楽しむ地元人気店です。",
+        "address": "271 ヴィンカン通り、8区、4区、ホーチミン市"
+      },
+      "ko": {
+        "name": "다오 소라 술집",
+        "description": "레스토랑 이름은 다오 소라 술집입니다. 주소는 271 빈칸 거리, 8구, 4구, 호치민시입니다. 활기찬 보도 음주 분위기로 친구 모임에 적합합니다. 넓은 좌석으로 대규모 그룹도 편안합니다. 강한 풍미를 합리적인 가격에 제공해 빈칸 거리에서 소라와 가벼운 음주를 즐기는 익숙한 현지 맛집입니다.",
+        "address": "271 빈칸 거리, 8구, 4구, 호치민시"
+      },
+      "zh": {
+        "name": "桃螺小酒馆",
+        "description": "餐厅名称是桃螺小酒馆。地址是胡志明市第四郡第八区永庆街271号。桃螺小酒馆专营新鲜螺和海鲜下酒菜，以口味浓郁的桃螺炒、香茅螺和烤螺等菜品为特色。热闹的路边饮酒氛围适合朋友聚会。空间宽敞，适合较大团体。菜品风味浓烈，价格亲民，是在永庆街享用螺和小酌的本地熟悉选择。",
+        "address": "胡志明市第四郡第八区永庆街271号"
+      },
+      "vi": {
+        "name": "Quán Nhậu Ốc Đào",
+        "description": "Tên quán là Quán Nhậu Ốc Đào. Địa chỉ tại 271 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM. Quán Nhậu Ốc Đào là quán nhậu chuyên ốc và hải sản tươi, nổi bật với các món ốc Đào xào, ốc sả và ốc nướng đậm vị. Quán mang phong cách nhậu vỉa hè đông vui, không khí sôi động, phù hợp cho những buổi tụ tập bạn bè. Không gian quán rộng rãi, dễ ngồi khi đi đông. Món ăn có hương vị đậm đà, giá cả bình dân, là lựa chọn quen thuộc cho nhóm bạn muốn ăn ốc, nhậu nhẹ tại phố Vĩnh Khánh",
+        "address": "271 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM"
+      }
+    },
+    "priority": 4
+  },
+  {
+    "id": 19,
+    "name": "Quán Cá Biển Nướng",
+    "address": "213 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
+    "translations": {
+      "en": {
+        "name": "Sea Fish Grill Restaurant",
+        "description": "The restaurant name is Sea Fish Grill Restaurant. Address at 213 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City. Sea Fish Grill Restaurant specializes in fresh grilled seafood, offering various preparations such as salted chili grilled fish, scallion oil grilled fish, and many other grilled seafood dishes. The food delivers rich oceanic flavors with fresh ingredients that are easy to enjoy. In its simple sidewalk setting, it is suitable for casual group drinking sessions. Affordable prices and bold, tasty flavors make it a regular stop for diners wanting to enjoy grilled fish and seafood on Vinh Khanh Street.",
+        "address": "213 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City"
+      },
+      "ja": {
+        "name": "シーフィッシュ グリル",
+        "description": "レストランの名前はシーフィッシュ グリルです。住所は213 ヴィンカン通り、8区、4区、ホーチミン市です。シーフィッシュ グリルは新鮮な海魚グリルを専門に、塩チリ焼き、ネギ油焼きなどさまざまな調理法の海鮮グリルを提供します。海の豊かな風味を新鮮な食材で、食べやすく仕上げています。シンプルな歩道スタイルで気軽なグループ飲み会に適しています。手頃な価格としっかりした味わいで、ヴィンカン通りで魚と海鮮のグリルを楽しみたい人に馴染みのあるお店です。",
+        "address": "213 ヴィンカン通り、8区、4区、ホーチミン市"
+      },
+      "ko": {
+        "name": "바다 생선 구이",
+        "description": "레스토랑 이름은 바다 생선 구이입니다. 주소는 213 빈칸 거리, 8구, 4구, 호치민시입니다. 신선한 재료로 바다의 진한 풍미를 먹기 쉽게 조리합니다. 간단한 보도 스타일로 캐주얼한 그룹 음주에 적합합니다. 저렴한 가격과 강렬한 맛으로 빈칸 거리에서 생선과 해산물 구이를 즐기고 싶은 손님들에게 익숙한 장소입니다.",
+        "address": "213 빈칸 거리, 8구, 4구, 호치민시"
+      },
+      "zh": {
+        "name": "海鱼烧烤店",
+        "description": "餐厅名称是海鱼烧烤店。地址是胡志明市第四郡第八区永庆街213号。海鱼烧烤店专营新鲜海鱼烧烤，提供盐辣烤鱼、葱油烤鱼等多种海鲜烧烤菜品。食材新鲜，带来浓郁的海鲜风味，容易入口。简单路边风格，适合随意聚会小酌。价格亲民，口味浓烈鲜美，是在永庆街享用烤鱼和海鲜的常去之地。",
+        "address": "胡志明市第四郡第八区永庆街213号"
+      },
+      "vi": {
+        "name": "Quán Cá Biển Nướng",
+        "description": "Tên quán là Quán Cá Biển Nướng. Địa chỉ tại 213 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM. Quán Cá Biển Nướng chuyên phục vụ cá biển tươi nướng với các kiểu chế biến như nướng muối ớt, nướng mỡ hành, cùng nhiều món hải sản nướng khác. Món ăn mang hương vị biển đậm đà, nguyên liệu tươi, dễ ăn. Quán theo phong cách vỉa hè, không gian đơn giản, phù hợp cho những buổi nhậu nhóm. Mức giá bình dân, hương vị ngon, đậm vị, là điểm dừng quen thuộc của thực khách khi muốn thưởng thức cá nướng và hải sản tại phố Vĩnh Khánh",
+        "address": "213 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM"
+      }
+    },
+    "priority": 5
+  },
+  {
+    "id": 20,
+    "name": "Nem Nướng Đặc Sản Quê Nhà",
+    "address": "314 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
+    "translations": {
+      "en": {
+        "name": "Nem Nuong Que Nha Specialty",
+        "description": "The restaurant name is Nem Nuong Que Nha Specialty. Address at 314 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City. Nem Nuong Que Nha is a long-standing grilled pork rolls restaurant with over 60 years of history, beloved by many diners in District 4. The signature is Nha Trang/Ninh Hoa-style grilled pork rolls served with rice paper, fresh herbs, and rich fermented fish sauce, alongside aromatic whole grilled rolls with authentic Central Vietnam flavors. The clean, airy sidewalk-family setting creates a comfortable dining experience. Affordable prices (around 45,000–100,000 VND per portion), fresh and non-greasy flavors, and consistent quality have earned it a spot among the best nem nuong restaurants in District 4. Perfect for light meals with friends or family.",
+        "address": "314 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City"
+      },
+      "ja": {
+        "name": "ネム ヌオン クエ ニャー",
+        "description": "レストランの名前はネム ヌオン クエ ニャーです。住所は314 ヴィンカン通り、8区、4区、ホーチミン市です。ネム ヌオン クエ ニャーは60年以上の歴史を持つ老舗のグリル豚肉ロール専門店で、4区の多くの食通に愛されています。看板メニューはニャチャン/ニンホア風グリル豚肉ロールで、ライスペーパー、新鮮ハーブ、濃厚な発酵魚醤と一緒に提供され、香ばしい一本グリルロールも本場の中央ベトナム風味です。清潔で開放的な歩道ファミリースタイルの空間で快適に食事ができます。手頃な価格（1ポーション約45,000〜100,000 VND）、新鮮で脂っこくない味わい、安定した品質から4区で最高のネムヌオン店のひとつに数えられます。友人や家族との軽食に最適です。",
+        "address": "314 ヴィンカン通り、8区、4区、ホーチミン市"
+      },
+      "ko": {
+        "name": "넴 누엉 꿰냐",
+        "description": "레스토랑 이름은 넴 누엉 꿰냐입니다. 주소는 314 빈칸 거리, 8구, 4구, 호치민시입니다. 시그니처는 냐짱/닌호아 스타일 구운 돼지고기 롤로, 라이스페이퍼, 신선한 허브, 진한 발효 생선 소스와 함께 제공되며, 향기로운 통구이 롤도 정통 중부 베트남 풍미입니다. 깨끗하고 쾌적한 보도 가족 스타일 공간에서 편안하게 식사할 수 있습니다. 저렴한 가격(1인분 약 45,000~100,000 VND), 신선하고 느끼하지 않은 맛, 안정적인 품질로 4구 최고의 넴 누엉 맛집 중 하나로 꼽힙니다. 친구나 가족과 가벼운 식사에 딱입니다.",
+        "address": "314 빈칸 거리, 8구, 4구, 호치민시"
+      },
+      "zh": {
+        "name": "家乡特色烤肉卷",
+        "description": "餐厅名称是家乡特色烤肉卷。地址是胡志明市第四郡第八区永庆街314号。家乡特色烤肉卷是一家拥有60多年历史的烤肉卷老店，在第四郡深受众多食客喜爱。招牌是芽庄/宁和风格的烤肉卷，搭配米纸、新鲜香草和浓郁鱼露，同时还有香气扑鼻的整条烤肉卷，口味正宗中部越南风。干净宽敞的路边家庭风格空间，用餐体验舒适。价格亲民（每份约45,000–100,000越南盾），口味新鲜不油腻，品质稳定，被列入第四郡最佳烤肉卷餐厅之一。适合与朋友或家人享用轻食。",
+        "address": "胡志明市第四郡第八区永庆街314号"
+      },
+      "vi": {
+        "name": "Nem Nướng Đặc Sản Quê Nhà",
+        "description": "Tên quán là Nem Nướng Đặc Sản Quê Nhà. Địa chỉ tại 314 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM. Nem Nướng Đặc Sản Quê Nhà là quán nem nướng lâu đời với hơn 60 năm hoạt động, được nhiều thực khách yêu thích tại Quận 4. Món signature là nem nướng Nha Trang/Ninh Hòa ăn kèm bánh tráng, rau sống và mắm nêm đậm đà, bên cạnh nem nướng nguyên que thơm lừng, chuẩn vị miền Trung. Quán mang phong cách vỉa hè kết hợp gia đình, không gian sạch sẽ, thoáng, tạo cảm giác dễ chịu khi ngồi ăn. Mức giá phải chăng (khoảng 45.000–100.000đ/phần), hương vị đặc trưng miền Trung, tươi ngon, không ngấy. Nhờ chất lượng ổn định và danh tiếng lâu năm, quán thường được xếp vào nhóm những quán nem nướng ngon nhất Quận 4, phù hợp ăn nhẹ cùng bạn bè hoặc gia đình",
+        "address": "314 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM"
+      }
+    },
+    "priority": 7
+  },
+  {
+    "id": 21,
+    "name": "Ốc Bụi Quán",
+    "address": "180 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
+    "translations": {
+      "en": {
+        "name": "Oc Bui Snail Restaurant",
+        "description": "The restaurant name is Oc Bui Snail Restaurant. Address at 180 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City. Oc Bui is a popular budget-friendly snail restaurant on Vinh Khanh Street, famous for its signature dish – crab claws stir-fried with salted water, which has made the restaurant well-known. The menu focuses on stir-fried snails, lemongrass chili snails, and grilled ribs as perfect drinking companions. With a comfortable sidewalk style and simple space, it opens from afternoon until around 1 AM, making it a favorite spot for late-night gatherings. Dishes deliver bold flavors with fresh ingredients at very affordable prices (snails around 40,000–60,000 VND per dish). It is often praised as “cheap but quality” compared to other spots in the area.",
+        "address": "180 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City"
+      },
+      "ja": {
+        "name": "オック ブイ",
+        "description": "レストランの名前はオック ブイです。住所は180 ヴィンカン通り、8区、4区、ホーチミン市です。オック ブイはヴィンカン通りにある人気の手頃なカタツムリ専門店で、看板メニューである塩水炒めカニ爪が店を有名にしています。メニューは炒めカタツムリ、レモングラスチリカタツムリ、グリルリブなどおつまみに最適な料理を中心に構成されています。快適な歩道スタイルのシンプルな空間で、午後から午前1時頃まで営業し、深夜の集まりにぴったりです。新鮮な食材で濃いめの味わいを非常に手頃な価格（カタツムリ1品約40,000〜60,000 VND）で提供し、地域の他店と比べて「安くて美味しい」と評判です。",
+        "address": "180 ヴィンカン通り、8区、4区、ホーチミン市"
+      },
+      "ko": {
+        "name": "옥 부이 소라 레스토랑",
+        "description": "레스토랑 이름은 옥 부이 소라 레스토랑입니다. 주소는 180 빈칸 거리, 8구, 4구, 호치민시입니다. 메뉴는 볶음 소라, 레몬그라스 칠리 소라, 구운 갈비 등 안주로 딱인 요리를 중심으로 합니다. 편안한 보도 스타일의 간단한 공간으로 오후부터 새벽 1시경까지 영업하며 늦은 밤 모임에 좋습니다. 신선한 재료로 진한 맛을 매우 저렴한 가격(소라 1인분 약 40,000~60,000 VND)에 제공해 주변 가게 대비 “싸고 맛있다”는 평가를 받고 있습니다.",
+        "address": "180 빈칸 거리, 8구, 4구, 호치민시"
+      },
+      "zh": {
+        "name": "尘螺餐厅",
+        "description": "餐厅名称是尘螺餐厅。地址是胡志明市第四郡第八区永庆街180号。尘螺是永庆街受欢迎的平价螺餐厅，以招牌菜——盐水炒蟹钳闻名。菜单以炒螺、香茅辣螺和烤排骨等下酒菜为主。采用舒适的路边风格，空间简单，从下午营业至凌晨1点左右，非常适合深夜聚会。食材新鲜，口味浓郁，价格非常亲民（螺类每份约40,000–60,000越南盾）。与周边相比，常被称赞“物美价廉”。",
+        "address": "胡志明市第四郡第八区永庆街180号"
+      },
+      "vi": {
+        "name": "Ốc Bụi Quán",
+        "description": "Tên quán là Ốc Bụi Quán. Địa chỉ tại 180 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM. Ốc Bụi là quán ốc bình dân được nhiều thực khách yêu thích tại phố Vĩnh Khánh, nổi bật với càng cúm xào muối nước – món đặc sản làm nên tên tuổi của quán. Thực đơn tập trung vào các món ốc xào, ốc sả ớt, ăn kèm sườn nướng, phù hợp cho những buổi nhậu khuya cùng bạn bè. Quán mang phong cách vỉa hè thoải mái, không gian đơn giản, mở cửa từ chiều đến khoảng 1 giờ sáng, rất được lòng khách đi ăn tối muộn. Món ăn có hương vị đậm đà, nguyên liệu tươi, giá cả bình dân (ốc khoảng 40.000–60.000đ/món), thường được đánh giá là “rẻ mà chất” so với mặt bằng chung khu vực",
+        "address": "180 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM"
+      }
+    },
+    "priority": 6
+  },
+  {
+    "id": 22,
+    "name": "Cơm Gà Xối Mỡ Cô Hai",
+    "address": "235 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
+    "translations": {
+      "en": {
+        "name": "Co Hai Crispy Chicken Rice",
+        "description": "The restaurant name is Co Hai Crispy Chicken Rice. Address at 235 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City. Co Hai Crispy Chicken Rice is a beloved rustic chicken rice stall in the Vinh Khanh food street. The signature dish is crispy chicken rice with golden, crunchy skin, juicy and tender meat, served with garlic chili fish sauce and fragrant rice. The simple sidewalk setting is always crowded, especially in the evenings, with long queues. Extremely affordable prices (around 35,000–60,000 VND per portion) and addictive crispy, flavorful taste make it a favorite for a satisfying meal after strolling or for late-night supper while exploring Vinh Khanh.",
+        "address": "235 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City"
+      },
+      "ja": {
+        "name": "コー ハイ クリスピーチキンライス",
+        "description": "レストランの名前はコー ハイ クリスピーチキンライスです。住所は235 ヴィンカン通り、8区、4区、ホーチミン市です。コー ハイ クリスピーチキンライスはヴィンカン美食ストリートで人気の素朴な鶏飯専門店です。看板メニューは黄金色でサクサクの皮、ジューシーで柔らかい肉のクリスピーチキンライスで、ニンニクチリ魚醤と香り高いご飯が付きます。シンプルな歩道スタイルのお店は特に夕方以降いつも行列ができています。非常に手頃な価格（1食あたり約35,000〜60,000 VND）と一度食べたらクセになるサクサクで美味しい味わいが、散策後の満足食事やヴィンカン探索中の夜食にぴったりです。",
+        "address": "235 ヴィンカン通り、8区、4区、ホーチミン市"
+      },
+      "ko": {
+        "name": "코 하이 바삭 치킨 라이스",
+        "description": "레스토랑 이름은 코 하이 바삭 치킨 라이스입니다. 주소는 235 빈칸 거리, 8구, 4구, 호치민시입니다. 시그니처 메뉴는 황금빛 바삭한 껍질과 촉촉하고 부드러운 고기의 바삭 치킨라이스로, 마늘 칠리 생선 소스와 향기로운 밥이 함께 나옵니다. 간단한 보도 스타일 가게는 특히 저녁에 항상 줄이 길게 서 있습니다. 매우 저렴한 가격(1인분 약 35,000~60,000 VND)과 먹으면 중독되는 바삭하고 맛있는 풍미로, 거리 산책 후 든든한 식사나 빈칸 탐방 중 야식으로 인기입니다.",
+        "address": "235 빈칸 거리, 8구, 4구, 호치민시"
+      },
+      "zh": {
+        "name": "二姨脆皮鸡饭",
+        "description": "餐厅名称是二姨脆皮鸡饭。地址是胡志明市第四郡第八区永庆街235号。二姨脆皮鸡饭是永庆美食街深受喜爱的家常鸡饭摊。招牌菜是脆皮鸡饭，金黄酥脆的鸡皮、鲜嫩多汁的鸡肉，搭配蒜蓉辣椒鱼露和香喷喷的米饭。简单路边摊风格，尤其晚上总是排长队。人均仅约35,000–60,000越南盾，口感酥脆入味、令人上瘾，是逛街后饱腹或探索永庆夜宵的理想选择。",
+        "address": "胡志明市第四郡第八区永庆街235号"
+      },
+      "vi": {
+        "name": "Cơm Gà Xối Mỡ Cô Hai",
+        "description": "Tên quán là Cơm Gà Xối Mỡ Cô Hai. Địa chỉ tại 235 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM. Cơm Gà Xối Mỡ Cô Hai là quán cơm gà xối mỡ dân dã nổi tiếng trong khu phố ẩm thực Vĩnh Khánh. Món signature là cơm gà xối mỡ giòn tan với da gà vàng ruộm, thịt mềm, mọng nước, ăn kèm nước mắm tỏi ớt và cơm dẻo thơm. Quán mang phong cách vỉa hè bình dân, không gian đơn giản nhưng lúc nào cũng đông khách xếp hàng, đặc biệt vào buổi tối. Mức giá rất rẻ (khoảng 35.000–60.000đ/phần), hương vị giòn ngon, đậm đà, thường được nhận xét là “ăn một lần là ghiền”. Đây là lựa chọn lý tưởng để ăn no bụng sau khi dạo phố hoặc dùng bữa khuya khi khám phá Vĩnh Khánh",
+        "address": "235 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM"
+      }
+    },
+    "priority": 3
+  },
+  {
+    "id": 23,
+    "name": "Lẩu Sukiyaki Thái",
+    "address": "252 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
+    "translations": {
+      "en": {
+        "name": "Thai Sukiyaki Hotpot",
+        "description": "The restaurant name is Thai Sukiyaki Hotpot. Address at 252 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City. Thai Sukiyaki Hotpot is a Thai-style hotpot restaurant with signature spicy and aromatic broth, featuring sets such as seafood sukiyaki, beef, or Thai mixed with fresh toppings like shrimp, squid, and clams. The broth has a distinct sour-spicy flavor that warms the stomach perfectly for late-night meals. With covered seating that is more comfortable than typical sidewalk spots, it is suitable for families and groups of friends. Average pricing (around 200,000–350,000 VND per person), fresh ingredients, and authentic Thai taste make it a worthwhile choice when exploring nighttime dining on Vinh Khanh Street.",
+        "address": "252 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City"
+      },
+      "ja": {
+        "name": "タイ スキヤキ鍋",
+        "description": "レストランの名前はタイ スキヤキ鍋です。住所は252 ヴィンカン通り、8区、4区、ホーチミン市です。タイ スキヤキ鍋は本格的なタイ風鍋専門店で、辛くて香り高いスープが特徴です。シーフードスキヤキ、ビーフ、またはエビ、イカ、アサリなどの新鮮トッピングを入れたタイミックスセットなどが人気です。酸っぱ辛い味わいのスープは夜遅くの食事に体を温めてくれます。普通の歩道店より快適な屋根付き席があり、家族や友人グループに適しています。平均価格（1人あたり約200,000〜350,000 VND）、新鮮な食材と本場のタイの味で、ヴィンカン通りの夜の食事探索に価値のある選択肢です。",
+        "address": "252 ヴィンカン通り、8区、4区、ホーチミン市"
+      },
+      "ko": {
+        "name": "태국 스키야키 핫팟",
+        "description": "레스토랑 이름은 태국 스키야키 핫팟입니다. 주소는 252 빈칸 거리, 8구, 4구, 호치민시입니다. 해산물 스키야키, 소고기, 또는 새우, 오징어, 조개 등 신선한 토핑을 넣은 태국 믹스 세트가 인기입니다. 새콤 매운 국물 맛이 늦은 밤 식사에 몸을 따뜻하게 해줍니다. 일반 보도 가게보다 편안한 지붕 있는 좌석으로 가족과 친구 모임에 적합합니다. 평균 가격대(1인당 약 200,000~350,000 VND), 신선한 재료와 정통 태국 맛으로 빈칸 거리 야간 식사 탐방에 추천할 만한 곳입니다.",
+        "address": "252 빈칸 거리, 8구, 4구, 호치민시"
+      },
+      "zh": {
+        "name": "泰式寿喜烧火锅",
+        "description": "餐厅名称是泰式寿喜烧火锅。地址是胡志明市第四郡第八区永庆街252号。泰式寿喜烧火锅是以酸辣香浓汤底为特色的泰式火锅店，提供海鲜寿喜烧、牛肉或搭配鲜虾、鱿鱼、蛤蜊等新鲜配料的泰式混合套餐。汤底酸辣分明，非常适合暖胃夜宵。设有遮雨座位，比普通路边摊更舒适，适合家庭和朋友聚会。人均约200,000–350,000越南盾，食材新鲜，口味正宗泰式，是探索永庆夜宵时的不错选择。",
+        "address": "胡志明市第四郡第八区永庆街252号"
+      },
+      "vi": {
+        "name": "Lẩu Sukiyaki Thái",
+        "description": "Tên quán là Lẩu Sukiyaki Thái. Địa chỉ tại 252 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM. Lẩu Sukiyaki Thái là quán lẩu kiểu Thái với hương vị cay nồng đặc trưng, nổi bật với các set sukiyaki hải sản, bò hoặc Thái mix gồm topping tươi như tôm, mực, ngao. Nước dùng có vị chua cay đậm đà, phù hợp với những ai yêu thích lẩu cay ấm bụng về đêm. Quán có mái che, không gian thoải mái hơn quán vỉa hè thuần, thích hợp cho gia đình và nhóm bạn. Mức giá trung bình (khoảng 200.000–350.000đ/người), nguyên liệu tươi, hương vị được đánh giá chuẩn vị Thái, là lựa chọn đáng cân nhắc khi khám phá ẩm thực đêm Vĩnh Khánh",
+        "address": "252 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM"
+      }
+    },
+    "priority": 4
+  },
+  {
+    "id": 24,
+    "name": "Ốc Phát Quán",
+    "address": "326 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
+    "translations": {
+      "en": {
+        "name": "Oc Phat Snail Restaurant",
+        "description": "The restaurant name is Oc Phat Snail Restaurant. Address at 326 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City. Oc Phat is a familiar sidewalk snail and seafood restaurant on Vinh Khanh Street, specializing in a variety of fresh snail dishes such as tamarind stir-fry, garlic butter stir-fry, and grilled snails. The lively street-style atmosphere with simple tables and chairs makes it suitable for late-night meals or casual drinking. Dishes are well-reviewed for being tasty, easy to eat, and served quickly at affordable prices, making it a reliable local favorite in the area.",
+        "address": "326 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City"
+      },
+      "ja": {
+        "name": "オック ファット",
+        "description": "レストランの名前はオック ファットです。住所は326 ヴィンカン通り、8区、4区、ホーチミン市です。オック ファットはヴィンカン通りにある馴染み深い歩道カタツムリ＆シーフード店で、タマリンド炒め、ガーリックバター炒め、グリルカタツムリなど新鮮なカタツムリ料理を多彩に提供しています。賑やかなストリートスタイルのシンプルなテーブルと椅子で、深夜の食事や気軽な飲み会に適しています。美味しい、食べやすい、素早い提供と手頃な価格で、地域の信頼できる人気店として親しまれています。",
+        "address": "326 ヴィンカン通り、8区、4区、ホーチミン市"
+      },
+      "ko": {
+        "name": "옥 팟 소라 레스토랑",
+        "description": "레스토랑 이름은 옥 팟 소라 레스토랑입니다. 주소는 326 빈칸 거리, 8구, 4구, 호치민시입니다. 활기찬 스트리트 스타일의 간단한 테이블과 의자로 늦은 밤 식사나 가벼운 음주에 적합합니다. 맛있고 먹기 쉽고 빠른 서비스에 저렴한 가격으로 지역에서 믿을 수 있는 인기 맛집입니다.",
+        "address": "326 빈칸 거리, 8구, 4구, 호치민시"
+      },
+      "zh": {
+        "name": "发螺餐厅",
+        "description": "餐厅名称是发螺餐厅。地址是胡志明市第四郡第八区永庆街326号。发螺是永庆街熟悉的路边螺和海鲜餐厅，专营新鲜螺的多种做法，如罗望子炒、蒜蓉黄油炒和烤螺。热闹的街头风格搭配简单桌椅，适合深夜用餐或随意小酌。菜品被评价为美味易食、上菜快且价格亲民，是当地可靠的热门选择。",
+        "address": "胡志明市第四郡第八区永庆街326号"
+      },
+      "vi": {
+        "name": "Ốc Phát Quán",
+        "description": "Tên quán là Ốc Phát Quán. Địa chỉ tại 326 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM. Ốc Phát Quán là quán ốc và hải sản vỉa hè quen thuộc trên phố Vĩnh Khánh, tập trung vào các món ốc tươi chế biến đa dạng như xào me, xào bơ tỏi, nướng. Quán mang phong cách đường phố nhộn nhịp, không gian thoáng, bàn ghế đơn giản, phù hợp cho những buổi ăn khuya hoặc nhậu nhẹ. Món ăn được đánh giá ngon, dễ ăn, lên món nhanh, giá cả bình dân, phù hợp với nhiều nhóm khách. Nhờ chất lượng ổn định và phục vụ nhanh, quán là lựa chọn quen thuộc của thực khách địa phương trong khu vực",
+        "address": "326 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM"
+      }
+    },
+    "priority": 5
+  },
+  {
+    "id": 25,
+    "name": "Cá Lóc Nướng Thy Thy",
+    "address": "296 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
+    "translations": {
+      "en": {
+        "name": "Thy Thy Grilled Snakehead Fish",
+        "description": "The restaurant name is Thy Thy Grilled Snakehead Fish. Address at 296 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City. Thy Thy Grilled Snakehead Fish specializes in the classic Mekong Delta rustic dish – whole grilled snakehead fish, served with salt chili and sweet-sour tamarind dipping sauce. The fish is grilled intact to preserve its natural fragrant flavor, true to countryside cuisine. With a simple, rustic sidewalk setting, it is suitable for light meals or casual drinking with friends while strolling Vinh Khanh Street. Affordable prices and authentic Mekong taste make it a great local spot.",
+        "address": "296 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City"
+      },
+      "ja": {
+        "name": "ティーティー ヘビ頭魚焼き",
+        "description": "レストランの名前はティーティー ヘビ頭魚焼きです。住所は296 ヴィンカン通り、8区、4区、ホーチミン市です。ティーティー ヘビ頭魚焼きはメコン・デルタの定番田舎料理である丸ごとグリルヘビ頭魚を専門にしています。塩チリと甘酸っぱいタマリンドディップソースと一緒に提供され、魚を丸ごと焼くことで自然な香ばしさをしっかり閉じ込めています。素朴な歩道スタイルのシンプルな空間で、軽食や友人との気軽な飲み会に適しています。手頃な価格と本場のメコン風味が魅力の地元らしいお店です。",
+        "address": "296 ヴィンカン通り、8区、4区、ホーチミン市"
+      },
+      "ko": {
+        "name": "티티 뱀장어 구이",
+        "description": "레스토랑 이름은 티티 뱀장어 구이입니다. 주소는 296 빈칸 거리, 8구, 4구, 호치민시입니다. 소금 칠리와 새콤달콤 타마린드 디핑 소스와 함께 제공되며, 생선을 통째로 구워 자연스러운 향을 그대로 살렸습니다. 소박한 보도 스타일의 간단한 공간으로 가벼운 식사나 친구와의 캐주얼 음주에 좋습니다. 저렴한 가격과 정통 메콩 맛이 매력적인 현지 느낌 물씬 나는 가게입니다.",
+        "address": "296 빈칸 거리, 8구, 4구, 호치민시"
+      },
+      "zh": {
+        "name": "Thy Thy 烤蛇头鱼",
+        "description": "餐厅名称是Thy Thy 烤蛇头鱼。地址是胡志明市第四郡第八区永庆街296号。Thy Thy 烤蛇头鱼专营湄公河三角洲经典乡村菜——整条烤蛇头鱼，搭配盐辣椒和酸甜罗望子蘸酱。鱼整条烤制以保留天然香味，充满乡土气息。简单质朴的路边风格，适合轻食或与朋友边逛永庆街边小酌。价格亲民，口味正宗湄公河风，是地道的本地好去处。",
+        "address": "胡志明市第四郡第八区永庆街296号"
+      },
+      "vi": {
+        "name": "Cá Lóc Nướng Thy Thy",
+        "description": "Tên quán là Cá Lóc Nướng Thy Thy. Địa chỉ tại 296 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM. Cá Lóc Nướng Thy Thy là quán chuyên cá lóc nướng trui – món đặc sản miền Tây dân dã, ăn kèm muối ớt và mắm me chua ngọt. Cá được nướng nguyên con, giữ trọn vị thơm ngon tự nhiên, đúng chất ẩm thực quê. Quán mang phong cách vỉa hè mộc mạc, không gian đơn giản. Mức giá bình dân, hương vị chuẩn vị miền Tây, phù hợp cho ăn nhẹ hoặc những buổi nhậu lai rai cùng bạn bè khi dạo phố Vĩnh Khánh",
+        "address": "296 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM"
+      }
+    },
+    "priority": 7
+  },
+  {
+    "id": 26,
+    "name": "Quán Nướng 79",
+    "address": "360 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
+    "translations": {
+      "en": {
+        "name": "79 Grill Restaurant",
+        "description": "The restaurant name is 79 Grill Restaurant. Address at 360 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City. 79 Grill Restaurant is a budget-friendly sidewalk grill stall offering a diverse menu of grilled meats, seafood, and vegetables. The items are well-marinated with bold flavors and easy to enjoy, perfect for late-night meals or casual drinking. With its simple street-style setting, it is often busy in the evenings. Very affordable prices make it a familiar, wallet-friendly choice for diners wanting quick and tasty grilled food while exploring Vinh Khanh Street.",
+        "address": "360 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City"
+      },
+      "ja": {
+        "name": "79 グリル",
+        "description": "レストランの名前は79 グリルです。住所は360 ヴィンカン通り、8区、4区、ホーチミン市です。79 グリルは手頃な価格の歩道グリル店で、肉、シーフード、野菜を多彩に揃えたメニューを提供しています。しっかり下味をつけた濃いめの味わいで食べやすく、深夜の食事や気軽な飲み会に最適です。シンプルなストリートスタイルのお店は夕方以降よく賑わいます。非常に安い価格で、ヴィンカン通り探索中に素早く美味しいグリル料理を楽しみたい人に馴染みのあるお財布に優しい選択肢です。",
+        "address": "360 ヴィンカン通り、8区、4区、ホーチミン市"
+      },
+      "ko": {
+        "name": "79 그릴",
+        "description": "레스토랑 이름은 79 그릴입니다. 주소는 360 빈칸 거리, 8구, 4구, 호치민시입니다. 진한 양념으로 맛을 낸 요리는 먹기 쉽고 늦은 밤 식사나 캐주얼 음주에 좋습니다. 간단한 스트리트 스타일 가게는 저녁에 자주 붐빕니다. 매우 저렴한 가격으로 빈칸 거리를 탐방하며 빠르고 맛있는 구이 요리를 즐기고 싶은 사람들에게 익숙하고 가성비 좋은 선택입니다.",
+        "address": "360 빈칸 거리, 8구, 4구, 호치민시"
+      },
+      "zh": {
+        "name": "79烧烤店",
+        "description": "餐厅名称是79烧烤店。地址是胡志明市第四郡第八区永庆街360号。79烧烤店是平价路边烧烤摊，提供肉类、海鲜和蔬菜的多样菜单。菜品腌制入味，口感浓郁易食，适合深夜用餐或随意小酌。简单街头风格，晚上常有客人光顾。价格非常实惠，是探索永庆街时想快速享用美味烧烤的实惠选择。",
+        "address": "胡志明市第四郡第八区永庆街360号"
+      },
+      "vi": {
+        "name": "Quán Nướng 79",
+        "description": "Tên quán là Quán Nướng 79. Địa chỉ tại 360 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM. Quán Nướng 79 là quán nướng bình dân với thực đơn đồ nướng vỉa hè đa dạng gồm thịt, hải sản và rau củ. Các món được tẩm ướp đậm đà, dễ ăn, phù hợp cho những buổi ăn khuya hoặc nhậu nhẹ. Quán mang phong cách đường phố nhậu, không gian đơn giản, thường đông khách vào buổi tối. Mức giá rẻ, phù hợp túi tiền, là lựa chọn quen thuộc của thực khách khi muốn thưởng thức đồ nướng nhanh gọn tại phố Vĩnh Khánh",
+        "address": "360 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM"
+      }
+    },
+    "priority": 6
+  },
+  {
+    "id": 27,
+    "name": "Cô Út Nướng",
+    "address": "435 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
+    "translations": {
+      "en": {
+        "name": "Co Ut Grill",
+        "description": "The restaurant name is Co Ut Grill. Address at 435 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City. Co Ut Grill is a familiar seafood and meat grill restaurant on Vinh Khanh Street, popular for grilled sea fish and grilled pork belly. Fresh ingredients are simply grilled to highlight their natural flavors. With a cozy sidewalk-family style and compact space, it offers a friendly, intimate atmosphere. Reasonable prices, delicious fresh food, and warm service make it suitable for light dinners or small, intimate gatherings.",
+        "address": "435 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City"
+      },
+      "ja": {
+        "name": "コー ウット グリル",
+        "description": "レストランの名前はコー ウット グリルです。住所は435 ヴィンカン通り、8区、4区、ホーチミン市です。コー ウット グリルはヴィンカン通りにある馴染み深いシーフード＆肉グリル店で、海魚焼きと豚バラ焼きが人気です。新鮮な食材をシンプルに焼くことで自然な風味を活かしています。居心地の良い歩道ファミリースタイルのコンパクトな空間で、親しみやすくアットホームな雰囲気です。手頃な価格、新鮮で美味しい料理、温かいサービスで軽い夕食や少人数の親しい集まりに適しています。",
+        "address": "435 ヴィンカン通り、8区、4区、ホーチミン市"
+      },
+      "ko": {
+        "name": "꼬 옷 그릴",
+        "description": "레스토랑 이름은 꼬 옷 그릴입니다. 주소는 435 빈칸 거리, 8구, 4구, 호치민시입니다. 신선한 재료를 간단하게 구워 자연스러운 맛을 강조합니다. 아늑한 보도 가족 스타일의 아담한 공간으로 친근하고 따뜻한 분위기를 자아냅니다. 합리적인 가격, 신선하고 맛있는 음식, 따뜻한 서비스로 가벼운 저녁 식사나 소규모 친밀한 모임에 좋습니다.",
+        "address": "435 빈칸 거리, 8구, 4구, 호치민시"
+      },
+      "zh": {
+        "name": "小姨烧烤",
+        "description": "餐厅名称是小姨烧烤。地址是胡志明市第四郡第八区永庆街435号。小姨烧烤是永庆街熟悉的海鲜和肉类烧烤店，以烤海鱼和烤五花肉受欢迎。新鲜食材简单烤制，突出自然风味。采用温馨的路边家庭风格，小巧空间营造出亲切亲密的氛围。价格合理，食物新鲜美味，服务热情，适合轻松晚餐或小型亲密聚会。",
+        "address": "胡志明市第四郡第八区永庆街435号"
+      },
+      "vi": {
+        "name": "Cô Út Nướng",
+        "description": "Tên quán là Cô Út Nướng. Địa chỉ tại 435 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM. Cô Út Nướng là quán nướng hải sản và thịt quen thuộc trên phố Vĩnh Khánh, nổi bật với các món cá biển nướng và vú heo nướng được nhiều thực khách lựa chọn. Nguyên liệu tươi, cách nướng đơn giản nhưng giữ được hương vị tự nhiên. Quán mang phong cách vỉa hè kết hợp gia đình, không gian nhỏ gọn, tạo cảm giác gần gũi. Mức giá phải chăng, món ăn tươi ngon, cùng phong cách phục vụ nhiệt tình, phù hợp cho bữa tối nhẹ hoặc những buổi tụ tập thân mật",
+        "address": "435 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM"
+      }
+    },
+    "priority": 5
+  },
+  {
+    "id": 28,
+    "name": "Vú Heo Nướng Tiến Lên",
+    "address": "523 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM",
+    "translations": {
+      "en": {
+        "name": "Tien Len Grilled Pork Belly",
+        "description": "The restaurant name is Tien Len Grilled Pork Belly. Address at 523 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City. Tien Len Grilled Pork Belly is a popular drinking restaurant specializing in crispy grilled pork belly, a classic dish often ordered with beer during friend gatherings. The pork belly is grilled to golden perfection, maintaining a crispy yet chewy texture with light spicy seasoning that pairs perfectly with drinks. The lively sidewalk drinking atmosphere and comfortable space make it suitable for groups. Affordable prices and easy-to-order menu make it a regular stop for evening meals or casual drinking on Vinh Khanh Street.",
+        "address": "523 Vinh Khanh Street, Ward 8, District 4, Ho Chi Minh City"
+      },
+      "ja": {
+        "name": "ティエン レン 豚バラ焼き",
+        "description": "レストランの名前はティエン レン 豚バラ焼きです。住所は523 ヴィンカン通り、8区、4区、ホーチミン市です。ティエン レン 豚バラ焼きはサクサクのグリル豚バラを専門にした人気の飲み屋で、友人同士の集まりでビールと一緒に注文される定番メニューです。黄金色に焼き上げられ、外はカリッと中はほどよい歯ごたえがあり、軽い辛味の味付けが飲みによく合います。賑やかな歩道飲み雰囲気と快適な空間でグループに適しています。手頃な価格と注文しやすいメニューで、ヴィンカン通りの夕食や気軽な飲み会に馴染みのあるお店です。",
+        "address": "523 ヴィンカン通り、8区、4区、ホーチミン市"
+      },
+      "ko": {
+        "name": "티엔 렌 삼겹살 구이",
+        "description": "레스토랑 이름은 티엔 렌 삼겹살 구이입니다. 주소는 523 빈칸 거리, 8구, 4구, 호치민시입니다. 황금빛으로 구워 바삭하면서도 쫄깃한 식감에 가벼운 매콤 양념이 술안주로 딱입니다. 활기찬 보도 음주 분위기와 편안한 공간으로 그룹 모임에 적합합니다. 저렴한 가격과 주문하기 쉬운 메뉴로 빈칸 거리의 저녁 식사나 캐주얼 음주에 자주 찾는 곳입니다.",
+        "address": "523 빈칸 거리, 8구, 4구, 호치민시"
+      },
+      "zh": {
+        "name": "前进烤五花肉",
+        "description": "餐厅名称是前进烤五花肉。地址是胡志明市第四郡第八区永庆街523号。前进烤五花肉是专营脆皮烤五花肉的热门小酒馆，常在朋友聚会时搭配啤酒点用。五花肉烤至金黄，外脆内有嚼劲，轻微辣味调味非常下酒。热闹的路边饮酒氛围和舒适空间适合团体。价格亲民，菜单易点，是在永庆街享用晚餐或随意小酌的常去之地。",
+        "address": "胡志明市第四郡第八区永庆街523号"
+      },
+      "vi": {
+        "name": "Vú Heo Nướng Tiến Lên",
+        "description": "Tên quán là Vú Heo Nướng Tiến Lên. Địa chỉ tại 523 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM. Vú Heo Nướng Tiến Lên là quán nhậu chuyên vú heo nướng giòn, món “tủ” thường được gọi kèm bia khi tụ tập bạn bè. Vú heo được nướng vàng, giữ độ giòn dai, tẩm ướp cay nhẹ, đậm vị, rất hợp khẩu vị nhậu. Quán mang phong cách vỉa hè nhậu, không gian vui vẻ, thoải mái, phù hợp cho nhóm bạn. Mức giá bình dân, dễ gọi nhiều món, là điểm dừng quen thuộc cho những buổi ăn tối hoặc nhậu nhẹ trên phố Vĩnh Khánh",
+        "address": "523 Đường Vĩnh Khánh, Phường 8, Quận 4, TP.HCM"
+      }
+    },
+    "priority": 4
+  }
+]

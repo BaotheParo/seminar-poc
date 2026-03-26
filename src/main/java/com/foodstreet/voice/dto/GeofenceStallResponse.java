@@ -20,6 +20,9 @@ public class GeofenceStallResponse {
     @Schema(description = "Mô tả của quán (Dùng để generate Audio Text)", example = "Quán Ốc Oanh là một trong những quán ốc...")
     private String description;
     
+    @Schema(description = "Địa chỉ của quán", example = "12 Vĩnh Khánh, Quận 4, TP.HCM")
+    private String address;
+    
     @Schema(description = "Vĩ độ của quán", example = "10.762622")
     private Double latitude;
     
@@ -37,4 +40,10 @@ public class GeofenceStallResponse {
     
     @Schema(description = "Độ ưu tiên của quán (Càng cao xếp càng trên)", example = "10")
     private Integer priority;
+
+    @Schema(description = "Ngôn ngữ thực tế được sử dụng để trả về Name/Description", example = "en")
+    private String usedLanguage;
+
+    @Schema(description = "Trạng thái dịch thuật (null nếu khớp ngôn ngữ, 'FALLBACK_TO_VI' nếu phải dùng tiếng Việt thay thế)", example = "FALLBACK_TO_VI")
+    private String localizationStatus;
 }

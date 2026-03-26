@@ -1,6 +1,8 @@
 package com.foodstreet.voice.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.foodstreet.voice.dto.DeviceActivityBatchRequest;
+import com.foodstreet.voice.dto.StallActivityCount;
 import com.foodstreet.voice.dto.TrackEventRequest;
 import com.foodstreet.voice.entity.FoodStall;
 import com.foodstreet.voice.repository.FoodStallRepository;
@@ -151,21 +153,27 @@ public class FullUserJourneyIntegrationTest {
         // PRD Requirement: Verify Request Coalescing blocks duplicate TTS provider calls
         verify(audioProvider, times(1)).generateAudio(anyString(), anyString());
 
-        // ==========================================
-        // STEP 4: Batch Analytics Sync
-        // ==========================================
-        List<TrackEventRequest> requests = List.of(
-                createEvent("DEVICE_INT_TEST", stallId, "ENTER_REGION", 0),
-                createEvent("DEVICE_INT_TEST", stallId, "PLAY_AUDIO", 0),
-                createEvent("DEVICE_INT_TEST", stallId, "FINISH_AUDIO", 60)
+        // Step 4: Batch Analytics Sync (Aggregated layout)
+        List<DeviceActivityBatchRequest> batchPayload = List.of(
+                DeviceActivityBatchRequest.builder()
+                        .deviceId("DEVICE_INT_TEST")
+                        .stalls(List.of(
+                                StallActivityCount.builder()
+                                        .stallId(stallId)
+                                        .manualPlay(1)
+                                        .autoPlay(0)
+                                        .finish(1)
+                                        .build()
+                        ))
+                        .build()
         );
 
         mockMvc.perform(post("/api/v1/analytics/track/batch")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(requests)))
+                .content(objectMapper.writeValueAsString(batchPayload)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value("success"))
-                .andExpect(jsonPath("$.count").value(3));
+                .andExpect(jsonPath("$.devicesCount").value(1));
 
         // Wait for @Async batch tracking to insert into DB
         Thread.sleep(1000);
@@ -198,13 +206,12 @@ public class FullUserJourneyIntegrationTest {
                 .andExpect(jsonPath("$.data[0].plays").value(1));
     }
 
-    private TrackEventRequest createEvent(String deviceId, Long stallId, String actionStr, Integer duration) {
+    private TrackEventRequest createEvent(String deviceId, Long stallId, String actionStr) {
         com.foodstreet.voice.entity.UserActivity.ActionType action = com.foodstreet.voice.entity.UserActivity.ActionType.valueOf(actionStr);
         return TrackEventRequest.builder()
                 .deviceId(deviceId)
                 .stallId(stallId)
                 .action(action)
-                .duration(duration)
                 .build();
     }
 }

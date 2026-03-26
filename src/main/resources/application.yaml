@@ -54,3 +54,14 @@ app:
   audio:
     local-path: ./audio
     base-url: ${AUDIO_BASE_URL:http://localhost:8080}
+  auth:
+    jwt-secret: ${JWT_SECRET:change-this-secret-minimum-32-characters-long-1234567890}
+    access-token-expiration-minutes: ${JWT_ACCESS_MINUTES:15}
+    refresh-token-expiration-days: ${JWT_REFRESH_DAYS:7}
+    oauth2-success-redirect: ${OAUTH2_SUCCESS_REDIRECT:http://localhost:5173/login/callback}
+    admin-whitelist-emails: ${ADMIN_WHITELIST_EMAILS:}
+    bootstrap-enabled: ${ADMIN_BOOTSTRAP_ENABLED:false}
+    bootstrap-username: ${ADMIN_BOOTSTRAP_USERNAME:}
+    bootstrap-email: ${ADMIN_BOOTSTRAP_EMAIL:}
+    bootstrap-password: ${ADMIN_BOOTSTRAP_PASSWORD:}
+    bootstrap-role: ${ADMIN_BOOTSTRAP_ROLE:ADMIN}

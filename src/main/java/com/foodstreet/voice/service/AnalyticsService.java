@@ -5,6 +5,8 @@ import com.foodstreet.voice.dto.projection.DailySummaryProjection;
 import com.foodstreet.voice.dto.projection.HourlyHeatmapProjection;
 import com.foodstreet.voice.dto.projection.PoiRankingProjection;
 import com.foodstreet.voice.dto.projection.SessionStatsProjection;
+import com.foodstreet.voice.dto.DeviceActivityBatchRequest;
+import com.foodstreet.voice.dto.StallActivityCount;
 import com.foodstreet.voice.dto.TrackEventRequest;
 import com.foodstreet.voice.entity.FoodStall;
 import com.foodstreet.voice.entity.UserActivity;
@@ -50,17 +52,13 @@ public class AnalyticsService {
 
         int rank = 1;
         for (PoiRankingProjection row : rows) {
-            long visits = row.getVisits() != null ? row.getVisits() : 0L;
             long plays = row.getPlays() != null ? row.getPlays() : 0L;
-            double engagementRate = visits == 0 ? 0.0 : Math.round(((double) plays / visits) * 10000.0) / 10000.0;
 
             Map<String, Object> item = new LinkedHashMap<>();
             item.put("rank", rank++);
             item.put("stallId", row.getStallId());
             item.put("stallName", row.getStallName());
-            item.put("visits", visits);
             item.put("plays", plays);
-            item.put("engagementRate", engagementRate);
             response.add(item);
         }
 
@@ -95,11 +93,7 @@ public class AnalyticsService {
             item.put("rank", rank++);
             item.put("stallId", row.getStallId());
             item.put("stallName", row.getStallName());
-            item.put("enters", row.getEnters() != null ? row.getEnters() : 0L);
             item.put("plays", row.getPlays() != null ? row.getPlays() : 0L);
-
-            BigDecimal engagementRate = row.getEngagementRate() != null ? row.getEngagementRate() : BigDecimal.ZERO;
-            item.put("engagementRate", engagementRate);
             response.add(item);
         }
 
@@ -158,9 +152,11 @@ public class AnalyticsService {
 
             UserActivity activity = UserActivity.builder()
                     .deviceId(request.getDeviceId())
+                    .sessionId(request.getSessionId())
+                    .platform(request.getPlatform())
                     .foodStall(stall)
                     .actionType(request.getAction())
-                    .durationSeconds(request.getDuration())
+                    .eventTime(LocalDateTime.now())
                     .build();
 
             userActivityRepository.save(activity);
@@ -174,30 +170,50 @@ public class AnalyticsService {
 
     @Async // Run in background to avoid blocking API response
     @Transactional
-    public void trackEventsBatch(java.util.List<TrackEventRequest> requests) {
-        log.debug("Tracking batch of {} events", requests.size());
-
+    public void trackEventsBatch(java.util.List<DeviceActivityBatchRequest> requests) {
+        log.info("Processing batch of {} device activity requests in background", requests.size());
         try {
             java.util.List<UserActivity> activities = new java.util.ArrayList<>();
+            LocalDateTime now = LocalDateTime.now();
 
-            for (TrackEventRequest request : requests) {
-                FoodStall stall = foodStallRepository.getReferenceById(request.getStallId());
+            for (DeviceActivityBatchRequest deviceReq : requests) {
+                String deviceId = deviceReq.getDeviceId();
+                String sessionId = deviceReq.getSessionId();
+                String platform = deviceReq.getPlatform();
+                if (deviceReq.getStalls() == null) continue;
 
-                UserActivity activity = UserActivity.builder()
-                        .deviceId(request.getDeviceId())
-                        .foodStall(stall)
-                        .actionType(request.getAction())
-                        .durationSeconds(request.getDuration())
-                        .build();
+                for (StallActivityCount stallReq : deviceReq.getStalls()) {
+                    log.info("Processing stall {}: manual={}, auto={}, skip={}, finish={}", 
+                            stallReq.getStallId(), stallReq.getManualPlay(), stallReq.getAutoPlay(), stallReq.getSkip(), stallReq.getFinish());
+                    FoodStall stall = foodStallRepository.getReferenceById(stallReq.getStallId());
 
-                activities.add(activity);
+                    unrollAction(activities, deviceId, sessionId, platform, stall, UserActivity.ActionType.PLAY_AUDIO_MANUAL, stallReq.getManualPlay(), now);
+                    unrollAction(activities, deviceId, sessionId, platform, stall, UserActivity.ActionType.PLAY_AUDIO_AUTO, stallReq.getAutoPlay(), now);
+                    unrollAction(activities, deviceId, sessionId, platform, stall, UserActivity.ActionType.SKIP_AUDIO, stallReq.getSkip(), now);
+                    unrollAction(activities, deviceId, sessionId, platform, stall, UserActivity.ActionType.FINISH_AUDIO, stallReq.getFinish(), now);
+                }
             }
 
             userActivityRepository.saveAll(activities);
-            log.info("Saved batch of {} analytics events", activities.size());
+            log.info("Saved unrolled batch: Total {} individual UserActivity records from {} device requests",
+                    activities.size(), requests.size());
 
         } catch (Exception e) {
             log.error("Failed to save batch analytics events", e);
+        }
+    }
+
+    private void unrollAction(java.util.List<UserActivity> list, String deviceId, String sessionId, String platform, FoodStall stall,
+                             UserActivity.ActionType type, int count, LocalDateTime time) {
+        for (int i = 0; i < count; i++) {
+            list.add(UserActivity.builder()
+                    .deviceId(deviceId)
+                    .sessionId(sessionId)
+                    .platform(platform)
+                    .foodStall(stall)
+                    .actionType(type)
+                    .eventTime(time)
+                    .build());
         }
     }
 }

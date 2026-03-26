@@ -34,6 +34,9 @@ public class FoodStallLocalization {
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    @Column(length = 500)
+    private String address;
+
     @Column(name = "audio_url", length = 500)
     private String audioUrl;
 

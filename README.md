@@ -1,157 +1,161 @@
 # Street Voice Backend 🎙️
 
-Backend API cho ứng dụng "Phố ẩm thực" - Hệ thống hướng dẫn âm thanh dựa trên vị trí địa lý.
+Backend API cho ứng dụng "Phố ẩm thực" - Hệ thống hướng dẫn âm thanh đa ngôn ngữ dựa trên vị trí địa lý.
 
 ## 🚀 Công nghệ sử dụng
 
-- **Java 21**
-- **Spring Boot 4.0.1**
-- **Maven**
-- **PostgreSQL** với **PostGIS** extension
-- **Hibernate Spatial**
-- **Lombok**
+| Thành phần | Chi tiết |
+|-----------|---------|
+| Runtime | Java 21 |
+| Framework | Spring Boot 3.2.2 |
+| Build | Maven |
+| Database | PostgreSQL 14+ với PostGIS extension |
+| ORM | Hibernate Spatial + JPA |
+| Async | Spring `@Async` + ThreadPoolTaskExecutor |
+| TTS | edge-tts (Microsoft Edge Neural TTS) |
+| Translation | MyMemory Translation API |
+| Docs | Swagger UI (SpringDoc OpenAPI) |
+| Container | Docker + Docker Compose |
 
-## 📋 Yêu cầu hệ thống
+---
 
-- Java 21 hoặc cao hơn
-- PostgreSQL 12+ với PostGIS extension
-- Maven 3.6+
+## ⚙️ Cài đặt & Chạy
 
-## ⚙️ Cài đặt
-
-### 1. Cài đặt PostgreSQL và PostGIS
-
-**macOS (Homebrew):**
-```bash
-brew install postgresql postgis
-brew services start postgresql
-```
-
-**Ubuntu/Debian:**
-```bash
-sudo apt-get install postgresql postgresql-contrib postgis
-```
-
-### 2. Tạo database
+### Cách 1: Docker (Khuyến nghị cho Frontend)
 
 ```bash
-# Kết nối PostgreSQL
-psql -U root
+# Tạo/cập nhật file .env
+echo "AUDIO_BASE_URL=http://localhost:8080" > .env
+echo "VIETMAP_API_KEY_SERVICES=<your-key>" >> .env
 
-# Tạo database
-CREATE DATABASE street_voice_db;
-
-# Thoát psql
-\q
-```
-
-### 3. Khởi tạo schema & Seed data
-
-Dự án hiện tại đã tích hợp **Flyway** và **Static Data Seeder**. FE **KHÔNG CẦN** phải chạy script SQL hay gọi API import dữ liệu thủ công nữa.
-Khi ứng dụng hoặc Docker container khởi động, Flyway sẽ tự động tạo cấu trúc bảng, và `DatabaseSeeder` sẽ tự động nạp danh sách 28 quán ăn chuẩn vào database nếu bảng đang trống.
-
-### 4. Cấu hình database (nếu cần)
-
-File `src/main/resources/application.yaml` đã được cấu hình với:
-- Database: `street_voice_db`
-- Username: `root`
-- Password: (để trống)
-
-Nếu cần thay đổi, cập nhật file này:
-
-```yaml
-spring:
-  datasource:
-    username: your_username
-    password: your_password
-```
-
-## 🐳 Docker Setup (Full Stack)
-
-Để chạy trọn bộ (Backend + Database) cho Frontend Dev:
-
-### 1. Cấu hình
-Đảm bảo file `.env` đã có API Key (như mục Cài đặt).
-
-### 2. Chạy
-```bash
-# Xóa data cũ và build lại từ đầu (Khuyên dùng khi có schema thay đổi)
+# Build & chạy toàn bộ stack
 docker-compose down -v
 docker-compose up -d --build
 ```
-*   **LƯU Ý CHO FRONTEND TEAM**: 
-    1. Khi chạy lệnh trên, Database PostgreSQL sẽ được tạo mới.
-    2. Spring Boot Boot khởi động, **Flyway** sẽ tự động chạy migration `V1__Init_Schema.sql`.
-    3. **DatabaseSeeder** sẽ tự động đọc file `vinh_khanh_places.json` và insert 28 bản ghi quán ăn mẫu vào database.
-    4. Bạn không cần phải gọi bất kỳ API sync/import nào nữa!
-*   Backend: `http://localhost:8080`
-*   Database: `localhost:5432` (User: `postgres`, Pass: `password`, DB: `street_voice_db`)
 
-## 🏃 Chạy ứng dụng (Thủ công)
+- Backend: `http://localhost:8080`
+- DB: `localhost:5432` (user: `postgres`, pass: `password`, db: `street_voice_db`)
+- Flyway tự động migrate schema, `DatabaseSeeder` tự động nạp 28 quán ăn mẫu khi DB trống.
 
-### Development mode
+### Cách 2: Chạy thủ công (Dev)
 
 ```bash
-./mvnw spring-boot:run
+# Yêu cầu: PostgreSQL đang chạy local, DB 'street_voice_db' đã tồn tại
+mvn spring-boot:run "-Dspring-boot.run.arguments=--spring.datasource.password=<your-pg-password>"
 ```
 
-### Build JAR file
+### Swagger UI
 
-```bash
-./mvnw clean package
-java -jar target/street-voice-backend-0.0.1-SNAPSHOT.jar
 ```
-
-Ứng dụng sẽ chạy tại: `http://localhost:8080`
-
-## 📖 API Documentation (Swagger UI)
-
-Tài liệu API (Swagger UI) đã được tích hợp sẵn để giúp Frontend team và các developer khác dễ dàng xem và thử nghiệm các API.
-
-**Cách truy cập:**
-1. Đảm bảo ứng dụng đang chạy (qua Docker Compose hoặc chạy thủ công).
-2. Mở trình duyệt và truy cập: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
-3. Hoặc xem OpenAPI JSON data tại: [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
+http://localhost:8080/swagger-ui.html
+http://localhost:8080/v3/api-docs
+```
 
 ---
 
 ## 📡 API Endpoints
 
-### Tìm quán ăn gần nhất
+### Public — Food Stalls (`/api/v1/stalls`)
 
-**Endpoint:** `GET /api/v1/stalls/nearby`
+| Method | Path | Mô tả |
+|--------|------|-------|
+| `GET` | `/api/v1/stalls` | Lấy tất cả quán ăn, hỗ trợ `?lang=` |
+| `GET` | `/api/v1/stalls/search` | Tìm kiếm + lọc + phân trang |
+| `GET` | `/api/v1/stalls/{id}` | Chi tiết 1 quán, hỗ trợ `?lang=` |
+| `GET` | `/api/v1/stalls/nearby` | Quán gần nhất theo lat/lon |
+| `GET` | `/api/v1/stalls/geofence` | Quán trong vùng geofence (tối đa 5) |
+| `GET` | `/api/v1/stalls/sync` | Đồng bộ dữ liệu offline cho mobile |
+| `GET` | `/api/v1/stalls/pack-info` | Thông tin pack audio offline |
+| `GET` | `/api/v1/stalls/audio/download-pack` | Tải ZIP audio theo ngôn ngữ |
+| `POST` | `/api/v1/stalls` | Tạo quán mới (kích hoạt dịch tự động) |
+| `PUT` | `/api/v1/stalls/{id}` | Cập nhật quán |
+| `DELETE` | `/api/v1/stalls/{id}` | Xóa quán |
+| `POST` | `/api/v1/stalls/{id}/audio/generate` | Tạo audio on-demand theo lang |
+| `POST` | `/api/v1/stalls/{id}/audio/generate-all` | Tạo audio cho tất cả ngôn ngữ |
 
-**Query Parameters:**
-- `lat` (required): Vĩ độ (-90 đến 90)
-- `lon` (required): Kinh độ (-180 đến 180)
+#### Tham số `?lang=` (hỗ trợ đa ngôn ngữ)
+
+Các API `GET /api/v1/stalls` và `GET /api/v1/stalls/{id}` đều hỗ trợ tham số `lang`:
+
+| Giá trị | Ngôn ngữ |
+|---------|---------|
+| `vi` (default) | Tiếng Việt |
+| `en` | Tiếng Anh |
+| `ja` | Tiếng Nhật |
+| `ko` | Tiếng Hàn |
+| `zh` | Tiếng Trung |
 
 **Ví dụ:**
-```bash
-curl "http://localhost:8080/api/v1/stalls/nearby?lat=21.0285&lon=105.8542"
+```
+GET /api/v1/stalls?lang=en
+GET /api/v1/stalls/29?lang=ja
 ```
 
-**Response (200 OK):**
+**Response có thêm 2 field quan trọng:**
 ```json
 {
   "id": 1,
-  "name": "Phở Bát Đàn",
-  "description": "Quán phở truyền thống nổi tiếng...",
-  "audioUrl": "https://example.com/audio/pho-bat-dan.mp3",
-  "imageUrl": "https://example.com/images/pho-bat-dan.jpg",
-  "latitude": 21.0285,
-  "longitude": 105.8542
+  "name": "Pho Ba Dan",
+  "usedLanguage": "en",
+  "localizationStatus": null
 }
 ```
 
-**Error Responses:**
-- `400 Bad Request`: Tham số không hợp lệ
-- `404 Not Found`: Không tìm thấy quán ăn nào gần vị trí
-- `500 Internal Server Error`: Lỗi server
+| Field | Giá trị | Ý nghĩa |
+|-------|---------|---------|
+| `usedLanguage` | `"en"` | Ngôn ngữ thực tế đang dùng |
+| `localizationStatus` | `null` | Đã có đủ bản dịch theo yêu cầu |
+| `localizationStatus` | `"FALLBACK_TO_VI"` | Chưa có bản dịch, đang dùng tiếng Việt |
 
-### Batch Analytics Sync
+---
 
-**Endpoint:** `POST /api/v1/analytics/track/batch`
-- Dùng cho App Mobile đồng bộ lại danh sách events tracking sau khi tải dữ liệu Offline (giúp chống Spam/DDoS lên quá nhiều requests riêng sảnh).
+### Admin — Data Management (`/api/v1/admin`)
+
+| Method | Path | Mô tả |
+|--------|------|-------|
+| `POST` | `/api/v1/admin/sync-localizations` | Đồng bộ đa ngôn ngữ cho toàn bộ quán |
+| `POST` | `/api/v1/admin/sync-vietmap` | Import dữ liệu từ VietMap API |
+| `PATCH` | `/api/v1/admin/stores/{id}/geofence` | Cập nhật geofence cho 1 quán |
+
+#### `POST /api/v1/admin/sync-localizations`
+
+Quét toàn bộ quán ăn trong DB, tìm và bổ sung bản dịch + audio cho các quán còn thiếu (chạy trong background). API trả về ngay lập tức, không cần request body.
+
+```json
+// Response (202 Accepted):
+{
+  "totalStalls": 28,
+  "queuedForSync": 27,
+  "alreadyComplete": 1,
+  "message": "27 quan dang duoc dong bo da ngon ngu trong nen. Vui long doi 15-30 giay roi kiem tra lai."
+}
+```
+
+---
+
+## 🌐 Hệ thống Đa Ngôn Ngữ
+
+### Translate-on-Create Pattern
+
+Khi tạo quán mới (`POST /api/v1/stalls`):
+1. API lưu quán vào DB và **trả về `201 Created` ngay lập tức**.
+2. Một tiến trình bất đồng bộ (`@Async`) chạy ngầm:
+   - `vi`: Dùng nội dung gốc, chỉ tạo TTS audio.
+   - `en, ja, ko, zh`: Gọi MyMemory API để dịch, sau đó tạo TTS audio bằng `edge-tts`.
+3. Mỗi ngôn ngữ xử lý độc lập — lỗi 1 ngôn ngữ không ảnh hưởng ngôn ngữ khác (fault-tolerant).
+4. Kết quả lưu vào bảng `food_stall_localizations`.
+
+### Bảng `food_stall_localizations`
+
+| Cột | Kiểu | Mô tả |
+|-----|------|-------|
+| `id` | SERIAL | Primary key |
+| `food_stall_id` | BIGINT FK | Liên kết với `food_stalls` |
+| `language_code` | VARCHAR | `vi`, `en`, `ja`, `ko`, `zh` |
+| `name` | VARCHAR | Tên quán đã dịch |
+| `description` | TEXT | Mô tả đã dịch |
+| `audio_url` | VARCHAR | Đường dẫn file `.mp3` |
+| `created_at` | TIMESTAMP | Thời gian tạo |
 
 ---
 
@@ -159,75 +163,68 @@ curl "http://localhost:8080/api/v1/stalls/nearby?lat=21.0285&lon=105.8542"
 
 ### Bảng `food_stalls`
 
-| Cột | Kiểu dữ liệu | Mô tả |
-|-----|--------------|-------|
-| id | SERIAL (Integer) | Primary key, auto-increment |
-| name | VARCHAR(255) | Tên quán ăn |
-| description | TEXT | Mô tả chi tiết |
-| audio_url | VARCHAR(500) | URL file âm thanh |
-| image_url | VARCHAR(500) | URL hình ảnh quán ăn |
-| location | GEOGRAPHY(Point, 4326) | Tọa độ địa lý (PostGIS) |
-| trigger_radius | INTEGER | Khoảng cách kích hoạt |
-| min_price | INTEGER | Giá tối thiểu |
-| max_price | INTEGER | Giá tối đa |
-| audio_duration | INTEGER | Thời lượng audio (giây) |
-| featured_reviews | JSONB | Các đánh giá nổi bật |
-| created_at | TIMESTAMP | Thời gian tạo |
+| Cột | Kiểu | Mô tả |
+|-----|------|-------|
+| `id` | SERIAL | Primary key |
+| `name` | VARCHAR(255) | Tên quán (tiếng Việt gốc) |
+| `description` | TEXT | Mô tả (tiếng Việt gốc) |
+| `audio_url` | VARCHAR | URL audio mặc định (vi) |
+| `image_url` | VARCHAR | URL hình ảnh |
+| `location` | GEOGRAPHY(Point,4326) | Tọa độ PostGIS |
+| `trigger_radius` | INTEGER | Bán kính kích hoạt (mét) |
+| `min_price` | INTEGER | Giá thấp nhất (VND) |
+| `max_price` | INTEGER | Giá cao nhất (VND) |
+| `audio_duration` | INTEGER | Thời lượng audio (giây) |
+| `priority` | INTEGER | Ưu tiên geofence |
+| `featured_reviews` | JSONB | Đánh giá nổi bật |
+| `created_at` | TIMESTAMP | Thời gian tạo |
 
-### Dữ liệu mẫu
+---
 
-Database sẽ được tự động nạp từ file `vinh_khanh_places.json` (thông qua `DatabaseSeeder`) gồm 28 địa điểm quán ăn tại Phố Ẩm Thực Vĩnh Khánh (Quận 4). Kèm theo đó là các thông số toạ độ chi tiết và các thuộc tính khác. Mọi thao tác đều hoàn toàn tự động khi khởi động Spring Boot.
-
-## 📱 Tích hợp với Flutter
-
-```dart
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-
-Future<Map<String, dynamic>> findNearestStall(double lat, double lon) async {
-  final url = Uri.parse('http://localhost:8080/api/v1/stalls/nearby?lat=$lat&lon=$lon');
-  final response = await http.get(url);
-  
-  if (response.statusCode == 200) {
-    return json.decode(response.body);
-  } else {
-    throw Exception('Failed to load nearest stall');
-  }
-}
-```
-
-## 🏗️ Cấu trúc project
+## 🏗️ Cấu trúc Project
 
 ```
 src/main/java/com/foodstreet/voice/
-├── StreetVoiceApplication.java       # Main application
+├── StreetVoiceApplication.java
+├── config/                        # AsyncConfig, AudioConfig, AudioProperties
 ├── controller/
-│   └── FoodStallController.java      # REST API endpoints
-├── dto/
-│   ├── ErrorResponse.java            # Error response format
-│   ├── FoodStallResponse.java        # API response DTO
-│   └── NearbyRequest.java            # Request validation
+│   ├── FoodStallController.java   # Public API endpoints
+│   └── AdminSyncController.java   # Admin endpoints (sync, geofence)
+├── dto/                           # Request/Response DTOs
+│   ├── FoodStallResponse.java     # Có usedLanguage + localizationStatus
+│   ├── LocalizationResponse.java
+│   └── ...
 ├── entity/
-│   └── FoodStall.java                # JPA entity
-├── exception/
-│   ├── GlobalExceptionHandler.java   # Centralized error handling
-│   └── ResourceNotFoundException.java
+│   ├── FoodStall.java
+│   └── FoodStallLocalization.java
 ├── repository/
-│   └── FoodStallRepository.java      # PostGIS queries
-└── service/
-    └── FoodStallService.java         # Business logic
+│   ├── FoodStallRepository.java
+│   └── FoodStallLocalizationRepository.java
+├── service/
+│   ├── FoodStallService.java      # Business logic + bulk localization map
+│   ├── LocalizationService.java   # Async dịch + audio, syncAllMissing
+│   ├── TranslationService.java    # MyMemory API
+│   ├── AudioService.java          # TTS + coalescing
+│   └── VietMapSyncService.java    # Import từ VietMap
+└── seeder/
+    └── DatabaseSeeder.java        # Auto-seed 28 quán khi DB trống
 ```
+
+---
 
 ## 🔧 Tính năng chính
 
-✅ **PostGIS Spatial Queries**: Tìm kiếm dựa trên khoảng cách địa lý chính xác  
-✅ **JTS Geometry**: Hỗ trợ đầy đủ cho dữ liệu không gian  
-✅ **Input Validation**: Kiểm tra tham số đầu vào  
-✅ **Exception Handling**: Xử lý lỗi tập trung  
-✅ **RESTful API**: Tuân thủ chuẩn REST  
-✅ **Logging**: Ghi log chi tiết cho debugging
-✅ **Race Condition Prevention**: Chống Duplicate Request với Executor/ConcurrentHashMap  
-✅ **Hỗ trợ Offline Mobile**: Tính toán Pack Size, đồng bộ Analytics Batching  
+✅ **PostGIS Spatial Queries** — Geofence chính xác, ưu tiên theo `priority`  
+✅ **Đa ngôn ngữ** — vi / en / ja / ko / zh với Fallback về tiếng Việt  
+✅ **Translate-on-Create** — Dịch bất đồng bộ ngay khi tạo quán, API vẫn trả `201` ngay  
+✅ **Fault-tolerant Async** — Lỗi 1 ngôn ngữ không dừng các ngôn ngữ còn lại  
+✅ **Sync All Localizations** — Một API để backfill bản dịch cho toàn bộ quán cũ  
+✅ **localizationStatus** — Client biết quán nào chưa dịch (`FALLBACK_TO_VI`)  
+✅ **Offline Audio Pack** — Tải ZIP audio theo ngôn ngữ cho Mobile offline  
+✅ **Race Condition Prevention** — Request coalescing cho TTS  
+✅ **Auto-seed** — 28 quán mẫu tự động nạp khi khởi động lần đầu  
+
+---
 
 ## 📝 License
 

@@ -25,7 +25,13 @@ public class AdminImportController {
     private final FoodStallService foodStallService;
 
     @PostMapping("/import-json")
-    @Operation(summary = "Import curated data from JSON")
+    @Operation(
+        summary = "Import food stalls from a curated JSON payload",
+        description = "Nhận một danh sách `FoodStallImportDto` dưới dạng JSON body và import hàng loạt vào database. " +
+            "Các quán trùng tên sẽ bị bỏ qua (idempotent). " +
+            "Trả về số lượng quán được thêm mới thành công.\n\n" +
+            "**Lưu ý:** Sau khi import, gọi `POST /api/v1/admin/sync-localizations` để tự động dịch đa ngôn ngữ cho các quán vừa import."
+    )
     public ResponseEntity<?> importCuratedData(@RequestBody List<FoodStallImportDto> request) {
         log.info("Da nhan du lieu import {} quan an", request.size());
         try {

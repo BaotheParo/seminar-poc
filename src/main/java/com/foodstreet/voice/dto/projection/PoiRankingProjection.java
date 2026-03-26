@@ -5,7 +5,5 @@ public interface PoiRankingProjection {
 
     String getStallName();
 
-    Long getVisits();
-
     Long getPlays();
 }

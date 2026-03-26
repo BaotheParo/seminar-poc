@@ -36,3 +36,6 @@ build/
 # Ignored audio and upload directories
 /audio/
 /uploads/
+
+
+.venv

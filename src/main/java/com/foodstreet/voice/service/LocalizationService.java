@@ -11,6 +11,11 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -20,6 +25,136 @@ public class LocalizationService {
     private final FoodStallLocalizationRepository localizationRepository;
     private final TranslationService translationService;
     private final AudioService audioService;
+
+    /**
+     * Translate-on-Create: Tao localization + audio cho tat ca ngon ngu ngay khi FoodStall duoc tao.
+     * Nhan thang entity da duoc luu, tranh phat sinh them 1 query DB.
+     * Chay bat dong bo (@Async) de API tra ve 201 ngay lap tuc.
+     *
+     * @param savedStall Entity FoodStall vua duoc persist thanh cong
+     */
+    @Async
+    public void processLocalizationAndAudioInBackground(FoodStall savedStall) {
+        Long stallId = savedStall.getId();
+        String[] languages = {"vi", "en", "ja", "ko", "zh"};
+        log.info("[Localization] [Async] Bat dau xu ly localization cho stallId={}, {} ngon ngu", stallId, languages.length);
+
+        String sourceName = savedStall.getName();
+        String sourceDesc = savedStall.getDescription();
+        String sourceAddress = savedStall.getAddress();
+
+        for (String lang : languages) {
+            try {
+                String translatedName;
+                String translatedDesc;
+                String translatedAddress;
+
+                // Translation Phase
+                if (lang.equals("vi")) {
+                    translatedName = sourceName;
+                    translatedDesc = sourceDesc;
+                    translatedAddress = sourceAddress;
+                    log.debug("[Localization] [vi] Su dung text goc, stallId={}", stallId);
+                } else {
+                    log.info("[Localization] [{}] Dich name + description + address, stallId={}", lang, stallId);
+                    translatedName = translationService.translate(sourceName, lang);
+                    translatedDesc = translationService.translate(sourceDesc, lang);
+                    translatedAddress = translationService.translate(sourceAddress, lang);
+                }
+
+                // Effectively-final aliases required for use inside lambda
+                final String finalName = translatedName;
+                final String finalDesc = translatedDesc;
+                final String finalAddress = translatedAddress;
+
+                // Audio Generation Phase
+                String audioText = finalName + ". " + finalDesc;
+                String audioUrl = audioService.getOrCreateAudioForStall(stallId, audioText, lang);
+                if (audioUrl == null) {
+                    audioUrl = stallId + "_" + lang + ".mp3";
+                    log.warn("[Localization] [{}] getOrCreateAudio tra ve null, dung fallback audioUrl={}", lang, audioUrl);
+                }
+                final String finalAudioUrl = audioUrl;
+
+                // Database Save Phase (upsert)
+                FoodStallLocalization stallRef = localizationRepository
+                        .findByFoodStallIdAndLanguageCode(stallId, lang)
+                        .map(existing -> {
+                            existing.setName(finalName);
+                            existing.setDescription(finalDesc);
+                            existing.setAddress(finalAddress);
+                            existing.setAudioUrl(finalAudioUrl);
+                            return existing;
+                        })
+                        .orElseGet(() -> FoodStallLocalization.builder()
+                                .foodStall(savedStall)
+                                .languageCode(lang)
+                                .name(finalName)
+                                .description(finalDesc)
+                                .address(finalAddress)
+                                .audioUrl(finalAudioUrl)
+                                .build());
+                localizationRepository.save(stallRef);
+
+                log.info("[Localization] [{}] Hoan thanh stallId={}, audioUrl={}", lang, stallId, finalAudioUrl);
+
+            } catch (Exception e) {
+                // Fault-tolerant: loi o 1 ngon ngu khong dung qua trinh cac ngon ngu con lai
+                log.error("[Localization] [{}] Loi khi xu ly stallId={}: {}", lang, stallId, e.getMessage(), e);
+            }
+        }
+
+        log.info("[Localization] [Async] Hoan thanh tat ca ngon ngu cho stallId={}", stallId);
+    }
+
+    /**
+     * Sync All Localizations: Quet toan bo FoodStall trong DB, tim cac quan chua co
+     * du 5 ban dich (vi/en/ja/ko/zh) va kich hoat processLocalizationAndAudioInBackground
+     * cho tung quan do. API tra ve bao cao ngay lap tuc, cong viec dich chay ngam.
+     *
+     * @return Map chua tong so quan, so quan can xu ly va so quan da day du ban dich
+     */
+    public Map<String, Object> syncAllMissingLocalizations() {
+        String[] allLangs = {"vi", "en", "ja", "ko", "zh"};
+        int totalLangCount = allLangs.length;
+
+        List<FoodStall> allStalls = foodStallRepository.findAll();
+        log.info("[SyncAll] Bat dau quet {} quan an de tim ban dich con thieu", allStalls.size());
+
+        // Lay tat ca id cua cac localization hien co trong DB
+        List<FoodStallLocalization> allLocs = localizationRepository.findAll();
+        // Group: stallId -> so ngon ngu da co
+        Map<Long, Long> locCountByStall = allLocs.stream()
+                .collect(Collectors.groupingBy(
+                        loc -> loc.getFoodStall().getId(),
+                        Collectors.counting()
+                ));
+
+        int needsSync = 0;
+        int alreadyComplete = 0;
+
+        for (FoodStall stall : allStalls) {
+            long existingLangCount = locCountByStall.getOrDefault(stall.getId(), 0L);
+            if (existingLangCount < totalLangCount) {
+                log.info("[SyncAll] stallId={} (ten='{}') chi co {}/{} ngon ngu -> kich hoat dong bo",
+                        stall.getId(), stall.getName(), existingLangCount, totalLangCount);
+                processLocalizationAndAudioInBackground(stall);
+                needsSync++;
+            } else {
+                alreadyComplete++;
+            }
+        }
+
+        log.info("[SyncAll] Hoan thanh phat lenh: {} quan can dong bo, {} quan da day du", needsSync, alreadyComplete);
+        return Map.of(
+                "totalStalls", allStalls.size(),
+                "queuedForSync", needsSync,
+                "alreadyComplete", alreadyComplete,
+                "message", needsSync > 0
+                        ? needsSync + " quan dang duoc dong bo da ngon ngu trong nen. Vui long doi 15-30 giay roi kiem tra lai."
+                        : "Tat ca quan da co du ban dich. Khong can dong bo them."
+        );
+    }
 
     /**
      * Tu dong tao localization cho tat ca cac ngon ngu ho tro (en, ja, ko, zh).
@@ -71,14 +206,17 @@ public class LocalizationService {
         // 2. Dich sang ngon ngu dich
         String translatedName;
         String translatedDesc;
+        String translatedAddress;
 
         if ("vi".equalsIgnoreCase(targetLang)) {
             translatedName = sourceName;
             translatedDesc = sourceDesc;
+            translatedAddress = stall.getAddress();
         } else {
-            log.info("[Localization] Dich name + description sang {}", targetLang);
+            log.info("[Localization] Dich name + description + address sang {}", targetLang);
             translatedName = translationService.translate(sourceName, targetLang);
             translatedDesc = translationService.translate(sourceDesc, targetLang);
+            translatedAddress = translationService.translate(stall.getAddress(), targetLang);
         }
 
         // 3. Tao audio MP3
@@ -97,6 +235,7 @@ public class LocalizationService {
 
         localization.setName(translatedName);
         localization.setDescription(translatedDesc);
+        localization.setAddress(translatedAddress);
         localization.setAudioUrl(audioUrl);
 
         localizationRepository.save(localization);

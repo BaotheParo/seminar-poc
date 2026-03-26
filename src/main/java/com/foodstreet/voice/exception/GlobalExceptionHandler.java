@@ -9,6 +9,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.time.OffsetDateTime;
@@ -78,6 +79,24 @@ public class GlobalExceptionHandler {
                 .build();
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+    }
+
+    @ExceptionHandler(ResponseStatusException.class)
+    public ResponseEntity<ErrorResponse> handleResponseStatusException(
+            ResponseStatusException ex,
+            HttpServletRequest request) {
+
+        HttpStatus status = HttpStatus.valueOf(ex.getStatusCode().value());
+
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .timestamp(OffsetDateTime.now())
+                .status(status.value())
+                .error(status.getReasonPhrase())
+                .message(ex.getReason() == null ? status.getReasonPhrase() : ex.getReason())
+                .path(request.getRequestURI())
+                .build();
+
+        return ResponseEntity.status(status).body(errorResponse);
     }
 
     @ExceptionHandler(Exception.class)

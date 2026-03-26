@@ -1,9 +1,8 @@
-version: '3.8'
-
 services:
   street-voice-backend:
     build: .
     container_name: street-voice-backend
+    restart: on-failure
     ports:
       - "8080:8080"
     volumes:
@@ -17,7 +16,8 @@ services:
       - VIETMAP_API_KEY_SERVICES=${VIETMAP_API_KEY_SERVICES}
       - AUDIO_BASE_URL=${AUDIO_BASE_URL}
     depends_on:
-      - street-voice-db
+      street-voice-db:
+        condition: service_healthy
     networks:
       - street-voice-network
 
@@ -34,7 +34,12 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       # Init script to adding extensions if needed, though PostGIS image usually has them
-      - ./src/main/resources/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      # - ./src/main/resources/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h localhost -U postgres -d street_voice_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       - street-voice-network
 

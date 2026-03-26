@@ -70,7 +70,11 @@ public class AudioAdminController {
     // === Background Task + SSE ===
 
     @PostMapping("/audio-tasks/generate-all")
-    @Operation(summary = "Start background task to generate audio for ALL stalls in a given language")
+    @Operation(summary = "Start background task: generate audio for ALL stalls", description = "Khởi động một background task tạo file TTS cho **toàn bộ quán ăn** theo ngôn ngữ chỉ định (`lang`). "
+            +
+            "API trả về `taskId` ngay lập tức. Theo dõi tiến trình realtime tại `GET /api/v1/admin/audio-tasks/stream/{taskId}` (SSE).\n\n"
+            +
+            "Ngôn ngữ hỗ trợ: `vi`, `en`, `ja`, `ko`, `zh`.")
     public ResponseEntity<Map<String, String>> generateAll(
             @RequestParam(defaultValue = "vi") String lang) {
         log.info("Admin request to generate all audio, lang={}", lang);
@@ -78,12 +82,13 @@ public class AudioAdminController {
         return ResponseEntity.ok(Map.of(
                 "taskId", taskId,
                 "message", "Task started. Stream progress at /api/v1/admin/audio-tasks/stream/" + taskId,
-                "lang", lang
-        ));
+                "lang", lang));
     }
 
     @GetMapping(value = "/audio-tasks/stream/{taskId}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    @Operation(summary = "SSE stream - realtime progress for a generate-all task")
+    @Operation(summary = "SSE stream: realtime progress for a generate-all task", description = "Kết nối Server-Sent Events (SSE) để nhận cập nhật realtime về tiến trình của task generate audio. "
+            +
+            "Mỗi event trả về phần trăm hoàn thành và tên quán đang xử lý. Kết nối tự đóng khi task hoàn tất.")
     public SseEmitter streamTaskProgress(@PathVariable String taskId) {
         log.info("SSE stream requested for taskId={}", taskId);
         return audioTaskManager.getOrCreateEmitter(taskId);

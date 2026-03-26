@@ -24,6 +24,12 @@ public class UserActivity {
     @Column(nullable = false)
     private String deviceId;
 
+    @Column(name = "session_id")
+    private String sessionId;
+
+    @Column(name = "platform")
+    private String platform;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "food_stall_id", nullable = false)
     private FoodStall foodStall;
@@ -32,19 +38,18 @@ public class UserActivity {
     @Column(nullable = false)
     private ActionType actionType;
 
-    @Column(name = "duration_seconds")
-    private Integer durationSeconds;
+    private LocalDateTime eventTime;
 
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
     public enum ActionType {
-        VIEW_DETAILS,
-        PLAY_AUDIO,
-        STOP_AUDIO,
+        PLAY_AUDIO, // Keeping for backward compatibility
+        PLAY_AUDIO_MANUAL,
+        PLAY_AUDIO_AUTO,
+        SKIP_AUDIO,
         FINISH_AUDIO,
-        ENTER_REGION,
-        AUTO_PLAY
+        ENTER_REGION
     }
 }
