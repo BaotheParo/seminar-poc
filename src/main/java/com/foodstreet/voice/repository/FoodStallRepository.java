@@ -54,7 +54,7 @@ public interface FoodStallRepository extends JpaRepository<FoodStall, Long>, Jpa
                 name, 
                 description, 
                 address,
-                CAST(id AS varchar) || '_vi.mp3' as "audioUrl", 
+                COALESCE(audio_url, '/audio/' || CAST(id AS varchar) || '_vi.mp3') as "audioUrl", 
                 trigger_radius as "triggerRadius", 
                 priority,
                 localization_status as "localizationStatus",
@@ -76,6 +76,8 @@ public interface FoodStallRepository extends JpaRepository<FoodStall, Long>, Jpa
         Optional<java.time.LocalDateTime> findMaxCreatedAt();
 
         Optional<FoodStall> findByIdAndOwnerId(Long id, Long ownerId);
+
+        List<FoodStall> findAllByOwnerIdOrderByUpdatedAtDesc(Long ownerId);
 
         List<FoodStall> findByStatus(StallStatus status);
 }

@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
@@ -49,23 +50,45 @@ public class AudioService {
     public String getOrCreateAudio(@NonNull String text, @NonNull String languageCode) {
         String hash = DigestUtils.md5DigestAsHex(text.getBytes());
         String fileName = hash + "_" + languageCode + ".mp3";
-        return getOrCreateAudioInternal(fileName, text, languageCode);
+        return getOrCreateAudioInternal(fileName, text, languageCode, false);
     }
 
     public String getOrCreateAudioForStall(@NonNull Long stallId, @NonNull String text, @NonNull String languageCode) {
         String fileName = stallId + "_" + languageCode + ".mp3";
-        return getOrCreateAudioInternal(fileName, text, languageCode);
+        return getOrCreateAudioInternal(fileName, text, languageCode, false);
     }
 
-    private String getOrCreateAudioInternal(String fileName, String text, String languageCode) {
+    /**
+     * Generate audio and overwrite the existing file (if any).
+     * Used after admin approval to ensure the mp3 matches the latest approved content.
+     */
+    public String generateAndOverwriteAudioForStall(@NonNull Long stallId, @NonNull String text, @NonNull String languageCode) {
+        String fileName = stallId + "_" + languageCode + ".mp3";
+        return getOrCreateAudioInternal(fileName, text, languageCode, true);
+    }
+
+    /**
+     * Backward-compatible alias for force-regeneration without timestamped filenames.
+     * Keeps a stable URL format: /audio/{stallId}_{lang}.mp3
+     */
+    public String generateVersionedAudioForStall(@NonNull Long stallId, @NonNull String text, @NonNull String languageCode) {
+        return generateAndOverwriteAudioForStall(stallId, text, languageCode);
+    }
+
+    private String getOrCreateAudioInternal(String fileName, String text, String languageCode, boolean overwrite) {
         try {
             Files.createDirectories(Paths.get(getUploadDir()));
             Path filePath = Paths.get(getUploadDir() + fileName);
 
-            if (Files.exists(filePath)) {
+            if (!overwrite && Files.exists(filePath)) {
                 return "/audio/" + fileName;
             }
 
+             if (overwrite) {
+                Files.deleteIfExists(filePath);
+            }
+
+            // Same file name is used as the task key to avoid concurrent regenerations.
             return inProgressTasks.computeIfAbsent(fileName, key -> generateAudioAsync(fileName, text, languageCode, filePath)).join();
         } catch (Exception e) {
             e.printStackTrace();
@@ -85,6 +108,35 @@ public class AudioService {
         }).whenComplete((result, ex) -> {
             inProgressTasks.remove(fileName);
         });
+    }
+
+    private void cleanupOldStallAudioVersions(Long stallId, String languageCode, String keepFileName) {
+        String versionPrefix = stallId + "_" + languageCode + "_";
+        String legacyFileName = stallId + "_" + languageCode + ".mp3";
+
+        try (Stream<Path> stream = Files.list(Paths.get(getUploadDir()))) {
+            List<Path> oldFiles = stream
+                    .filter(path -> !Files.isDirectory(path))
+                    .filter(path -> {
+                        String name = path.getFileName().toString();
+                        return (name.startsWith(versionPrefix) || name.equals(legacyFileName))
+                                && !name.equals(keepFileName);
+                    })
+                    .sorted(Comparator.comparingLong(path -> {
+                        try {
+                            return Files.getLastModifiedTime(path).toMillis();
+                        } catch (IOException e) {
+                            return Long.MIN_VALUE;
+                        }
+                    }))
+                    .collect(Collectors.toList());
+
+            for (Path oldFile : oldFiles) {
+                Files.deleteIfExists(oldFile);
+            }
+        } catch (IOException ignored) {
+            // Best effort cleanup only. Audio generation should not fail because cleanup failed.
+        }
     }
 
     public List<String> listAllAudioFiles() {
@@ -120,7 +172,7 @@ public class AudioService {
 
         // Tao audio moi tu description dung format stallId_lang.mp3
         String text = stall.getName() + ". " + stall.getDescription();
-        String newAudioUrl = getOrCreateAudioForStall(stallId, text, "vi");
+        String newAudioUrl = generateAndOverwriteAudioForStall(stallId, text, "vi");
 
         stall.setAudioUrl(newAudioUrl);
         foodStallRepository.save(stall);

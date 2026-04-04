@@ -35,7 +35,7 @@ public class FoodStallUpdate {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "food_stall_id", nullable = false)
+    @JoinColumn(name = "food_stall_id")
     private FoodStall foodStall;
 
     @ManyToOne(fetch = FetchType.LAZY)

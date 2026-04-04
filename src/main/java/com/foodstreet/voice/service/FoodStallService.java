@@ -109,11 +109,11 @@ public class FoodStallService {
     private Map<Long, FoodStallLocalization> fetchLocalizationMap(List<Long> stallIds, String lang) {
         if (stallIds.isEmpty()) return Collections.emptyMap();
         
-        List<FoodStallLocalization> locs = localizationRepository.findAllByLanguageCodeAndFoodStallIdIn(lang, stallIds);
+        List<FoodStallLocalization> locs = localizationRepository.findAllByLanguageCodeAndFoodStall_IdIn(lang, stallIds);
         
         // Neu khong phai tieng Viet va bi thieu, fallback ve tieng Viet
         if (!DEFAULT_LANG.equals(lang) && locs.size() < stallIds.size()) {
-            List<FoodStallLocalization> viLocs = localizationRepository.findAllByLanguageCodeAndFoodStallIdIn(DEFAULT_LANG, stallIds);
+            List<FoodStallLocalization> viLocs = localizationRepository.findAllByLanguageCodeAndFoodStall_IdIn(DEFAULT_LANG, stallIds);
             Map<Long, FoodStallLocalization> viMap = viLocs.stream()
                 .collect(Collectors.toMap(l -> l.getFoodStall().getId(), l -> l, (a, b) -> a));
             
@@ -145,7 +145,7 @@ public class FoodStallService {
         // Thu tim localization theo lang yeu cau
         String effectiveLang = lang;
         FoodStallLocalization localization = localizationRepository
-                .findByFoodStallIdAndLanguageCode(id, lang)
+                .findByFoodStall_IdAndLanguageCode(id, lang)
                 .orElse(null);
 
         // Fallback ve tieng Viet neu khong co
@@ -153,7 +153,7 @@ public class FoodStallService {
             log.debug("Khong co localization lang={}, fallback sang vi", lang);
             effectiveLang = DEFAULT_LANG;
             localization = localizationRepository
-                    .findByFoodStallIdAndLanguageCode(id, DEFAULT_LANG)
+                    .findByFoodStall_IdAndLanguageCode(id, DEFAULT_LANG)
                     .orElse(null);
         }
 
@@ -193,7 +193,9 @@ public class FoodStallService {
             String address = (loc != null && loc.getAddress() != null) ? loc.getAddress() : p.getAddress();
             
             String actualLang = (loc != null && loc.getLanguageCode() != null) ? loc.getLanguageCode() : DEFAULT_LANG;
-            String audioUrl = "/audio/" + p.getId() + "_" + actualLang + ".mp3";
+            String audioUrl = (p.getAudioUrl() != null && !p.getAudioUrl().isBlank())
+                    ? p.getAudioUrl()
+                    : "/audio/" + p.getId() + "_" + DEFAULT_LANG + ".mp3";
             
             String localizationStatus = (p.getLocalizationStatus() != null) ? p.getLocalizationStatus() :
                                         ((lang != null && !DEFAULT_LANG.equals(lang) && !lang.equals(actualLang)) 
@@ -466,8 +468,11 @@ public class FoodStallService {
         // Tinh toan ngon ngu thuc te duoc su dung
         String actualLang = (loc != null && loc.getLanguageCode() != null) ? loc.getLanguageCode()
                 : DEFAULT_LANG;
-        String langSuffix = (actualLang != null && !actualLang.isBlank()) ? actualLang : DEFAULT_LANG;
-        String audioUrl = "/audio/" + stall.getId() + "_" + langSuffix + ".mp3";
+        String audioUrl = (loc != null && loc.getAudioUrl() != null && !loc.getAudioUrl().isBlank())
+            ? loc.getAudioUrl()
+            : ((stall.getAudioUrl() != null && !stall.getAudioUrl().isBlank())
+                ? stall.getAudioUrl()
+                : "/audio/" + stall.getId() + "_" + DEFAULT_LANG + ".mp3");
 
         // Neu ngon ngu thuc te khac ngon ngu yeu cau => da fallback ve tieng Viet
         String localizationStatus = null;

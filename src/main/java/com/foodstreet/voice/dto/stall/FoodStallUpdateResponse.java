@@ -11,6 +11,7 @@ import lombok.Data;
 public class FoodStallUpdateResponse {
     private Long id;
     private FoodStallUpdateStatus status;
+    private Boolean newStallRequest;
     private LocalDateTime createdAt;
     private LocalDateTime reviewedAt;
     private String reason;

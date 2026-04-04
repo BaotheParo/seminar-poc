@@ -11,13 +11,12 @@ import com.foodstreet.voice.entity.StallStatus;
 import com.foodstreet.voice.exception.ResourceNotFoundException;
 import com.foodstreet.voice.repository.FoodStallRepository;
 import com.foodstreet.voice.repository.FoodStallUpdateRepository;
+import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.GeometryFactory;
-import org.locationtech.jts.geom.Point;
-import org.locationtech.jts.geom.PrecisionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +26,11 @@ import org.springframework.web.server.ResponseStatusException;
 @RequiredArgsConstructor
 public class StallOwnerService {
 
-    private static final GeometryFactory GEOMETRY_FACTORY = new GeometryFactory(new PrecisionModel(), 4326);
+    private static final Collection<FoodStallUpdateStatus> PENDING_UPDATE_STATUSES = List.of(
+            FoodStallUpdateStatus.PENDING,
+            FoodStallUpdateStatus.CREATE_PENDING,
+            FoodStallUpdateStatus.UPDATE_PENDING
+    );
 
     private final UserRepository userRepository;
     private final FoodStallRepository foodStallRepository;
@@ -35,36 +38,67 @@ public class StallOwnerService {
 
     @Transactional(readOnly = true)
     public FoodStall getMyStall(String username) {
-        User owner = findOwner(username);
-        if (owner.getRestaurantId() == null) {
-            return null;
-        }
+        List<FoodStall> stalls = getMyStalls(username);
+        return stalls.isEmpty() ? null : stalls.get(0);
+    }
 
-        return foodStallRepository.findByIdAndOwnerId(owner.getRestaurantId(), owner.getId())
-                .orElse(null);
+    @Transactional(readOnly = true)
+    public List<FoodStall> getMyStalls(String username) {
+        User owner = findOwner(username);
+        return foodStallRepository.findAllByOwnerIdOrderByUpdatedAtDesc(owner.getId());
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<FoodStallUpdate> getLatestPendingUpdateForStall(String username, Long stallId) {
+        User owner = findOwner(username);
+        return foodStallUpdateRepository.findTopByOwner_IdAndFoodStall_IdAndStatusInOrderByCreatedAtDesc(
+                owner.getId(),
+                stallId,
+                PENDING_UPDATE_STATUSES
+        );
+    }
+
+    @Transactional(readOnly = true)
+    public List<FoodStallUpdate> getPendingCreateRequests(String username) {
+        User owner = findOwner(username);
+        return foodStallUpdateRepository.findByOwner_IdAndFoodStallIsNullAndStatusInOrderByCreatedAtDesc(
+                owner.getId(),
+                PENDING_UPDATE_STATUSES
+        );
     }
 
     @Transactional
     public FoodStall submitStallUpdate(String username, StallOwnerUpsertRequest request) {
         User owner = findOwner(username);
         FoodStall stall;
+        FoodStallUpdateStatus pendingStatus;
 
-        if (owner.getRestaurantId() == null) {
-            stall = createPendingStall(owner, request);
-            owner.setRestaurantId(stall.getId());
-            userRepository.save(owner);
+        if (request.getStallId() == null) {
+            // New stall registration request:
+            // Do NOT create a FoodStall record yet. Only store the request in food_stall_updates.
+            stall = null;
+            pendingStatus = FoodStallUpdateStatus.CREATE_PENDING;
         } else {
-            stall = foodStallRepository.findByIdAndOwnerId(owner.getRestaurantId(), owner.getId())
+            stall = foodStallRepository.findByIdAndOwnerId(request.getStallId(), owner.getId())
                     .orElseThrow(() -> new ResourceNotFoundException("Stall does not exist for this owner"));
+
+            if (stall.getStatus() == StallStatus.PENDING) {
+                throw new ResponseStatusException(HttpStatus.CONFLICT,
+                        "Your stall update is pending approval. You cannot edit until admin reviews it.");
+            }
+
             stall.setStatus(StallStatus.PENDING);
             foodStallRepository.save(stall);
+            pendingStatus = hasApprovedUpdate(stall.getId())
+                    ? FoodStallUpdateStatus.UPDATE_PENDING
+                    : FoodStallUpdateStatus.CREATE_PENDING;
         }
 
         Map<String, Object> changes = toChanges(request);
         FoodStallUpdate update = FoodStallUpdate.builder()
                 .foodStall(stall)
                 .owner(owner)
-                .status(FoodStallUpdateStatus.PENDING)
+                .status(pendingStatus)
                 .changes(changes)
                 .build();
         foodStallUpdateRepository.save(update);
@@ -72,22 +106,37 @@ public class StallOwnerService {
         return stall;
     }
 
-    private FoodStall createPendingStall(User owner, StallOwnerUpsertRequest request) {
-        Point location = GEOMETRY_FACTORY.createPoint(new Coordinate(request.getLongitude(), request.getLatitude()));
+    @Transactional
+    public void cancelRequest(String username, Long updateId) {
+        User owner = findOwner(username);
+        FoodStallUpdate update = foodStallUpdateRepository.findById(updateId)
+                .orElseThrow(() -> new ResourceNotFoundException("Request not found"));
 
-        FoodStall stall = FoodStall.builder()
-                .name(request.getName())
-                .description(request.getDescription())
-                .address(request.getAddress())
-                .location(location)
-                .minPrice(request.getMinPrice())
-                .maxPrice(request.getMaxPrice())
-                .triggerRadius(request.getTriggerRadius() == null ? 15 : request.getTriggerRadius())
-                .ownerId(owner.getId())
-                .status(StallStatus.PENDING)
-                .build();
+        if (!update.getOwner().getId().equals(owner.getId())) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Unauthorized to cancel this request");
+        }
 
-        return foodStallRepository.save(stall);
+        if (!PENDING_UPDATE_STATUSES.contains(update.getStatus())) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    "Can only cancel pending requests");
+        }
+
+        // If this is an update request for existing stall, revert stall status back to ACTIVE
+        if (update.getFoodStall() != null) {
+            FoodStall stall = update.getFoodStall();
+            stall.setStatus(StallStatus.ACTIVE);
+            foodStallRepository.save(stall);
+        }
+
+        update.setStatus(FoodStallUpdateStatus.CANCELLED);
+        foodStallUpdateRepository.save(update);
+    }
+
+    private boolean hasApprovedUpdate(Long stallId) {
+        return foodStallUpdateRepository.existsByFoodStall_IdAndStatus(
+                stallId,
+                FoodStallUpdateStatus.APPROVED
+        );
     }
 
     private Map<String, Object> toChanges(StallOwnerUpsertRequest request) {

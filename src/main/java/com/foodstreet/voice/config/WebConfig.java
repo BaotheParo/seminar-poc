@@ -33,7 +33,9 @@ public class WebConfig implements WebMvcConfigurer {
         String localPath = audioProperties.getResolvedLocalPath();
         registry.addResourceHandler("/audio/**")
                 .addResourceLocations("file:" + localPath)
-                .setCachePeriod(3600);
+                // Audio files can be regenerated with the same filename after approval.
+                // Disable aggressive caching so clients can fetch the newest bytes.
+                .setCachePeriod(0);
 
         System.out.println("[AudioConfig] /audio/** -> file:" + localPath);
     }

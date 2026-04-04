@@ -17,9 +17,12 @@ import lombok.RequiredArgsConstructor;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.PrecisionModel;
+import org.locationtech.jts.geom.Point;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronization;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
@@ -31,10 +34,15 @@ public class AdminApprovalService {
     private final FoodStallUpdateRepository foodStallUpdateRepository;
     private final FoodStallRepository foodStallRepository;
     private final UserRepository userRepository;
+    private final LocalizationService localizationService;
 
     @Transactional(readOnly = true)
     public List<FoodStallUpdateResponse> getPendingApprovals() {
-        return foodStallUpdateRepository.findByStatusOrderByCreatedAtDesc(FoodStallUpdateStatus.PENDING)
+        return foodStallUpdateRepository.findByStatusInOrderByCreatedAtDesc(List.of(
+                FoodStallUpdateStatus.CREATE_PENDING,
+                FoodStallUpdateStatus.UPDATE_PENDING,
+                FoodStallUpdateStatus.PENDING
+            ))
                 .stream()
                 .map(this::toResponse)
                 .toList();
@@ -53,7 +61,7 @@ public class AdminApprovalService {
         FoodStallUpdate update = foodStallUpdateRepository.findById(updateId)
                 .orElseThrow(() -> new ResourceNotFoundException("Update request not found"));
 
-        if (update.getStatus() != FoodStallUpdateStatus.PENDING) {
+        if (!isPendingStatus(update.getStatus())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Only pending update can be approved");
         }
 
@@ -61,16 +69,46 @@ public class AdminApprovalService {
                 .orElseThrow(() -> new ResourceNotFoundException("Reviewer user not found"));
 
         FoodStall stall = update.getFoodStall();
-        applyChanges(stall, update.getChanges());
-        stall.setStatus(StallStatus.ACTIVE);
-        foodStallRepository.save(stall);
+        if (stall == null) {
+            // Approving a CREATE_PENDING request: create the FoodStall only at approval time.
+            stall = createStallFromChanges(update);
+            foodStallRepository.save(stall);
+
+            update.setFoodStall(stall);
+        } else {
+            applyChanges(stall, update.getChanges());
+            stall.setStatus(StallStatus.ACTIVE);
+            foodStallRepository.save(stall);
+        }
+
+        // Ensure Vietnamese localization is updated immediately so UI (default vi) shows latest data on reload.
+        // Also regenerate VI audio synchronously so the owner-facing page can play the newest audio right away.
+        localizationService.upsertVietnameseFromStall(stall.getId());
+        localizationService.generateLocalizationForceAudio(stall.getId(), "vi");
 
         update.setStatus(FoodStallUpdateStatus.APPROVED);
         update.setReviewedAt(LocalDateTime.now());
         update.setReviewedBy(reviewer);
         update.setReason(null);
 
-        return toResponse(foodStallUpdateRepository.save(update));
+        FoodStallUpdate savedUpdate = foodStallUpdateRepository.save(update);
+
+        // After approval, regenerate translations + audio for all supported languages.
+        // Run after-commit to avoid the async job reading stale/uncommitted data.
+        Long stallId = stall.getId();
+        if (stallId != null && TransactionSynchronizationManager.isActualTransactionActive()) {
+            TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
+                @Override
+                public void afterCommit() {
+                    // Overwrite mp3 so audio matches the latest approved content.
+                    localizationService.regenerateAllLanguagesForStall(stallId);
+                }
+            });
+        } else if (stallId != null) {
+            localizationService.regenerateAllLanguagesForStall(stallId);
+        }
+
+        return toResponse(savedUpdate);
     }
 
     @Transactional
@@ -78,7 +116,7 @@ public class AdminApprovalService {
         FoodStallUpdate update = foodStallUpdateRepository.findById(updateId)
                 .orElseThrow(() -> new ResourceNotFoundException("Update request not found"));
 
-        if (update.getStatus() != FoodStallUpdateStatus.PENDING) {
+        if (!isPendingStatus(update.getStatus())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Only pending update can be rejected");
         }
 
@@ -91,16 +129,32 @@ public class AdminApprovalService {
         update.setReviewedBy(reviewer);
 
         FoodStall stall = update.getFoodStall();
-        boolean hasApproved = foodStallUpdateRepository.existsByFoodStall_IdAndStatus(
-                stall.getId(),
-                FoodStallUpdateStatus.APPROVED
-        );
-        if (!hasApproved) {
-            stall.setStatus(StallStatus.INACTIVE);
-            foodStallRepository.save(stall);
+        boolean hasApproved = false;
+        if (stall != null) {
+            hasApproved = foodStallUpdateRepository.existsByFoodStall_IdAndStatus(
+                    stall.getId(),
+                    FoodStallUpdateStatus.APPROVED
+            );
         }
 
-        return toResponse(foodStallUpdateRepository.save(update));
+        FoodStallUpdate savedUpdate = foodStallUpdateRepository.save(update);
+        FoodStallUpdateResponse response = toResponse(savedUpdate);
+
+        if (!hasApproved) {
+            // New stall registration request rejected:
+            // There should be no FoodStall row (new flow). If an older pending row exists, delete it.
+            if (stall != null) {
+                foodStallRepository.delete(stall);
+            }
+            return response;
+        }
+
+        // Existing stall update rejected: keep stall live and revert status to ACTIVE.
+        if (stall != null) {
+            stall.setStatus(StallStatus.ACTIVE);
+            foodStallRepository.save(stall);
+        }
+        return response;
     }
 
     private void applyChanges(FoodStall stall, Map<String, Object> changes) {
@@ -137,17 +191,75 @@ public class AdminApprovalService {
         }
     }
 
+    private FoodStall createStallFromChanges(FoodStallUpdate update) {
+        Map<String, Object> changes = update.getChanges();
+        String name = (changes != null && changes.containsKey("name")) ? toStringValue(changes.get("name")) : null;
+        if (name == null || name.isBlank()) {
+            name = "Pending stall";
+        }
+
+        FoodStall stall = FoodStall.builder()
+                .name(name)
+                .description(changes == null ? null : toStringValue(changes.get("description")))
+                .address(changes == null ? null : toStringValue(changes.get("address")))
+                .minPrice(changes == null ? null : toIntegerValue(changes.get("minPrice")))
+                .maxPrice(changes == null ? null : toIntegerValue(changes.get("maxPrice")))
+                .triggerRadius(changes == null ? 15 : (toIntegerValue(changes.get("triggerRadius")) == null ? 15 : toIntegerValue(changes.get("triggerRadius"))))
+                .ownerId(update.getOwner() == null ? null : update.getOwner().getId())
+                .status(StallStatus.ACTIVE)
+                .build();
+
+        Double latitude = changes == null ? null : toDoubleValue(changes.get("latitude"));
+        Double longitude = changes == null ? null : toDoubleValue(changes.get("longitude"));
+        if (latitude != null && longitude != null) {
+            Point p = GEOMETRY_FACTORY.createPoint(new Coordinate(longitude, latitude));
+            stall.setLocation(p);
+        }
+
+        // Ensure any additional fields are applied consistently.
+        applyChanges(stall, changes);
+        stall.setStatus(StallStatus.ACTIVE);
+        return stall;
+    }
+
     private FoodStallUpdateResponse toResponse(FoodStallUpdate update) {
+        boolean isCreatePending = update.getStatus() == FoodStallUpdateStatus.CREATE_PENDING;
+        boolean isUpdatePending = update.getStatus() == FoodStallUpdateStatus.UPDATE_PENDING;
+
+        Long stallId = update.getFoodStall() == null ? null : update.getFoodStall().getId();
+        boolean hadApprovedBefore = stallId != null && update.getCreatedAt() != null
+                && foodStallUpdateRepository.existsByFoodStall_IdAndStatusAndCreatedAtBefore(
+                        stallId,
+                        FoodStallUpdateStatus.APPROVED,
+                        update.getCreatedAt()
+                );
+
+        boolean isNewStallRequest = isCreatePending || (!isUpdatePending && !hadApprovedBefore);
+
+        String stallName = null;
+        if (update.getFoodStall() != null) {
+            stallName = update.getFoodStall().getName();
+        } else if (update.getChanges() != null && update.getChanges().containsKey("name")) {
+            stallName = toStringValue(update.getChanges().get("name"));
+        }
+
         return FoodStallUpdateResponse.builder()
                 .id(update.getId())
                 .status(update.getStatus())
+                .newStallRequest(isNewStallRequest)
                 .createdAt(update.getCreatedAt())
                 .reviewedAt(update.getReviewedAt())
                 .reason(update.getReason())
-                .stallName(update.getFoodStall() == null ? null : update.getFoodStall().getName())
+                .stallName(stallName)
                 .ownerUsername(update.getOwner() == null ? null : update.getOwner().getUsername())
                 .changes(update.getChanges())
                 .build();
+    }
+
+    private boolean isPendingStatus(FoodStallUpdateStatus status) {
+        return status == FoodStallUpdateStatus.PENDING
+                || status == FoodStallUpdateStatus.CREATE_PENDING
+                || status == FoodStallUpdateStatus.UPDATE_PENDING;
     }
 
     private Integer toIntegerValue(Object value) {
