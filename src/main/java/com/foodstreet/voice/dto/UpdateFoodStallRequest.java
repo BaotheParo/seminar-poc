@@ -18,6 +18,8 @@ public class UpdateFoodStallRequest {
 
     private String description;
 
+    private String address;
+
     private String audioUrl;
 
     private String imageUrl;

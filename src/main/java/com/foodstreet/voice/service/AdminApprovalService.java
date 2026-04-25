@@ -10,10 +10,12 @@ import com.foodstreet.voice.entity.StallStatus;
 import com.foodstreet.voice.exception.ResourceNotFoundException;
 import com.foodstreet.voice.repository.FoodStallRepository;
 import com.foodstreet.voice.repository.FoodStallUpdateRepository;
+import com.foodstreet.voice.service.LocalizationService;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.PrecisionModel;
@@ -27,6 +29,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AdminApprovalService {
 
     private static final GeometryFactory GEOMETRY_FACTORY = new GeometryFactory(new PrecisionModel(), 4326);
@@ -101,11 +104,12 @@ public class AdminApprovalService {
                 @Override
                 public void afterCommit() {
                     // Overwrite mp3 so audio matches the latest approved content.
-                    localizationService.regenerateAllLanguagesForStall(stallId);
+                    // Skip "vi" as we already did it synchronously for immediate feedback.
+                    localizationService.regenerateLanguagesForStall(stallId, List.of("vi"));
                 }
             });
         } else if (stallId != null) {
-            localizationService.regenerateAllLanguagesForStall(stallId);
+            localizationService.regenerateLanguagesForStall(stallId, List.of("vi"));
         }
 
         return toResponse(savedUpdate);

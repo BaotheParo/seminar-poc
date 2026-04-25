@@ -228,6 +228,7 @@ public class FoodStallService {
 
         FoodStall stall = FoodStall.builder()
                 .name(request.getName())
+                .address(request.getAddress())
                 .description(request.getDescription())
                 .audioUrl(request.getAudioUrl())
                 .imageUrl(request.getImageUrl())
@@ -290,7 +291,7 @@ public class FoodStallService {
         log.debug("Updated food stall: {}", updatedStall.getName());
 
         // Neu ten hoac mo ta thay doi (hoac gia su la vay), cap nhat lai audio da ngon ngu
-        localizationService.generateAllLanguagesForStall(updatedStall.getId());
+        localizationService.generateAllLanguagesForStall(updatedStall.getId(), true);
 
         return mapToResponse(updatedStall);
     }
@@ -468,11 +469,9 @@ public class FoodStallService {
         // Tinh toan ngon ngu thuc te duoc su dung
         String actualLang = (loc != null && loc.getLanguageCode() != null) ? loc.getLanguageCode()
                 : DEFAULT_LANG;
-        String audioUrl = (loc != null && loc.getAudioUrl() != null && !loc.getAudioUrl().isBlank())
-            ? loc.getAudioUrl()
-            : ((stall.getAudioUrl() != null && !stall.getAudioUrl().isBlank())
-                ? stall.getAudioUrl()
-                : "/audio/" + stall.getId() + "_" + DEFAULT_LANG + ".mp3");
+        String audioUrl = (stall.getAudioUrl() != null && !stall.getAudioUrl().isBlank())
+            ? stall.getAudioUrl()
+            : "/audio/" + stall.getId() + "_" + DEFAULT_LANG + ".mp3";
 
         // Neu ngon ngu thuc te khac ngon ngu yeu cau => da fallback ve tieng Viet
         String localizationStatus = null;

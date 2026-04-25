@@ -21,6 +21,8 @@ public class CreateFoodStallRequest {
 
     private String description;
 
+    private String address;
+
     private String audioUrl;
 
     private String imageUrl;

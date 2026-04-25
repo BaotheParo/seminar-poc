@@ -20,6 +20,14 @@ services:
         condition: service_healthy
     networks:
       - street-voice-network
+  adminer:
+    image: adminer
+    container_name: street-voice-adminer
+    restart: always
+    ports:
+      - "8888:8080"
+    networks:
+      - street-voice-network
 
   street-voice-db:
     image: postgis/postgis:14-3.4-alpine
@@ -36,7 +44,7 @@ services:
       # Init script to adding extensions if needed, though PostGIS image usually has them
       # - ./src/main/resources/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -h localhost -U postgres -d street_voice_db"]
+      test: [ "CMD-SHELL", "pg_isready -h localhost -U postgres -d street_voice_db" ]
       interval: 10s
       timeout: 5s
       retries: 5

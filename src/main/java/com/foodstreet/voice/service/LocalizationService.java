@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -59,7 +58,12 @@ public class LocalizationService {
 
     /**
      * Translate-on-Create: Tao localization + audio cho tat ca ngon ngu ngay khi FoodStall duoc tao.
-     * Nhan thang entity da duoc luu, tranh phat sinh them 1 query DB.
+     * Chay bat dong bo (@Async) de API tra ve 201 ngay lap tuc.
+     *
+     * @param savedStall Entity FoodStall vua duoc persist thanh cong
+     */
+    /**
+     * Translate-on-Create: Tao localization + audio cho tat ca ngon ngu ngay khi FoodStall duoc tao.
      * Chay bat dong bo (@Async) de API tra ve 201 ngay lap tuc.
      *
      * @param savedStall Entity FoodStall vua duoc persist thanh cong
@@ -70,96 +74,27 @@ public class LocalizationService {
         String[] languages = {"vi", "en", "ja", "ko", "zh"};
         log.info("[Localization] [Async] Bat dau xu ly localization cho stallId={}, {} ngon ngu", stallId, languages.length);
 
-        String sourceName = savedStall.getName();
-        String sourceDesc = savedStall.getDescription();
-        String sourceAddress = savedStall.getAddress();
-
         for (String lang : languages) {
             try {
-                String translatedName;
-                String translatedDesc;
-                String translatedAddress;
-
-                // Translation Phase
-                if (lang.equals("vi")) {
-                    translatedName = sourceName;
-                    translatedDesc = sourceDesc;
-                    translatedAddress = sourceAddress;
-                    log.debug("[Localization] [vi] Su dung text goc, stallId={}", stallId);
-                } else {
-                    log.info("[Localization] [{}] Dich name + description + address, stallId={}", lang, stallId);
-                    translatedName = translationService.translate(sourceName, lang);
-                    translatedDesc = translationService.translate(sourceDesc, lang);
-                    translatedAddress = translationService.translate(sourceAddress, lang);
-                }
-
-                // Effectively-final aliases required for use inside lambda
-                final String finalName = translatedName;
-                final String finalDesc = translatedDesc;
-                final String finalAddress = translatedAddress;
-
-                // Audio Generation Phase
-                String audioText = finalName + ". " + finalDesc;
-                String audioUrl = audioService.getOrCreateAudioForStall(stallId, audioText, lang);
-                if (audioUrl == null) {
-                    audioUrl = stallId + "_" + lang + ".mp3";
-                    log.warn("[Localization] [{}] getOrCreateAudio tra ve null, dung fallback audioUrl={}", lang, audioUrl);
-                }
-                final String finalAudioUrl = audioUrl;
-
-                if ("vi".equalsIgnoreCase(lang) && finalAudioUrl != null && !finalAudioUrl.isBlank()) {
-                    savedStall.setAudioUrl(finalAudioUrl);
-                    foodStallRepository.save(savedStall);
-                }
-
-                // Database Save Phase (upsert)
-                FoodStallLocalization stallRef = localizationRepository
-                        .findByFoodStall_IdAndLanguageCode(stallId, lang)
-                        .map(existing -> {
-                            existing.setName(finalName);
-                            existing.setDescription(finalDesc);
-                            existing.setAddress(finalAddress);
-                            existing.setAudioUrl(finalAudioUrl);
-                            return existing;
-                        })
-                        .orElseGet(() -> FoodStallLocalization.builder()
-                                .foodStall(savedStall)
-                                .languageCode(lang)
-                                .name(finalName)
-                                .description(finalDesc)
-                                .address(finalAddress)
-                                .audioUrl(finalAudioUrl)
-                                .build());
-                localizationRepository.save(stallRef);
-
-                log.info("[Localization] [{}] Hoan thanh stallId={}, audioUrl={}", lang, stallId, finalAudioUrl);
-
+                // Use the centralized internal method to avoid duplicating translation/audio/save logic.
+                // We use forceAudio=false here to allow caching if a file already exists (e.g. hash-based).
+                this.generateLocalizationInternal(stallId, lang, false);
             } catch (Exception e) {
-                // Fault-tolerant: loi o 1 ngon ngu khong dung qua trinh cac ngon ngu con lai
-                log.error("[Localization] [{}] Loi khi xu ly stallId={}: {}", lang, stallId, e.getMessage(), e);
+                log.error("[Localization] [{}] Loi khi xu ly stallId={}: {}", lang, stallId, e.getMessage());
             }
         }
-
         log.info("[Localization] [Async] Hoan thanh tat ca ngon ngu cho stallId={}", stallId);
     }
 
     /**
-     * Sync All Localizations: Quet toan bo FoodStall trong DB, tim cac quan chua co
-     * du 5 ban dich (vi/en/ja/ko/zh) va kich hoat processLocalizationAndAudioInBackground
-     * cho tung quan do. API tra ve bao cao ngay lap tuc, cong viec dich chay ngam.
-     *
-     * @return Map chua tong so quan, so quan can xu ly va so quan da day du ban dich
+     * Sync All Localizations: Quet toan bo FoodStall trong DB de tim ban dich con thieu.
      */
     public Map<String, Object> syncAllMissingLocalizations() {
         String[] allLangs = {"vi", "en", "ja", "ko", "zh"};
         int totalLangCount = allLangs.length;
 
         List<FoodStall> allStalls = foodStallRepository.findAll();
-        log.info("[SyncAll] Bat dau quet {} quan an de tim ban dich con thieu", allStalls.size());
-
-        // Lay tat ca id cua cac localization hien co trong DB
         List<FoodStallLocalization> allLocs = localizationRepository.findAll();
-        // Group: stallId -> so ngon ngu da co
         Map<Long, Long> locCountByStall = allLocs.stream()
                 .collect(Collectors.groupingBy(
                         loc -> loc.getFoodStall().getId(),
@@ -172,8 +107,6 @@ public class LocalizationService {
         for (FoodStall stall : allStalls) {
             long existingLangCount = locCountByStall.getOrDefault(stall.getId(), 0L);
             if (existingLangCount < totalLangCount) {
-                log.info("[SyncAll] stallId={} (ten='{}') chi co {}/{} ngon ngu -> kich hoat dong bo",
-                        stall.getId(), stall.getName(), existingLangCount, totalLangCount);
                 processLocalizationAndAudioInBackground(stall);
                 needsSync++;
             } else {
@@ -181,67 +114,58 @@ public class LocalizationService {
             }
         }
 
-        log.info("[SyncAll] Hoan thanh phat lenh: {} quan can dong bo, {} quan da day du", needsSync, alreadyComplete);
         return Map.of(
                 "totalStalls", allStalls.size(),
                 "queuedForSync", needsSync,
-                "alreadyComplete", alreadyComplete,
-                "message", needsSync > 0
-                        ? needsSync + " quan dang duoc dong bo da ngon ngu trong nen. Vui long doi 15-30 giay roi kiem tra lai."
-                        : "Tat ca quan da co du ban dich. Khong can dong bo them."
+                "alreadyComplete", alreadyComplete
         );
     }
 
     /**
-     * Tu dong tao localization cho tat ca cac ngon ngu ho tro (en, ja, ko, zh).
-     * Chay bat dong bo de khong lam cham luong tao quan an.
+     * Tu dong tao localization cho tat ca cac ngon ngu ho tro.
      */
     @Async
     public void generateAllLanguagesForStall(Long stallId) {
+        generateAllLanguagesForStall(stallId, false);
+    }
+
+    @Async
+    public void generateAllLanguagesForStall(Long stallId, boolean forceRegenerate) {
         String[] languages = {"vi", "en", "ja", "ko", "zh"};
-        log.info("[Localization] Bat dau tu dong tao audio cho {} ngon ngu, stallId={}", languages.length, stallId);
-        
         for (String lang : languages) {
             try {
-                this.generateLocalization(stallId, lang);
+                this.generateLocalizationInternal(stallId, lang, forceRegenerate);
             } catch (Exception e) {
                 log.error("[Localization] Loi khi tu dong tao lang={} cho stallId={}: {}", lang, stallId, e.getMessage());
             }
         }
-        log.info("[Localization] Hoan thanh tu dong tao audio cho stallId={}", stallId);
+    }
+
+    @Async
+    public void regenerateAllLanguagesForStall(Long stallId) {
+        this.regenerateLanguagesForStall(stallId, List.of());
     }
 
     /**
-     * Force-regenerate audio files for all languages (overwrite mp3) and upsert localizations.
-     * Used after admin approves an update to ensure audio matches the latest content.
+     * Force-regenerate audio files for specific languages (with timestamp).
+     * @param stallId ID of the stall
+     * @param excludeLanguages List of language codes to skip
      */
     @Async
-    public void regenerateAllLanguagesForStall(Long stallId) {
+    public void regenerateLanguagesForStall(Long stallId, List<String> excludeLanguages) {
         String[] languages = {"vi", "en", "ja", "ko", "zh"};
-        log.info("[Localization] Force regenerate audio cho {} ngon ngu, stallId={}", languages.length, stallId);
+        log.info("[Localization] Force regenerate audio (with timestamp) cho stallId={}, excluding={}", stallId, excludeLanguages);
 
         for (String lang : languages) {
+            if (excludeLanguages.contains(lang)) continue;
             try {
                 this.generateLocalizationForceAudio(stallId, lang);
             } catch (Exception e) {
                 log.error("[Localization] Force regenerate loi lang={} stallId={}: {}", lang, stallId, e.getMessage());
             }
         }
-        log.info("[Localization] Hoan thanh force regenerate audio cho stallId={}", stallId);
     }
 
-    /**
-     * Tao hoac cap nhat localization cho mot quan an.
-     * Buoc:
-     * 1. Lay thong tin tieng Viet (goc)
-     * 2. Dich name + description sang targetLang
-     * 3. Tao audio MP3 cho ban dich
-     * 4. Luu vao bang food_stall_localizations
-     *
-     * @param stallId    ID cua quan an
-     * @param targetLang Ma ngon ngu dich (en, ja, ko, zh)
-     * @return AudioUrl cua file MP3 tieng nuoc ngoai
-     */
     @Transactional
     public String generateLocalization(Long stallId, String targetLang) {
         return generateLocalizationInternal(stallId, targetLang, false);
@@ -253,9 +177,8 @@ public class LocalizationService {
     }
 
     private String generateLocalizationInternal(Long stallId, String targetLang, boolean forceAudio) {
-        log.info("[Localization] Bat dau tao localization stallId={}, lang={}", stallId, targetLang);
+        log.info("[Localization] Process stallId={}, lang={}, forceAudio={}", stallId, targetLang, forceAudio);
 
-        // 1. Lay thong tin goc tieng Viet
         if (stallId == null) throw new IllegalArgumentException("stallId must not be null");
         FoodStall stall = foodStallRepository.findById(stallId)
                 .orElseThrow(() -> new ResourceNotFoundException("Quan an khong ton tai: " + stallId));
@@ -264,19 +187,18 @@ public class LocalizationService {
                 .findByFoodStall_IdAndLanguageCode(stallId, "vi")
                 .orElse(null);
 
-        // Prefer the latest approved FoodStall fields as the Vietnamese source-of-truth.
-        // Only fallback to stored "vi" localization if stall fields are missing.
+        // source-of-truth from latest FoodStall fields
         String sourceName = stall.getName();
         if (sourceName == null || sourceName.isBlank()) {
-            sourceName = (viLoc != null) ? viLoc.getName() : null;
+            sourceName = (viLoc != null) ? viLoc.getName() : "";
         }
 
         String sourceDesc = stall.getDescription();
         if (sourceDesc == null || sourceDesc.isBlank()) {
-            sourceDesc = (viLoc != null) ? viLoc.getDescription() : null;
+            sourceDesc = (viLoc != null) ? viLoc.getDescription() : "";
         }
 
-        // 2. Dich sang ngon ngu dich
+        // 2. Translation
         String translatedName;
         String translatedDesc;
         String translatedAddress;
@@ -286,21 +208,18 @@ public class LocalizationService {
             translatedDesc = sourceDesc;
             translatedAddress = stall.getAddress();
         } else {
-            log.info("[Localization] Dich name + description + address sang {}", targetLang);
             translatedName = translationService.translate(sourceName, targetLang);
             translatedDesc = translationService.translate(sourceDesc, targetLang);
             translatedAddress = translationService.translate(stall.getAddress(), targetLang);
         }
 
-        // 3. Tao audio MP3
+        // 3. Audio Generation
         String audioText = translatedName + ". " + translatedDesc;
-        log.info("[Localization] Tao audio lang={}, do dai text={} chars", targetLang, audioText.length());
-        @SuppressWarnings("null")
         String audioUrl = forceAudio
-            ? audioService.generateAndOverwriteAudioForStall(stallId, audioText, targetLang)
-                : audioService.getOrCreateAudioForStall(stallId, audioText, targetLang);
+            ? audioService.generateVersionedAudioForStall(stallId, audioText, targetLang)
+            : audioService.getOrCreateAudioForStall(stallId, audioText, targetLang);
 
-        // 4. Luu hoac cap nhat localization
+        // 4. Persistence
         FoodStallLocalization localization = localizationRepository
                 .findByFoodStall_IdAndLanguageCode(stallId, targetLang)
                 .orElse(FoodStallLocalization.builder()
@@ -315,13 +234,11 @@ public class LocalizationService {
 
         localizationRepository.save(localization);
 
-        // Canonical audio URL for client retrieval is stored on food_stalls (VI/default audio).
         if ("vi".equalsIgnoreCase(targetLang) && audioUrl != null && !audioUrl.isBlank()) {
             stall.setAudioUrl(audioUrl);
             foodStallRepository.save(stall);
         }
 
-        log.info("[Localization] Hoan thanh stallId={}, lang={}, audioUrl={}", stallId, targetLang, audioUrl);
         return audioUrl;
     }
 }

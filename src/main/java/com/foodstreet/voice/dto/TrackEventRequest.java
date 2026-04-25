@@ -3,12 +3,16 @@ package com.foodstreet.voice.dto;
 import com.foodstreet.voice.entity.UserActivity;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class TrackEventRequest {
     @NotBlank(message = "Device ID is required")
     @Schema(description = "Unique device identifier for anonymous tracking", example = "fcm_token_123")

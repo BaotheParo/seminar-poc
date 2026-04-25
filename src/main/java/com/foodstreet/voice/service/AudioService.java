@@ -7,6 +7,7 @@ import com.foodstreet.voice.repository.FoodStallRepository;
 import com.foodstreet.voice.repository.FoodStallLocalizationRepository;
 import com.foodstreet.voice.service.audio.AudioProviderStrategy;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.lang.NonNull;
@@ -29,6 +30,7 @@ import com.foodstreet.voice.config.AudioProperties;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AudioService {
     private final AudioProviderStrategy audioProvider;
     private final AudioProperties audioProperties;
@@ -68,11 +70,16 @@ public class AudioService {
     }
 
     /**
-     * Backward-compatible alias for force-regeneration without timestamped filenames.
-     * Keeps a stable URL format: /audio/{stallId}_{lang}.mp3
+     * Generate a new versioned audio file for a stall and remove stale files of the same language.
+     * This avoids CDN/browser serving a cached file with the same URL after content updates.
      */
     public String generateVersionedAudioForStall(@NonNull Long stallId, @NonNull String text, @NonNull String languageCode) {
-        return generateAndOverwriteAudioForStall(stallId, text, languageCode);
+        String fileName = stallId + "_" + languageCode + "_" + System.currentTimeMillis() + ".mp3";
+        String audioUrl = getOrCreateAudioInternal(fileName, text, languageCode, false);
+        if (audioUrl != null) {
+            cleanupOldStallAudioVersions(stallId, languageCode, fileName);
+        }
+        return audioUrl;
     }
 
     private String getOrCreateAudioInternal(String fileName, String text, String languageCode, boolean overwrite) {
@@ -114,28 +121,28 @@ public class AudioService {
         String versionPrefix = stallId + "_" + languageCode + "_";
         String legacyFileName = stallId + "_" + languageCode + ".mp3";
 
-        try (Stream<Path> stream = Files.list(Paths.get(getUploadDir()))) {
-            List<Path> oldFiles = stream
-                    .filter(path -> !Files.isDirectory(path))
-                    .filter(path -> {
-                        String name = path.getFileName().toString();
-                        return (name.startsWith(versionPrefix) || name.equals(legacyFileName))
-                                && !name.equals(keepFileName);
-                    })
-                    .sorted(Comparator.comparingLong(path -> {
-                        try {
-                            return Files.getLastModifiedTime(path).toMillis();
-                        } catch (IOException e) {
-                            return Long.MIN_VALUE;
-                        }
-                    }))
-                    .collect(Collectors.toList());
+        try {
+            Path uploadPath = Paths.get(getUploadDir());
+            if (!Files.exists(uploadPath)) return;
 
-            for (Path oldFile : oldFiles) {
-                Files.deleteIfExists(oldFile);
+            try (Stream<Path> stream = Files.list(uploadPath)) {
+                List<Path> oldFiles = stream
+                        .filter(path -> !Files.isDirectory(path))
+                        .filter(path -> {
+                            String name = path.getFileName().toString();
+                            // Matches both versioned (stallId_lang_timestamp.mp3) and legacy (stallId_lang.mp3)
+                            return (name.startsWith(versionPrefix) || name.equals(legacyFileName))
+                                    && !name.equals(keepFileName);
+                        })
+                        .collect(Collectors.toList());
+
+                for (Path oldFile : oldFiles) {
+                    Files.deleteIfExists(oldFile);
+                    log.info("[AudioService] Cleaned up old audio version: {}", oldFile.getFileName());
+                }
             }
-        } catch (IOException ignored) {
-            // Best effort cleanup only. Audio generation should not fail because cleanup failed.
+        } catch (IOException e) {
+            log.warn("[AudioService] Failed to cleanup old audio versions for stallId={}: {}", stallId, e.getMessage());
         }
     }
 
