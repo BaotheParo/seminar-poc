@@ -31,15 +31,13 @@ public class TranslationService {
 
         try {
             String langpair = "vi|" + targetLang;
-            String url = org.springframework.web.util.UriComponentsBuilder
-                    .fromHttpUrl(MYMEMORY_URL)
-                    .buildAndExpand(text, langpair)
-                    .toUriString();
-
-            log.info("[Translation] Requesting translation for text='{}', langpair='{}'", text, langpair);
 
             @SuppressWarnings("rawtypes")
-            Map response = restTemplate.getForObject(url, Map.class);
+            Map response = restTemplate.getForObject(
+                    MYMEMORY_URL,
+                    Map.class,
+                    text, langpair
+            );
 
             if (response != null) {
                 @SuppressWarnings("unchecked")
@@ -47,12 +45,10 @@ public class TranslationService {
                 if (responseData != null) {
                     String translated = (String) responseData.get("translatedText");
                     if (translated != null && !translated.isBlank()) {
-                        log.info("[Translation] Success: {} -> {} ({} chars). Result: '{}'", 
-                                "vi", targetLang, translated.length(), translated);
+                        log.info("[Translation] {} -> {}: {} chars", "vi", targetLang, translated.length());
                         return translated;
                     }
                 }
-                log.warn("[Translation] Response received but translatedText is empty for lang={}. Full response: {}", targetLang, response);
             }
         } catch (Exception e) {
             log.warn("[Translation] MyMemory API failed for lang={}: {}", targetLang, e.getMessage());

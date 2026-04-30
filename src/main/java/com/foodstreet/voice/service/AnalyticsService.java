@@ -147,8 +147,11 @@ public class AnalyticsService {
                 request.getStallId());
 
         try {
-            FoodStall stall = foodStallRepository.findById(request.getStallId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Stall not found: " + request.getStallId()));
+            FoodStall stall = null;
+            if (request.getAction() != UserActivity.ActionType.IDLE && request.getStallId() != null) {
+                stall = foodStallRepository.findById(request.getStallId())
+                        .orElseThrow(() -> new ResourceNotFoundException("Stall not found: " + request.getStallId()));
+            }
 
             UserActivity activity = UserActivity.builder()
                     .deviceId(request.getDeviceId())
@@ -160,7 +163,8 @@ public class AnalyticsService {
                     .build();
 
             userActivityRepository.save(activity);
-            log.info("Saved analytics event: {} for stall {}", request.getAction(), stall.getName());
+            log.info("Saved analytics event: {} for stall {}", request.getAction(),
+                    stall != null ? stall.getName() : "none");
 
         } catch (Exception e) {
             log.error("Failed to save analytics event", e);

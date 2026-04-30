@@ -181,3 +181,9 @@ INSERT INTO food_stalls (
     'Vú Heo Nướng Tiến Lên là quán nhậu chuyên vú heo nướng giòn...', 
     '', ST_GeogFromText('POINT(106.707169 10.76049)'), 15, 30000, 150000, 120, '["Good food", "Nice place"]'::JSONB, CURRENT_TIMESTAMP
 );
+
+-- 3. Insert Admin User (Password: admin123)
+-- Use BCrypt hash for 'admin123': $2a$10$8.UnVuG9HHgffUDAlk8qfOuVGkqRzgVymGe07xd00DMxs.TVuHOn2
+INSERT INTO users (username, email, password_hash, role, enabled)
+VALUES ('admin', 'admin@foodstreet.com', '$2a$10$8.UnVuG9HHgffUDAlk8qfOuVGkqRzgVymGe07xd00DMxs.TVuHOn2', 'ADMIN', true)
+ON CONFLICT (username) DO NOTHING;

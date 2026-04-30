@@ -9,6 +9,9 @@ RUN mvn clean package -Dmaven.test.skip=true
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
+## NOTE:
+## Do not COPY `.env` into the image because `.env` is typically not committed (secrets)
+## and fresh clones would fail to build. Use docker-compose `environment`/`env_file` instead.
 
 # Cai Python3 + edge-tts de tao audio thật
 RUN apk add --no-cache python3 py3-pip \
